@@ -34,24 +34,28 @@
         <h2>Overview</h2>
         <p>
           Mixed-item sorting on moving belts requires fast perception and robust translation from image coordinates to
-          robot actions. The system needed to remain stable under frame-to-frame variation and class ambiguity.
+          robot actions. The system needed to remain stable under frame-to-frame variation, class ambiguity, and the
+          practical constraints of downstream robotic handling.
         </p>
         <h3>Implementation</h3>
         <p>
           I built a Python vision stack using YOLO and OpenCV, refined object centroids with silhouette-based
           localization, and projected detections into world coordinates through homography calibration. The
-          perception stack then fed a delta-arm robotic workflow for physical sorting.
+          perception stack then fed a delta-arm robotic workflow for physical sorting. I also improved the training
+          loop through rapid auto-labeling and retraining so the detector could adapt as the object set expanded.
         </p>
         <h3>Results</h3>
         <p>
           The pipeline reduced misclassification through confidence-weighted tracking, stabilized labels across frames,
-          and expanded supported classes to bottles, cans, and six-pack bundles.
+          and expanded supported classes to bottles, cans, and six-pack bundles. The system combined robust
+          localization with practical robotic integration so detections translated into usable sorting actions.
         </p>
         <h3>My Contributions</h3>
         <ul class="list">
-          <li>Built the calibrated detection and localization pipeline.</li>
-          <li>Integrated perception outputs with downstream robotic sorting workflows.</li>
-          <li>Programmed, assembled, and tested the delta-arm structure and associated control flow.</li>
+          <li>Developed the real-time YOLO and OpenCV pipeline for object detection on the conveyor.</li>
+          <li>Improved localization through silhouette-based centroid refinement and homography calibration.</li>
+          <li>Reduced misclassification with confidence-weighted tracking, label stabilization, and retraining workflows.</li>
+          <li>Programmed, assembled, tested, and integrated the delta-arm structure for downstream sorting.</li>
         </ul>
       </div>
 
@@ -67,6 +71,10 @@
         <div class="fact">
           <span class="fact-label">Capability</span>
           Real-time sorting of bottles, cans, and bundle packs
+        </div>
+        <div class="fact">
+          <span class="fact-label">Robot Side</span>
+          Delta-arm structure for downstream sorting and material handling
         </div>
       </aside>
     </section>

@@ -21,7 +21,7 @@
 
   <main class="page">
     <section class="project-hero">
-      <p class="meta">Senior Design | Fall 2023 - Fall 2024</p>
+      <p class="meta">August 2023 - May 2024</p>
       <h1>Solar-Powered Terrain Walker</h1>
       <p class="hero-sub">
         Designed an autonomous, solar-powered four-legged robot that prioritized kinematic efficiency, lower cost,
@@ -33,25 +33,29 @@
       <div class="project-section">
         <h2>Overview</h2>
         <p>
-          Traditional legged robots often trade simplicity for capability. This project focused on a lighter,
-          cheaper architecture that could still traverse terrain effectively.
+          Traditional legged robots often require multiple actuators per leg and a correspondingly complex control
+          stack. This project focused on a lighter, cheaper architecture that could still traverse uneven terrain
+          effectively while using fewer active components.
         </p>
         <h3>Implementation</h3>
         <p>
           I used Chebyshev 4-bar linkages and pantographs to reduce each leg from three actuators to one. I modeled
           pivot designs in SolidWorks, validated structural integrity through ANSYS stress simulations, and developed
-          motion and sensing subsystems in C on Arduino hardware.
+          motion and sensing subsystems in C on Arduino hardware. The system combined mechanical simplification with
+          embedded control logic to keep the gait stable while preserving the advantages of a legged platform.
         </p>
         <h3>Results</h3>
         <p>
           The design reduced overall cost by roughly 34%, simplified controls, and achieved terrain performance
-          comparable to more complex six-legged systems.
+          comparable to more complex six-legged systems. By consolidating actuation, the robot also improved energy
+          efficiency and moved toward a more deployable low-cost locomotion platform.
         </p>
         <h3>My Contributions</h3>
         <ul class="list">
           <li>Engineered the mechanism architecture and actuator reduction strategy.</li>
-          <li>Modeled and validated key structural components in CAD and FEA tools.</li>
-          <li>Implemented embedded sensing and gait control for stable locomotion.</li>
+          <li>Designed and built the quadruped platform around Chebyshev 4-bar linkages and pantographs.</li>
+          <li>Modeled and validated key structural components in SolidWorks and ANSYS.</li>
+          <li>Implemented motion and sensing subsystems in C on Arduino for stable locomotion.</li>
         </ul>
       </div>
 

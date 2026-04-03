@@ -35,21 +35,23 @@
         <p>
           The project targets driving scenarios that are difficult for fixed rule sets: dense highway merges and
           unprotected left turns with interacting traffic. I used a two-level planner so the agent could retain
-          long-horizon route intent while still responding to local traffic conditions.
+          long-horizon route intent while still responding to local traffic conditions and negotiation dynamics.
         </p>
 
         <h3>Implementation</h3>
         <p>
           I developed the training and evaluation pipeline in Python using Stable-Baselines3, PyTorch, and CARLA.
           The stack includes scenario generation, traffic-interaction features, reward design, rollout analysis, and
-          repeatable benchmarking against CARLA rule-based baselines.
+          repeatable benchmarking against CARLA rule-based baselines. A global A* route planner provides long-horizon
+          structure, while the PPO policy handles local reactive trajectory generation in the presence of other actors.
         </p>
 
         <h3>Results</h3>
         <p>
           The PPO planner achieved a 92% success rate and was benchmarked using completion time, jerk-based comfort
           metrics, and failure-mode analysis. The result was a planner that handled reactive maneuvers more reliably
-          than hand-coded baselines in mixed-traffic settings.
+          than hand-coded baselines in mixed-traffic settings while remaining measurable on both performance and ride
+          comfort.
         </p>
 
         <h3>My Contributions</h3>
@@ -57,7 +59,7 @@
           <li>Designed the hierarchical planner structure combining A* routing and PPO local control.</li>
           <li>Built the training/evaluation pipeline, scenario tooling, and rollout analysis utilities.</li>
           <li>Engineered reward functions and traffic-interaction features for merging and intersection behavior.</li>
-          <li>Benchmarked policy performance against CARLA rule-based baselines with comfort and failure metrics.</li>
+          <li>Benchmarked policy performance against CARLA rule-based baselines with completion time, jerk-based comfort, and failure metrics.</li>
         </ul>
       </div>
 
