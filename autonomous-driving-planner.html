@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Driving Local Planner | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">January 2026 - Present</p>
+      <h1>Autonomous Driving Local Planner with Reinforcement Learning</h1>
+      <p class="hero-sub">
+        Built a hierarchical autonomous-driving system in CARLA where a global A* planner provides route-level
+        guidance and a PPO policy generates reactive local trajectories for highway merging and unprotected left turns.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <h2>Overview</h2>
+        <p>
+          The project targets driving scenarios that are difficult for fixed rule sets: dense highway merges and
+          unprotected left turns with interacting traffic. I used a two-level planner so the agent could retain
+          long-horizon route intent while still responding to local traffic conditions.
+        </p>
+
+        <h3>Implementation</h3>
+        <p>
+          I developed the training and evaluation pipeline in Python using Stable-Baselines3, PyTorch, and CARLA.
+          The stack includes scenario generation, traffic-interaction features, reward design, rollout analysis, and
+          repeatable benchmarking against CARLA rule-based baselines.
+        </p>
+
+        <h3>Results</h3>
+        <p>
+          The PPO planner achieved a 92% success rate and was benchmarked using completion time, jerk-based comfort
+          metrics, and failure-mode analysis. The result was a planner that handled reactive maneuvers more reliably
+          than hand-coded baselines in mixed-traffic settings.
+        </p>
+
+        <h3>My Contributions</h3>
+        <ul class="list">
+          <li>Designed the hierarchical planner structure combining A* routing and PPO local control.</li>
+          <li>Built the training/evaluation pipeline, scenario tooling, and rollout analysis utilities.</li>
+          <li>Engineered reward functions and traffic-interaction features for merging and intersection behavior.</li>
+          <li>Benchmarked policy performance against CARLA rule-based baselines with comfort and failure metrics.</li>
+        </ul>
+      </div>
+
+      <aside class="quick-facts">
+        <div class="fact">
+          <span class="fact-label">Focus</span>
+          Hierarchical planning, reinforcement learning, simulation
+        </div>
+        <div class="fact">
+          <span class="fact-label">Stack</span>
+          Python, Stable-Baselines3, PyTorch, CARLA
+        </div>
+        <div class="fact">
+          <span class="fact-label">Key Metric</span>
+          92% maneuver success rate
+        </div>
+        <div class="fact">
+          <span class="fact-label">Scenarios</span>
+          Highway merging and unprotected left turns
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to all projects</a></div>
+      <div>Last updated: April 3, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>

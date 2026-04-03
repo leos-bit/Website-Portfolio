@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar-Powered Terrain Walker | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">Senior Design | Fall 2023 - Fall 2024</p>
+      <h1>Solar-Powered Terrain Walker</h1>
+      <p class="hero-sub">
+        Designed an autonomous, solar-powered four-legged robot that prioritized kinematic efficiency, lower cost,
+        and reduced actuator count without sacrificing terrain performance.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <h2>Overview</h2>
+        <p>
+          Traditional legged robots often trade simplicity for capability. This project focused on a lighter,
+          cheaper architecture that could still traverse terrain effectively.
+        </p>
+        <h3>Implementation</h3>
+        <p>
+          I used Chebyshev 4-bar linkages and pantographs to reduce each leg from three actuators to one. I modeled
+          pivot designs in SolidWorks, validated structural integrity through ANSYS stress simulations, and developed
+          motion and sensing subsystems in C on Arduino hardware.
+        </p>
+        <h3>Results</h3>
+        <p>
+          The design reduced overall cost by roughly 34%, simplified controls, and achieved terrain performance
+          comparable to more complex six-legged systems.
+        </p>
+        <h3>My Contributions</h3>
+        <ul class="list">
+          <li>Engineered the mechanism architecture and actuator reduction strategy.</li>
+          <li>Modeled and validated key structural components in CAD and FEA tools.</li>
+          <li>Implemented embedded sensing and gait control for stable locomotion.</li>
+        </ul>
+      </div>
+
+      <aside class="quick-facts">
+        <div class="fact">
+          <span class="fact-label">Focus</span>
+          Mechanism design, embedded controls, autonomous robotics
+        </div>
+        <div class="fact">
+          <span class="fact-label">Design Gain</span>
+          34% lower cost versus a comparable six-legged model
+        </div>
+        <div class="fact">
+          <span class="fact-label">Actuation</span>
+          Reduced from three motors per leg to one
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to all projects</a></div>
+      <div>Last updated: April 3, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>

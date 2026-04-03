@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conveyor Sorting System | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">January 2026 - Present</p>
+      <h1>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h1>
+      <p class="hero-sub">
+        Built a calibrated perception and robot-integration pipeline for mixed-object sorting on a conveyor in
+        real time.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <h2>Overview</h2>
+        <p>
+          Mixed-item sorting on moving belts requires fast perception and robust translation from image coordinates to
+          robot actions. The system needed to remain stable under frame-to-frame variation and class ambiguity.
+        </p>
+        <h3>Implementation</h3>
+        <p>
+          I built a Python vision stack using YOLO and OpenCV, refined object centroids with silhouette-based
+          localization, and projected detections into world coordinates through homography calibration. The
+          perception stack then fed a delta-arm robotic workflow for physical sorting.
+        </p>
+        <h3>Results</h3>
+        <p>
+          The pipeline reduced misclassification through confidence-weighted tracking, stabilized labels across frames,
+          and expanded supported classes to bottles, cans, and six-pack bundles.
+        </p>
+        <h3>My Contributions</h3>
+        <ul class="list">
+          <li>Built the calibrated detection and localization pipeline.</li>
+          <li>Integrated perception outputs with downstream robotic sorting workflows.</li>
+          <li>Programmed, assembled, and tested the delta-arm structure and associated control flow.</li>
+        </ul>
+      </div>
+
+      <aside class="quick-facts">
+        <div class="fact">
+          <span class="fact-label">Focus</span>
+          Computer vision, calibration, robot integration
+        </div>
+        <div class="fact">
+          <span class="fact-label">Stack</span>
+          Python, YOLO, OpenCV
+        </div>
+        <div class="fact">
+          <span class="fact-label">Capability</span>
+          Real-time sorting of bottles, cans, and bundle packs
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to all projects</a></div>
+      <div>Last updated: April 3, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>

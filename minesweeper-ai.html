@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minesweeper AI | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">April 2024 - August 2024</p>
+      <h1>Minesweeper Artificial Intelligence</h1>
+      <p class="hero-sub">
+        Developed an autonomous Minesweeper agent using deep reinforcement learning and convolutional neural networks
+        to make strategic decisions in a partially observable environment.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <h2>Overview</h2>
+        <p>
+          Minesweeper is a compact but difficult planning problem with sparse signals, uncertainty, and long-horizon
+          consequences. I used it as a testbed for scalable learning and reward design.
+        </p>
+        <h3>Implementation</h3>
+        <p>
+          I built the agent in Python using TensorFlow, Keras, and PyTorch, with custom reward functions,
+          experience replay, and target-network stabilization. CNN-based state analysis supported policy learning on
+          higher-dimensional board states.
+        </p>
+        <h3>Results</h3>
+        <p>
+          The system achieved over 30% win rate on expert-level boards and improved meaningfully over baseline
+          logic-driven strategies.
+        </p>
+        <h3>My Contributions</h3>
+        <ul class="list">
+          <li>Designed the reinforcement learning environment and reward shaping strategy.</li>
+          <li>Implemented replay buffers, target networks, and training/evaluation tooling.</li>
+          <li>Built visualization and analysis tools for model behavior and outcomes.</li>
+        </ul>
+      </div>
+
+      <aside class="quick-facts">
+        <div class="fact">
+          <span class="fact-label">Focus</span>
+          Deep reinforcement learning
+        </div>
+        <div class="fact">
+          <span class="fact-label">Stack</span>
+          Python, TensorFlow, Keras, PyTorch
+        </div>
+        <div class="fact">
+          <span class="fact-label">Performance</span>
+          30%+ win rate on expert difficulty
+        </div>
+      </aside>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to all projects</a></div>
+      <div>Last updated: April 3, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
