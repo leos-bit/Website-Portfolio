@@ -122,6 +122,27 @@
             </div>
           </div>
 
+          <div class="media-grid">
+            <div class="media-card">
+              <img class="project-image" src="assets/trajectory_creation.png" alt="Diagram of PPO local trajectory generation from anchor-point offsets and heading reconnection bias" />
+              <div class="media-caption">
+                This trajectory-construction view shows how the PPO planner acts in a continuous five-dimensional action
+                space without directly outputting throttle or steering. The policy predicts three lateral offsets placed
+                about 8 m, 18 m, and 30 m along the global A* path, plus one heading reconnection bias that shapes how
+                the local plan rejoins the route, and one target-speed value that controls yield-versus-go behavior.
+              </div>
+            </div>
+            <div class="media-card">
+              <h4>Trajectory Construction</h4>
+              <div class="media-caption">
+                Internally, the three anchor offsets are limited to about 1.0 m of lateral deviation from the global
+                route. The environment converts those offsets and the reconnection term into a smooth local path with a
+                Catmull-Rom spline, then hands that trajectory to CARLA's fixed PID controller. This keeps the learning
+                problem focused on planning rather than low-level control.
+              </div>
+            </div>
+          </div>
+
           <div class="metrics-card">
             <h3>Evaluation Metrics</h3>
             <div class="table-wrap">

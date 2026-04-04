@@ -328,6 +328,14 @@ a:hover {
   background: #000;
 }
 
+.project-image {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #fafafa;
+}
+
 .metrics-card {
   margin-top: 20px;
   background: var(--card);
