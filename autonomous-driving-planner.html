@@ -48,10 +48,9 @@
 
         <h3>Results</h3>
         <p>
-          The PPO planner achieved a 92% success rate and was benchmarked using completion time, jerk-based comfort
-          metrics, and failure-mode analysis. The result was a planner that handled reactive maneuvers more reliably
-          than hand-coded baselines in mixed-traffic settings while remaining measurable on both performance and ride
-          comfort.
+          I benchmarked the planner with success rate, completion time, crash count, and jerk-based comfort metrics
+          in a highway merge scenario. The resulting comparison shows the tradeoff between an aggressive scripted
+          baseline and the learned PPO policy while keeping route completion and ride quality measurable.
         </p>
 
         <h3>My Contributions</h3>
@@ -65,46 +64,66 @@
         <div class="media-section">
           <h3>Project Media</h3>
           <p>
-            This section is set up for simulator videos, route overlays, and evaluation figures. Replace the placeholders
-            below with embedded video tags, screenshots, or metric plots as you collect assets.
+            This CARLA clip shows the PPO local planner navigating a highway merge scenario. Light blue lines indicate
+            the PPO local planner's candidate and executed trajectories, while the yellow line shows the global A*
+            planner route that provides longer-horizon guidance through the merge.
           </p>
           <div class="media-grid featured">
             <div class="media-card">
-              <div class="media-frame large">
-                Featured merge or left-turn demo video
-                <br />
-                Suggested file: <code>assets/autonomous-driving/demo.mp4</code>
-              </div>
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/Carlaue4%202026.03.24%20-%2002.19.56.08.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
               <div class="media-caption">
-                Use this slot for a short CARLA clip showing the PPO local planner navigating a merge or unprotected left turn.
+                In this rollout, the PPO local planner reacts to nearby traffic during the merge while the A* route
+                remains visible as a global reference path.
               </div>
             </div>
             <div class="media-card">
-              <div class="media-frame">
-                Success-rate chart, trajectory heatmap,
-                or comfort-metric figure
-              </div>
+              <h4>Trajectory Legend</h4>
               <div class="media-caption">
-                Pair the video with a quantitative artifact such as success rate, jerk profile, or failure-mode breakdown.
+                Light blue trajectories correspond to the PPO local planner. Yellow corresponds to the A* global planner.
+                This makes it easier to separate immediate reactive planning from the route-level guidance during the merge.
               </div>
             </div>
           </div>
-          <div class="media-grid">
-            <div class="media-card">
-              <div class="media-frame">
-                Global A* route visualization
-              </div>
-              <div class="media-caption">
-                Good place for a screenshot showing the route-level planner and local trajectory candidate set.
-              </div>
-            </div>
-            <div class="media-card">
-              <div class="media-frame">
-                Scenario setup and traffic interaction view
-              </div>
-              <div class="media-caption">
-                Use this slot for a camera frame, bird's-eye rendering, or rollout debugging panel.
-              </div>
+
+          <div class="metrics-card">
+            <h3>Evaluation Metrics</h3>
+            <div class="table-wrap">
+              <table class="metrics-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Episodes</th>
+                    <th>Successes</th>
+                    <th>Crashes</th>
+                    <th>Success Rate</th>
+                    <th>P90 Time Success (s)</th>
+                    <th>P90 Max Jerk Success (m/s^3)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Baseline (Aggressive)</td>
+                    <td>100</td>
+                    <td>83</td>
+                    <td>17</td>
+                    <td>83%</td>
+                    <td>11.6</td>
+                    <td>446.354</td>
+                  </tr>
+                  <tr>
+                    <td>PPO</td>
+                    <td>100</td>
+                    <td>77</td>
+                    <td>17</td>
+                    <td>77%</td>
+                    <td>24.5</td>
+                    <td>482.044</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
@@ -121,7 +140,7 @@
         </div>
         <div class="fact">
           <span class="fact-label">Key Metric</span>
-          92% maneuver success rate
+          83% success-rate baseline vs. 77% PPO in highway merge evaluation
         </div>
         <div class="fact">
           <span class="fact-label">Scenarios</span>

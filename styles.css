@@ -285,6 +285,10 @@ a:hover {
   box-shadow: var(--shadow);
 }
 
+.media-card h4 {
+  margin: 0 0 10px;
+}
+
 .media-frame {
   display: grid;
   place-items: center;
@@ -314,6 +318,51 @@ a:hover {
   margin-top: 12px;
   color: var(--muted);
   font-size: 14px;
+}
+
+.project-video {
+  width: 100%;
+  display: block;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: #000;
+}
+
+.metrics-card {
+  margin-top: 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+.metrics-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.metrics-table th,
+.metrics-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  font-size: 14px;
+}
+
+.metrics-table th {
+  color: var(--muted);
+  font-weight: 600;
+  background: #f3efe8;
+}
+
+.metrics-table tbody tr:last-child td {
+  border-bottom: none;
 }
 
 .embed {
