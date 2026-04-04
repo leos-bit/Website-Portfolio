@@ -24,8 +24,8 @@
       <p class="meta">January 2026 - Present</p>
       <h1>Autonomous Driving Local Planner with Reinforcement Learning</h1>
       <p class="hero-sub">
-        Built a hierarchical autonomous-driving system in CARLA where a global A* planner provides route-level
-        guidance and a PPO policy generates reactive local trajectories for highway merging and unprotected left turns.
+        Built a closed-loop CARLA planning framework for highway merges, unprotected left turns, and sudden cut-ins,
+        using global A* routing, fixed PID tracking, and a PPO local planner for interaction-aware trajectory generation.
       </p>
     </section>
 
@@ -33,32 +33,39 @@
       <div class="project-section">
         <h2>Overview</h2>
         <p>
-          The project targets driving scenarios that are difficult for fixed rule sets: dense highway merges and
-          unprotected left turns with interacting traffic. I used a two-level planner so the agent could retain
-          long-horizon route intent while still responding to local traffic conditions and negotiation dynamics.
+          This project targets high-conflict traffic situations where reactive rule sets often break down: highway
+          merges, unprotected left turns, and abrupt cut-ins. I built the system as a controlled closed-loop study so
+          planner improvements could be measured directly without changing the low-level vehicle controller.
         </p>
 
         <h3>Implementation</h3>
         <p>
           I developed the training and evaluation pipeline in Python using Stable-Baselines3, PyTorch, and CARLA.
-          The stack includes scenario generation, traffic-interaction features, reward design, rollout analysis, and
-          repeatable benchmarking against CARLA rule-based baselines. A global A* route planner provides long-horizon
-          structure, while the PPO policy handles local reactive trajectory generation in the presence of other actors.
+          The stack keeps global A* route planning and longitudinal/lateral PID tracking fixed, then replaces the
+          rule-based local planner with PPO. At each simulator step, the learned policy outputs a short-horizon local
+          trajectory segment and target speed, allowing the vehicle to react to nearby traffic while staying anchored
+          to the long-horizon route.
+        </p>
+        <p>
+          The observation design combined ego and route-following state, gap-level merge cues, and nearby-vehicle
+          geometry. I also shaped the reward around progress, anti-idling behavior, collision avoidance, TTC safety,
+          route adherence, and comfort penalties so the agent had to balance merge completion against smoothness and risk.
         </p>
 
         <h3>Results</h3>
         <p>
-          I benchmarked the planner with success rate, completion time, crash count, and jerk-based comfort metrics
-          in a highway merge scenario. The resulting comparison shows the tradeoff between an aggressive scripted
-          baseline and the learned PPO policy while keeping route completion and ride quality measurable.
+          In the tuned highway-merge evaluation, the PPO planner achieved an 86% success rate over 100 episodes, with
+          a 17.4 s 90th-percentile completion time for successful runs and a 547.137 m/s^3 90th-percentile maximum jerk.
+          That result showed the RL pipeline was functional end-to-end in closed loop, while also making clear that
+          smoothness and decisiveness still needed more tuning.
         </p>
 
         <h3>My Contributions</h3>
         <ul class="list">
-          <li>Designed the hierarchical planner structure combining A* routing and PPO local control.</li>
-          <li>Built the training/evaluation pipeline, scenario tooling, and rollout analysis utilities.</li>
-          <li>Engineered reward functions and traffic-interaction features for merging and intersection behavior.</li>
-          <li>Benchmarked policy performance against CARLA rule-based baselines with completion time, jerk-based comfort, and failure metrics.</li>
+          <li>Designed the hierarchical planner structure combining global A* routing, PPO local planning, and fixed PID tracking.</li>
+          <li>Built reproducible CARLA scenarios for highway merges, unprotected left turns, and sudden cut-ins.</li>
+          <li>Implemented observation features and reward shaping for gap selection, progress, safety, and ride comfort.</li>
+          <li>Developed evaluation tooling to benchmark success rate, crash rate, completion time, and jerk against CARLA baselines.</li>
         </ul>
 
         <div class="media-section">
@@ -116,11 +123,11 @@
                   <tr>
                     <td>PPO</td>
                     <td>100</td>
-                    <td>77</td>
-                    <td>17</td>
-                    <td>77%</td>
-                    <td>24.5</td>
-                    <td>482.044</td>
+                    <td>86</td>
+                    <td>10</td>
+                    <td>86%</td>
+                    <td>17.4</td>
+                    <td>547.137</td>
                   </tr>
                 </tbody>
               </table>
@@ -140,18 +147,18 @@
         </div>
         <div class="fact">
           <span class="fact-label">Key Metric</span>
-          83% success-rate baseline vs. 77% PPO in highway merge evaluation
+          86% PPO success rate in 100 closed-loop highway merge episodes
         </div>
         <div class="fact">
           <span class="fact-label">Scenarios</span>
-          Highway merging and unprotected left turns
+          Highway merging, unprotected left turns, and sudden cut-ins
         </div>
       </aside>
     </section>
 
     <footer class="footer">
       <div><a href="projects.html">Back to all projects</a></div>
-      <div>Last updated: April 3, 2026</div>
+      <div>Last updated: April 4, 2026</div>
     </footer>
   </main>
 </body>
