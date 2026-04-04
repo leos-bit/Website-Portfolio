@@ -51,6 +51,20 @@
           geometry. I also shaped the reward around progress, anti-idling behavior, collision avoidance, TTC safety,
           route adherence, and comfort penalties so the agent had to balance merge completion against smoothness and risk.
         </p>
+        <p>
+          The policy was framed as a local trajectory generator rather than a selector over fixed waypoints. Its action
+          space produced trajectory-shaping parameters and target speed, which the environment converted into a smooth
+          short-horizon path using anchored offsets and a Catmull-Rom spline before handing the result to the fixed
+          controller stack.
+        </p>
+
+        <h3>System Design Details</h3>
+        <ul class="list">
+          <li>Kept the low-level longitudinal and lateral PID tracker fixed so changes in performance could be attributed to planning instead of controller retuning.</li>
+          <li>Structured observations around ego state, route-relative tracking error, gap-level interaction cues, and nearby-vehicle geometry, with a full observation size of 12 + 10 + 8N for N nearby vehicles.</li>
+          <li>Used a five-dimensional continuous action space to shape the short-horizon path and commanded speed during merge negotiation.</li>
+          <li>Generated reproducible traffic with randomized gap, speed, and density variation so merges, left turns, and cut-ins could be stress-tested under controlled conditions.</li>
+        </ul>
 
         <h3>Results</h3>
         <p>
@@ -58,6 +72,11 @@
           a 17.4 s 90th-percentile completion time for successful runs and a 547.137 m/s^3 90th-percentile maximum jerk.
           That result showed the RL pipeline was functional end-to-end in closed loop, while also making clear that
           smoothness and decisiveness still needed more tuning.
+        </p>
+        <p>
+          More broadly, the project established a reproducible baseline framework across all three scenarios and showed
+          where purely reactive planning becomes brittle under aggressive interaction timing, tighter merge gaps, and
+          higher closing speeds. That baseline gave the PPO planner a measurable reference point for policy iteration.
         </p>
 
         <h3>My Contributions</h3>
@@ -67,6 +86,14 @@
           <li>Implemented observation features and reward shaping for gap selection, progress, safety, and ride comfort.</li>
           <li>Developed evaluation tooling to benchmark success rate, crash rate, completion time, and jerk against CARLA baselines.</li>
         </ul>
+
+        <h3>What This Shows</h3>
+        <p>
+          This project demonstrates more than just PPO training. It shows controlled autonomy-stack experimentation,
+          scenario design, reward engineering, and closed-loop evaluation with explicit safety, comfort, and efficiency
+          tradeoffs. It also highlights an honest limitation: the learned planner could complete merges reliably, but
+          still needed improvement in smoothness and merge timing to consistently match stronger scripted behavior.
+        </p>
 
         <div class="media-section">
           <h3>Project Media</h3>
@@ -139,11 +166,15 @@
       <aside class="quick-facts">
         <div class="fact">
           <span class="fact-label">Focus</span>
-          Hierarchical planning, reinforcement learning, simulation
+          Hierarchical planning, reinforcement learning, closed-loop evaluation
         </div>
         <div class="fact">
           <span class="fact-label">Stack</span>
           Python, Stable-Baselines3, PyTorch, CARLA
+        </div>
+        <div class="fact">
+          <span class="fact-label">Architecture</span>
+          Global A* routing, PPO local trajectory generation, fixed PID tracking
         </div>
         <div class="fact">
           <span class="fact-label">Key Metric</span>
@@ -152,6 +183,10 @@
         <div class="fact">
           <span class="fact-label">Scenarios</span>
           Highway merging, unprotected left turns, and sudden cut-ins
+        </div>
+        <div class="fact">
+          <span class="fact-label">Evaluation</span>
+          Success rate, crash rate, completion time, and jerk-based comfort
         </div>
       </aside>
     </section>
