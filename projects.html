@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | Leo Shaw</title>
+  <title>Projects &amp; Experience | Leo Shaw</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,63 +14,111 @@
     <div class="brand">Leo Shaw</div>
     <div class="nav-links">
       <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Projects &amp; Experience</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
 
   <main class="page">
     <section class="section">
-      <h2>Projects & Experience</h2>
+      <h2>Projects &amp; Experience</h2>
       <p>
-        Each project has its own page with context, implementation details, measurable outcomes, and a clear
-        statement of my specific contributions. The entries below mirror the work and projects listed on my resume,
-        with added technical detail about system design, evaluation, and impact.
+        This page separates my academic and personal projects from my professional experience. Each card gives a
+        short overview of the work itself, and the linked pages go into technical detail, results, and supporting media.
       </p>
     </section>
 
     <section class="section">
-      <div class="grid">
-        <a class="card project-link" href="ulvac-field-service.html">
-          <h3>Field Service Engineer I - Ulvac Technologies</h3>
-          <p class="meta">Santa Clara, CA | Oct 2024 - Aug 2025</p>
-          <p>Led semiconductor tool rebuilds, subsystem retrofits, and root-cause driven service work across six high-volume fabs supporting production-critical customers.</p>
-          <p class="cta">View project</p>
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <p>Machine learning, robotics, and mechatronics work across class projects, research-style builds, and personal systems.</p>
+      </div>
+
+      <div class="project-grid">
+        <a class="card project-link project-card" href="seeing-through-occlusion.html">
+          <img class="project-card-image" src="assets/deep-learning-summary.png" alt="Summary plots from the Seeing Through Occlusion deep learning project" />
+          <div class="project-card-body">
+            <h3>Seeing Through Occlusion</h3>
+            <p class="meta">18-786 Introduction to Deep Learning | Spring 2026</p>
+            <p>A video instance segmentation project on OVIS that models object motion through occlusion with multimodal LSTMs, temporal attention, and an occlusion-aware memory bank.</p>
+            <p class="cta">View project</p>
+          </div>
         </a>
 
-        <a class="card project-link" href="paltorc-ebike.html">
-          <h3>Mechanical Engineering Intern - Paltorc</h3>
-          <p class="meta">Milpitas, CA | May 2022 - Aug 2022</p>
-          <p>Built connected mobility functionality by linking an E-Bike control module to rider-facing software and improving end-to-end reliability.</p>
-          <p class="cta">View project</p>
+        <a class="card project-link project-card" href="conveyor-sorting.html">
+          <img class="project-card-image" src="assets/thumb-conveyor.svg" alt="Illustration of a conveyor sorting cell with camera detections and a delta robot" />
+          <div class="project-card-body">
+            <h3>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h3>
+            <p class="meta">January 2026 - Present</p>
+            <p>A real-time sorting system that detects mixed objects on a conveyor, localizes them in world coordinates, and feeds actions to a downstream delta-arm robot.</p>
+            <p class="cta">View project</p>
+          </div>
         </a>
 
-        <a class="card project-link" href="terrain-walker.html">
-          <h3>Solar-Powered Terrain Walker</h3>
-          <p class="meta">August 2023 - May 2024</p>
-          <p>Designed and built an autonomous quadruped that used kinematic linkages to lower cost, cut actuation count, and improve energy efficiency.</p>
-          <p class="cta">View project</p>
+        <a class="card project-link project-card" href="autonomous-driving-planner.html">
+          <img class="project-card-image" src="assets/trajectory_creation.png" alt="Trajectory generation diagram for the autonomous driving local planner" />
+          <div class="project-card-body">
+            <h3>Autonomous Driving Local Planner with Reinforcement Learning</h3>
+            <p class="meta">January 2026 - Present</p>
+            <p>A hierarchical CARLA planning framework that combines global A* routing, PPO-based local trajectory generation, and fixed PID tracking for interactive traffic scenarios.</p>
+            <p class="cta">View project</p>
+          </div>
         </a>
 
-        <a class="card project-link" href="conveyor-sorting.html">
-          <h3>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h3>
-          <p class="meta">January 2026 - Present</p>
-          <p>Developed a real-time YOLO and OpenCV perception pipeline with calibration, label stabilization, and robot-side integration for sorting workflows.</p>
-          <p class="cta">View project</p>
+        <a class="card project-link project-card" href="terrain-walker.html">
+          <img class="project-card-image" src="assets/thumb-terrain.svg" alt="Illustration of a four-legged terrain walker with simplified linkages" />
+          <div class="project-card-body">
+            <h3>Solar-Powered Terrain Walker</h3>
+            <p class="meta">August 2023 - May 2024</p>
+            <p>An autonomous quadruped built around linkage-based leg design to reduce actuator count, lower cost, and improve energy efficiency on uneven terrain.</p>
+            <p class="cta">View project</p>
+          </div>
         </a>
 
-        <a class="card project-link" href="autonomous-driving-planner.html">
-          <h3>Autonomous Driving Local Planner with Reinforcement Learning</h3>
-          <p class="meta">January 2026 - Present</p>
-          <p>Built a closed-loop CARLA planning framework for highway merges, unprotected left turns, and sudden cut-ins using global A* routing, fixed PID tracking, and PPO local planning.</p>
-          <p class="cta">View project</p>
+        <a class="card project-link project-card" href="minesweeper-ai.html">
+          <img class="project-card-image" src="assets/thumb-minesweeper.svg" alt="Illustration of a neural network solving a Minesweeper board" />
+          <div class="project-card-body">
+            <h3>Minesweeper Artificial Intelligence</h3>
+            <p class="meta">April 2024 - August 2024</p>
+            <p>A deep reinforcement learning agent for Minesweeper that uses learned state representations and reward shaping to operate in a sparse, partially observable environment.</p>
+            <p class="cta">View project</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-heading">
+        <h2>Experience</h2>
+        <p>Full-time and internship roles focused on semiconductor equipment, connected products, and system integration.</p>
+      </div>
+
+      <div class="project-grid">
+        <a class="card project-link project-card" href="ulvac-field-service.html">
+          <img class="project-card-image" src="assets/thumb-ulvac.svg" alt="Illustration of a semiconductor tool chamber with upgrade components" />
+          <div class="project-card-body">
+            <h3>Field Service Engineer I - Ulvac Technologies</h3>
+            <p class="meta">Santa Clara, CA | Oct 2024 - Aug 2025</p>
+            <p>Production support and retrofit work on semiconductor tools, including hardware rebuilds, controls changes, diagnostics, and fleet reliability improvement.</p>
+            <p class="cta">View experience</p>
+          </div>
+        </a>
+
+        <a class="card project-link project-card" href="paltorc-ebike.html">
+          <img class="project-card-image" src="assets/thumb-ebike.svg" alt="Illustration of a connected e-bike dashboard and telemetry interface" />
+          <div class="project-card-body">
+            <h3>Mechanical Engineering Intern - Paltorc</h3>
+            <p class="meta">Milpitas, CA | May 2022 - Aug 2022</p>
+            <p>Connected an E-Bike control module to rider-facing software so live telemetry and diagnostics became part of the product experience.</p>
+            <p class="cta">View experience</p>
+          </div>
         </a>
       </div>
     </section>
 
     <footer class="footer">
       <div>Questions or collaboration? Email: leo.shaw@andrew.cmu.edu</div>
-      <div>Last updated: April 3, 2026</div>
+      <div>Last updated: April 23, 2026</div>
     </footer>
   </main>
 </body>

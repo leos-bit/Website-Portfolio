@@ -14,7 +14,7 @@
     <div class="brand">Leo Shaw</div>
     <div class="nav-links">
       <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Projects &amp; Experience</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
@@ -24,60 +24,78 @@
       <p class="meta">August 2023 - May 2024</p>
       <h1>Solar-Powered Terrain Walker</h1>
       <p class="hero-sub">
-        Designed an autonomous, solar-powered four-legged robot that prioritized kinematic efficiency, lower cost,
-        and reduced actuator count without sacrificing terrain performance.
+        A low-cost autonomous quadruped that used linkage-based leg design to reduce actuation complexity without giving up terrain capability.
       </p>
     </section>
 
     <section class="project-layout">
       <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Mechanism design and embedded controls
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Tools</span>
+            SolidWorks, ANSYS, Arduino
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Design Gain</span>
+            34% lower cost than a comparable six-legged design
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Actuation</span>
+            Reduced from three motors per leg to one
+          </div>
+        </div>
+
         <h2>Overview</h2>
         <p>
-          Traditional legged robots often require multiple actuators per leg and a correspondingly complex control
-          stack. This project focused on a lighter, cheaper architecture that could still traverse uneven terrain
-          effectively while using fewer active components.
+          Many legged robots become expensive and fragile because each leg needs several actuators and a correspondingly
+          complicated control system. This project explored a more deployable alternative: using clever linkage design to
+          simplify locomotion mechanically before asking software to compensate.
         </p>
+
         <h3>Implementation</h3>
         <p>
-          I used Chebyshev 4-bar linkages and pantographs to reduce each leg from three actuators to one. I modeled
-          pivot designs in SolidWorks, validated structural integrity through ANSYS stress simulations, and developed
-          motion and sensing subsystems in C on Arduino hardware. The system combined mechanical simplification with
-          embedded control logic to keep the gait stable while preserving the advantages of a legged platform.
+          I designed the robot around Chebyshev 4-bar linkages and pantographs so each leg could be driven with a
+          single actuator instead of three. I modeled the pivots and structural components in SolidWorks, validated key
+          parts with ANSYS stress analysis, and implemented motion and sensing subsystems in C on Arduino hardware.
         </p>
+
         <h3>Results</h3>
         <p>
-          The design reduced overall cost by roughly 34%, simplified controls, and achieved terrain performance
-          comparable to more complex six-legged systems. By consolidating actuation, the robot also improved energy
-          efficiency and moved toward a more deployable low-cost locomotion platform.
+          The final design lowered cost by about 34%, simplified controls, and preserved useful terrain performance
+          relative to more complex legged platforms. Consolidated actuation also improved energy efficiency and made the
+          robot easier to build, debug, and reason about.
         </p>
-        <h3>My Contributions</h3>
-        <ul class="list">
-          <li>Engineered the mechanism architecture and actuator reduction strategy.</li>
-          <li>Designed and built the quadruped platform around Chebyshev 4-bar linkages and pantographs.</li>
-          <li>Modeled and validated key structural components in SolidWorks and ANSYS.</li>
-          <li>Implemented motion and sensing subsystems in C on Arduino for stable locomotion.</li>
-        </ul>
-      </div>
 
-      <aside class="quick-facts">
-        <div class="fact">
-          <span class="fact-label">Focus</span>
-          Mechanism design, embedded controls, autonomous robotics
+        <h3>What I Built</h3>
+        <ul class="list">
+          <li>Mechanism architecture based on Chebyshev 4-bar linkages and pantographs.</li>
+          <li>Actuator reduction strategy that cut each leg from three motors to one.</li>
+          <li>Structural design and validation in SolidWorks and ANSYS.</li>
+          <li>Embedded motion and sensing subsystems in C on Arduino.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Project Snapshot</h3>
+          <div class="media-grid">
+            <div class="media-card">
+              <img class="project-image" src="assets/thumb-terrain.svg" alt="Illustration of the terrain walker linkage design" />
+              <div class="media-caption">
+                The main idea was to push complexity into the mechanical design so the robot could move with fewer
+                motors, simpler controls, and better energy efficiency.
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="fact">
-          <span class="fact-label">Design Gain</span>
-          34% lower cost versus a comparable six-legged model
-        </div>
-        <div class="fact">
-          <span class="fact-label">Actuation</span>
-          Reduced from three motors per leg to one
-        </div>
-      </aside>
+      </div>
     </section>
 
     <footer class="footer">
-      <div><a href="projects.html">Back to all projects</a></div>
-      <div>Last updated: April 3, 2026</div>
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: April 23, 2026</div>
     </footer>
   </main>
 </body>

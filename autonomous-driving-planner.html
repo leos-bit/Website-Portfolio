@@ -14,7 +14,7 @@
     <div class="brand">Leo Shaw</div>
     <div class="nav-links">
       <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Projects &amp; Experience</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
@@ -24,84 +24,71 @@
       <p class="meta">January 2026 - Present</p>
       <h1>Autonomous Driving Local Planner with Reinforcement Learning</h1>
       <p class="hero-sub">
-        Built a closed-loop CARLA planning framework for highway merges, unprotected left turns, and sudden cut-ins,
-        using global A* routing, fixed PID tracking, and a PPO local planner for interaction-aware trajectory generation.
+        A hierarchical CARLA planning system for highway merges, unprotected left turns, and sudden cut-ins using
+        global A* routing, PPO local trajectory generation, and fixed PID tracking.
       </p>
     </section>
 
     <section class="project-layout">
       <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Hierarchical planning and closed-loop evaluation
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Python, CARLA, PyTorch, Stable-Baselines3
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Planner</span>
+            Global A* plus PPO local trajectory generation
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Key Result</span>
+            86% success in 100 highway-merge episodes
+          </div>
+        </div>
+
         <h2>Overview</h2>
         <p>
-          This project targets high-conflict traffic situations where reactive rule sets often break down: highway
-          merges, unprotected left turns, and abrupt cut-ins. I built the system as a controlled closed-loop study so
-          planner improvements could be measured directly without changing the low-level vehicle controller.
+          This project focuses on the kinds of traffic interactions where simple reactive rules often break down:
+          contested highway merges, unprotected left turns, and abrupt cut-ins. I built the system so planner changes
+          could be measured in a controlled way without retuning the low-level controller every time.
         </p>
 
         <h3>Implementation</h3>
         <p>
-          I developed the training and evaluation pipeline in Python using Stable-Baselines3, PyTorch, and CARLA.
-          The stack keeps global A* route planning and longitudinal/lateral PID tracking fixed, then replaces the
-          rule-based local planner with PPO. At each simulator step, the learned policy outputs a short-horizon local
-          trajectory segment and target speed, allowing the vehicle to react to nearby traffic while staying anchored
-          to the long-horizon route.
+          The stack keeps global A* routing and longitudinal and lateral PID tracking fixed, then replaces the local
+          planning layer with a PPO policy. At each simulator step, the learned policy predicts short-horizon trajectory
+          shaping parameters and target speed, letting the ego vehicle react to surrounding traffic while staying
+          aligned with the route-level objective.
         </p>
         <p>
-          The observation design combined ego and route-following state, gap-level merge cues, and nearby-vehicle
-          geometry. I also shaped the reward around progress, anti-idling behavior, collision avoidance, TTC safety,
-          route adherence, and comfort penalties so the agent had to balance merge completion against smoothness and risk.
+          I built the training and evaluation pipeline in Python with reproducible scenario generation, observation
+          design for route and traffic interaction cues, reward shaping for safety and progress, and rollout analysis
+          tooling. The action space was designed around trajectory generation rather than direct throttle and steering,
+          which kept the learning problem focused on planning instead of low-level control.
         </p>
-        <p>
-          The policy was framed as a local trajectory generator rather than a selector over fixed waypoints. Its action
-          space produced trajectory-shaping parameters and target speed, which the environment converted into a smooth
-          short-horizon path using anchored offsets and a Catmull-Rom spline before handing the result to the fixed
-          controller stack.
-        </p>
-
-        <h3>System Design Details</h3>
-        <ul class="list">
-          <li>Kept the low-level longitudinal and lateral PID tracker fixed so changes in performance could be attributed to planning instead of controller retuning.</li>
-          <li>Structured observations around ego state, route-relative tracking error, gap-level interaction cues, and nearby-vehicle geometry, with a full observation size of 12 + 10 + 8N for N nearby vehicles.</li>
-          <li>Used a five-dimensional continuous action space to shape the short-horizon path and commanded speed during merge negotiation.</li>
-          <li>Generated reproducible traffic with randomized gap, speed, and density variation so merges, left turns, and cut-ins could be stress-tested under controlled conditions.</li>
-        </ul>
 
         <h3>Results</h3>
         <p>
-          In the tuned highway-merge evaluation, the PPO planner achieved an 86% success rate over 100 episodes, with
-          a 17.4 s 90th-percentile completion time for successful runs and a 547.137 m/s^3 90th-percentile maximum jerk.
-          That result showed the RL pipeline was functional end-to-end in closed loop, while also making clear that
-          smoothness and decisiveness still needed more tuning.
-        </p>
-        <p>
-          More broadly, the project established a reproducible baseline framework across all three scenarios and showed
-          where purely reactive planning becomes brittle under aggressive interaction timing, tighter merge gaps, and
-          higher closing speeds. That baseline gave the PPO planner a measurable reference point for policy iteration.
+          In the tuned highway-merge benchmark, the PPO planner reached an 86% success rate over 100 episodes while
+          outperforming a scripted aggressive baseline on total successes. The project also exposed an honest tradeoff:
+          the learned planner improved completion reliability, but comfort and decisiveness still needed work when
+          measured with jerk-based metrics and long-tail completion times.
         </p>
 
-        <h3>My Contributions</h3>
+        <h3>What I Built</h3>
         <ul class="list">
-          <li>Designed the hierarchical planner structure combining global A* routing, PPO local planning, and fixed PID tracking.</li>
-          <li>Built reproducible CARLA scenarios for highway merges, unprotected left turns, and sudden cut-ins.</li>
-          <li>Implemented observation features and reward shaping for gap selection, progress, safety, and ride comfort.</li>
-          <li>Developed evaluation tooling to benchmark success rate, crash rate, completion time, and jerk against CARLA baselines.</li>
+          <li>Hierarchical planner combining global A* guidance, PPO local planning, and fixed PID tracking.</li>
+          <li>Reproducible CARLA scenarios for merges, left turns, and sudden cut-ins.</li>
+          <li>Observation and reward design for route adherence, safety, progress, and comfort.</li>
+          <li>Evaluation tooling for success rate, crash rate, completion time, and jerk-based ride quality.</li>
         </ul>
-
-        <h3>What This Shows</h3>
-        <p>
-          This project demonstrates more than just PPO training. It shows controlled autonomy-stack experimentation,
-          scenario design, reward engineering, and closed-loop evaluation with explicit safety, comfort, and efficiency
-          tradeoffs. It also highlights an honest limitation: the learned planner could complete merges reliably, but
-          still needed improvement in smoothness and merge timing to consistently match stronger scripted behavior.
-        </p>
 
         <div class="media-section">
           <h3>Project Media</h3>
-          <p>
-            This CARLA clip shows the PPO local planner navigating a highway merge scenario. Light blue lines indicate
-            the PPO local planner's candidate and executed trajectories, while the yellow line shows the global A*
-            planner route that provides longer-horizon guidance through the merge.
-          </p>
           <div class="media-grid featured">
             <div class="media-card">
               <video class="project-video" controls preload="metadata">
@@ -109,36 +96,15 @@
                 Your browser does not support the video tag.
               </video>
               <div class="media-caption">
-                In this rollout, the PPO local planner reacts to nearby traffic during the merge while the A* route
-                remains visible as a global reference path.
+                In this rollout, the PPO local planner reacts to nearby traffic during a highway merge while the global
+                A* route stays visible as a longer-horizon reference.
               </div>
             </div>
             <div class="media-card">
-              <h4>Trajectory Legend</h4>
+              <img class="project-image" src="assets/trajectory_creation.png" alt="Trajectory generation diagram for the PPO local planner" />
               <div class="media-caption">
-                Light blue trajectories correspond to the PPO local planner. Yellow corresponds to the A* global planner.
-                This makes it easier to separate immediate reactive planning from the route-level guidance during the merge.
-              </div>
-            </div>
-          </div>
-
-          <div class="media-grid">
-            <div class="media-card">
-              <img class="project-image" src="assets/trajectory_creation.png" alt="Diagram of PPO local trajectory generation from anchor-point offsets and heading reconnection bias" />
-              <div class="media-caption">
-                This trajectory-construction view shows how the PPO planner acts in a continuous five-dimensional action
-                space without directly outputting throttle or steering. The policy predicts three lateral offsets placed
-                about 8 m, 18 m, and 30 m along the global A* path, plus one heading reconnection bias that shapes how
-                the local plan rejoins the route, and one target-speed value that controls yield-versus-go behavior.
-              </div>
-            </div>
-            <div class="media-card">
-              <h4>Trajectory Construction</h4>
-              <div class="media-caption">
-                Internally, the three anchor offsets are limited to about 1.0 m of lateral deviation from the global
-                route. The environment converts those offsets and the reconnection term into a smooth local path with a
-                Catmull-Rom spline, then hands that trajectory to CARLA's fixed PID controller. This keeps the learning
-                problem focused on planning rather than low-level control.
+                The policy predicts trajectory-shaping parameters and target speed instead of direct controls, then a
+                fixed controller tracks the generated local path.
               </div>
             </div>
           </div>
@@ -183,38 +149,11 @@
           </div>
         </div>
       </div>
-
-      <aside class="quick-facts">
-        <div class="fact">
-          <span class="fact-label">Focus</span>
-          Hierarchical planning, reinforcement learning, closed-loop evaluation
-        </div>
-        <div class="fact">
-          <span class="fact-label">Stack</span>
-          Python, Stable-Baselines3, PyTorch, CARLA
-        </div>
-        <div class="fact">
-          <span class="fact-label">Architecture</span>
-          Global A* routing, PPO local trajectory generation, fixed PID tracking
-        </div>
-        <div class="fact">
-          <span class="fact-label">Key Metric</span>
-          86% PPO success rate in 100 closed-loop highway merge episodes
-        </div>
-        <div class="fact">
-          <span class="fact-label">Scenarios</span>
-          Highway merging, unprotected left turns, and sudden cut-ins
-        </div>
-        <div class="fact">
-          <span class="fact-label">Evaluation</span>
-          Success rate, crash rate, completion time, and jerk-based comfort
-        </div>
-      </aside>
     </section>
 
     <footer class="footer">
-      <div><a href="projects.html">Back to all projects</a></div>
-      <div>Last updated: April 4, 2026</div>
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: April 23, 2026</div>
     </footer>
   </main>
 </body>

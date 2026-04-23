@@ -14,7 +14,7 @@
     <div class="brand">Leo Shaw</div>
     <div class="nav-links">
       <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Projects &amp; Experience</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
@@ -24,110 +24,92 @@
       <p class="meta">January 2026 - Present</p>
       <h1>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h1>
       <p class="hero-sub">
-        Built a calibrated perception and robot-integration pipeline for mixed-object sorting on a conveyor in
-        real time.
+        A calibrated vision and robot-integration pipeline for mixed-object sorting on a moving conveyor in real time.
       </p>
     </section>
 
     <section class="project-layout">
       <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Computer vision, calibration, robot integration
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Python, YOLO, OpenCV
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Hardware</span>
+            Conveyor cell plus delta-arm sorter
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Output</span>
+            Real-time detections translated into robot actions
+          </div>
+        </div>
+
         <h2>Overview</h2>
         <p>
-          Mixed-item sorting on moving belts requires fast perception and robust translation from image coordinates to
-          robot actions. The system needed to remain stable under frame-to-frame variation, class ambiguity, and the
-          practical constraints of downstream robotic handling.
+          Mixed-item sorting on moving belts requires more than object detection. The system has to stay stable from
+          frame to frame, convert detections into usable physical coordinates, and deliver outputs the robot can act on
+          before the part has moved out of reach.
         </p>
+
         <h3>Implementation</h3>
         <p>
-          I built a Python vision stack using YOLO and OpenCV, refined object centroids with silhouette-based
-          localization, and projected detections into world coordinates through homography calibration. The
-          perception stack then fed a delta-arm robotic workflow for physical sorting. I also improved the training
-          loop through rapid auto-labeling and retraining so the detector could adapt as the object set expanded.
+          I built the vision stack in Python using YOLO and OpenCV, then added silhouette-based centroid refinement and
+          homography calibration so detections could be projected into world coordinates. On top of that, I used
+          confidence-weighted tracking and label stabilization to reduce flicker and misclassification when objects were
+          partially occluded or visually similar.
         </p>
+        <p>
+          The perception pipeline fed a delta-arm robotic sorting workflow, so the project became an end-to-end physical
+          AI system rather than just a detection demo. I also set up rapid auto-labeling and retraining loops so the
+          model could adapt as the object set expanded from single containers to bundled products.
+        </p>
+
         <h3>Results</h3>
         <p>
-          The pipeline reduced misclassification through confidence-weighted tracking, stabilized labels across frames,
-          and expanded supported classes to bottles, cans, and six-pack bundles. The system combined robust
-          localization with practical robotic integration so detections translated into usable sorting actions.
+          The final system supported bottles, cans, and six-pack bundles while improving localization consistency and
+          reducing label churn across frames. More importantly, the outputs were robust enough to drive downstream
+          sorting actions in a real cell instead of staying trapped in image space.
         </p>
-        <h3>My Contributions</h3>
+
+        <h3>What I Built</h3>
         <ul class="list">
-          <li>Developed the real-time YOLO and OpenCV pipeline for object detection on the conveyor.</li>
-          <li>Improved localization through silhouette-based centroid refinement and homography calibration.</li>
-          <li>Reduced misclassification with confidence-weighted tracking, label stabilization, and retraining workflows.</li>
-          <li>Programmed, assembled, tested, and integrated the delta-arm structure for downstream sorting.</li>
+          <li>Real-time YOLO and OpenCV detection pipeline for mixed objects on a conveyor.</li>
+          <li>Centroid refinement from object silhouettes for more stable pick localization.</li>
+          <li>Homography-based mapping from image coordinates to robot-usable world coordinates.</li>
+          <li>Confidence-weighted tracking, label stabilization, and retraining workflows for new classes.</li>
+          <li>Programming, assembly, testing, and integration of the downstream delta-arm sorting structure.</li>
         </ul>
 
         <div class="media-section">
           <h3>Project Media</h3>
-          <p>
-            This page now has dedicated room for system photos, sorting videos, and perception outputs. Replace these
-            placeholders with actual media as you collect them from the conveyor and robot setup.
-          </p>
           <div class="media-grid featured">
             <div class="media-card">
-              <div class="media-frame large">
-                Conveyor sorting demo video
-                <br />
-                Suggested file: <code>assets/conveyor-sorting/demo.mp4</code>
-              </div>
+              <img class="project-image" src="assets/thumb-conveyor.svg" alt="Illustration of the conveyor sorting pipeline from camera perception to delta robot pick" />
               <div class="media-caption">
-                Use this featured slot for the end-to-end demo showing detection, localization, and the delta-arm sorting action.
+                This layout reflects the full loop: image capture, stabilized detections, world-coordinate projection,
+                and robot-side sorting decisions.
               </div>
             </div>
             <div class="media-card">
-              <div class="media-frame">
-                Labeled detection frame or tracking overlay
-              </div>
+              <h4>System Highlights</h4>
               <div class="media-caption">
-                A good companion image is a YOLO frame with stabilized labels, confidence scores, and world-coordinate mapping.
-              </div>
-            </div>
-          </div>
-          <div class="media-grid">
-            <div class="media-card">
-              <div class="media-frame">
-                Calibration board, homography, or centroid-refinement visual
-              </div>
-              <div class="media-caption">
-                Use this area for your calibration setup or a before/after comparison of centroid refinement.
-              </div>
-            </div>
-            <div class="media-card">
-              <div class="media-frame">
-                Delta-arm build photo or sorting cell image
-              </div>
-              <div class="media-caption">
-                This slot works well for hardware photos that show the robot structure and conveyor environment.
+                The strongest part of this project is the bridge between perception and action. The goal was not just to
+                classify objects but to produce detections that were precise enough for a physical robot to use in motion.
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      <aside class="quick-facts">
-        <div class="fact">
-          <span class="fact-label">Focus</span>
-          Computer vision, calibration, robot integration
-        </div>
-        <div class="fact">
-          <span class="fact-label">Stack</span>
-          Python, YOLO, OpenCV
-        </div>
-        <div class="fact">
-          <span class="fact-label">Capability</span>
-          Real-time sorting of bottles, cans, and bundle packs
-        </div>
-        <div class="fact">
-          <span class="fact-label">Robot Side</span>
-          Delta-arm structure for downstream sorting and material handling
-        </div>
-      </aside>
     </section>
 
     <footer class="footer">
-      <div><a href="projects.html">Back to all projects</a></div>
-      <div>Last updated: April 3, 2026</div>
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: April 23, 2026</div>
     </footer>
   </main>
 </body>

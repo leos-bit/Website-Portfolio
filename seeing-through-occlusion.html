@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Seeing Through Occlusion | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects &amp; Experience</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">18-786 Introduction to Deep Learning | Spring 2026</p>
+      <h1>Seeing Through Occlusion: Multi-Modal Motion Modeling for Video Instance Segmentation</h1>
+      <p class="hero-sub">
+        A deep learning project on the OVIS dataset that models object motion through heavy occlusion with multimodal
+        recurrent encoders, temporal attention, and an occlusion-aware memory bank.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Dataset</span>
+            OVIS video instance segmentation benchmark
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Python, PyTorch, recurrent models
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Best Model</span>
+            Occlusion-aware temporal attention
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Best Validation</span>
+            0.762 IoU and 0.614 mAP
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          This project tackled video instance segmentation under severe occlusion on OVIS, where appearance-based
+          tracking features often fail once objects are partially or fully hidden. Our approach shifted attention toward
+          instance-level motion, predicting where objects should continue moving even when the visual signal becomes weak.
+        </p>
+
+        <h3>Approach</h3>
+        <p>
+          The work progressed in phases. We began with a single-stream motion LSTM baseline, then moved to a
+          multi-modal architecture that decomposed motion into velocity, shape, acceleration, and context streams. The
+          later model added occlusion-aware temporal attention so the network could selectively trust past frames rather
+          than treating the history uniformly, and we explored a memory-bank extension for longer occlusion gaps.
+        </p>
+        <p>
+          The strongest checkpoint came from the temporal-attention phase, which improved the validation metrics over
+          both the baseline and the multimodal gated-fusion model. Motion-stratified evaluation also showed why this
+          mattered: simple copy-last-frame heuristics look deceptively strong overall, but learned motion modeling
+          provides clearer gains once object displacement and occlusion difficulty increase.
+        </p>
+
+        <h3>What I Worked On</h3>
+        <ul class="list">
+          <li>Contributed to the OVIS motion-modeling pipeline and experiment iteration for the course project.</li>
+          <li>Helped package the progression from baseline LSTM to multimodal and occlusion-aware variants.</li>
+          <li>Used quantitative evaluation and figure generation to compare model behavior across motion and occlusion regimes.</li>
+          <li>Integrated project outputs into a presentation-ready story using result plots and qualitative examples.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Key Figures</h3>
+          <div class="media-grid featured">
+            <div class="media-card">
+              <img class="project-image" src="assets/deep-learning-summary.png" alt="Four-panel summary of occlusion-aware model performance on the OVIS project" />
+              <div class="media-caption">
+                Summary plots from the project repository showing the model comparison across the main evaluation views.
+              </div>
+            </div>
+            <div class="media-card">
+              <img class="project-image" src="assets/deep-learning-training.png" alt="Training curves for the deep learning occlusion project" />
+              <div class="media-caption">
+                Training and validation curves used to understand convergence and the tradeoff between next-frame
+                prediction quality and harder occlusion-gap behavior.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-card">
+          <h3>Model Progression</h3>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Phase</th>
+                  <th>Model</th>
+                  <th>Parameters</th>
+                  <th>Val IoU</th>
+                  <th>Val mAP</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1a</td>
+                  <td>Baseline LSTM</td>
+                  <td>84K</td>
+                  <td>0.747</td>
+                  <td>0.587</td>
+                </tr>
+                <tr>
+                  <td>1b</td>
+                  <td>Multi-Modal Gated Fusion LSTM</td>
+                  <td>198K</td>
+                  <td>0.756</td>
+                  <td>0.603</td>
+                </tr>
+                <tr>
+                  <td>2a</td>
+                  <td>Occlusion-Aware Temporal Attention</td>
+                  <td>310K</td>
+                  <td>0.762</td>
+                  <td>0.614</td>
+                </tr>
+                <tr>
+                  <td>2b</td>
+                  <td>Memory Bank + Gap Training</td>
+                  <td>310K</td>
+                  <td>0.757</td>
+                  <td>0.607</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="media-section">
+          <h3>Final Presentation</h3>
+          <p>
+            I also included the final presentation PDF directly on the page so the additional graphs and framing are
+            easy to browse from the site.
+          </p>
+          <embed class="embed" src="assets/seeing-through-occlusion.pdf" type="application/pdf" />
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: April 23, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>

@@ -14,7 +14,7 @@
     <div class="brand">Leo Shaw</div>
     <div class="nav-links">
       <a href="index.html">About</a>
-      <a href="projects.html">Projects</a>
+      <a href="projects.html">Projects &amp; Experience</a>
       <a href="resume.html">Resume</a>
     </div>
   </nav>
@@ -24,56 +24,76 @@
       <p class="meta">April 2024 - August 2024</p>
       <h1>Minesweeper Artificial Intelligence</h1>
       <p class="hero-sub">
-        Developed an autonomous Minesweeper agent using deep reinforcement learning and convolutional neural networks
-        to make strategic decisions in a partially observable environment.
+        A deep reinforcement learning agent for Minesweeper that learns under sparse feedback and partial observability.
       </p>
     </section>
 
     <section class="project-layout">
       <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Deep reinforcement learning
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Python, TensorFlow, Keras, PyTorch
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Challenge</span>
+            Sparse rewards and partial observability
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Performance</span>
+            30%+ win rate on expert difficulty
+          </div>
+        </div>
+
         <h2>Overview</h2>
         <p>
-          Minesweeper is a compact but difficult planning problem with sparse signals, uncertainty, and long-horizon
-          consequences. I used it as a testbed for scalable learning and reward design.
+          Minesweeper is a deceptively hard decision-making problem because each click reveals only limited information,
+          the reward signal is sparse, and early mistakes can end the episode immediately. I used it as a compact testbed
+          for scalable learning, reward design, and training stability.
         </p>
+
         <h3>Implementation</h3>
         <p>
-          I built the agent in Python using TensorFlow, Keras, and PyTorch, with custom reward functions,
-          experience replay, and target-network stabilization. CNN-based state analysis supported policy learning on
-          higher-dimensional board states.
+          I built the agent in Python using deep learning components across TensorFlow, Keras, and PyTorch. The system
+          used replay buffers, target-network stabilization, CNN-based state analysis, and custom reward functions to
+          improve long-horizon policy learning on higher-dimensional board states.
         </p>
+
         <h3>Results</h3>
         <p>
-          The system achieved over 30% win rate on expert-level boards and improved meaningfully over baseline
-          logic-driven strategies.
+          The final model achieved more than a 30% win rate on expert boards and improved meaningfully over simpler
+          logic-driven strategies. The project showed how reinforcement learning can learn useful structure even in a
+          game where the full state is never directly visible.
         </p>
-        <h3>My Contributions</h3>
-        <ul class="list">
-          <li>Designed the reinforcement learning environment and reward shaping strategy.</li>
-          <li>Implemented replay buffers, target networks, and training/evaluation tooling.</li>
-          <li>Built visualization and analysis tools for model behavior and outcomes.</li>
-        </ul>
-      </div>
 
-      <aside class="quick-facts">
-        <div class="fact">
-          <span class="fact-label">Focus</span>
-          Deep reinforcement learning
+        <h3>What I Built</h3>
+        <ul class="list">
+          <li>Reinforcement learning environment and reward shaping strategy.</li>
+          <li>Replay buffers, target networks, and training and evaluation tooling.</li>
+          <li>Visualization and analysis tools for model behavior and failure cases.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Project Snapshot</h3>
+          <div class="media-grid">
+            <div class="media-card">
+              <img class="project-image" src="assets/thumb-minesweeper.svg" alt="Illustration of an AI agent navigating a Minesweeper board" />
+              <div class="media-caption">
+                The project used Minesweeper as a compact but challenging environment for learning under uncertainty.
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="fact">
-          <span class="fact-label">Stack</span>
-          Python, TensorFlow, Keras, PyTorch
-        </div>
-        <div class="fact">
-          <span class="fact-label">Performance</span>
-          30%+ win rate on expert difficulty
-        </div>
-      </aside>
+      </div>
     </section>
 
     <footer class="footer">
-      <div><a href="projects.html">Back to all projects</a></div>
-      <div>Last updated: April 3, 2026</div>
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: April 23, 2026</div>
     </footer>
   </main>
 </body>

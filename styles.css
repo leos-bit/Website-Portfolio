@@ -31,6 +31,10 @@ a:hover {
   color: var(--accent);
 }
 
+img {
+  max-width: 100%;
+}
+
 .page {
   max-width: 1100px;
   margin: 0 auto;
@@ -65,18 +69,36 @@ a:hover {
 
 .hero {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 28px;
   align-items: center;
   margin-top: 24px;
 }
 
-.hero-card {
+.hero-card,
+.photo-card,
+.project-hero,
+.project-section,
+.card,
+.media-card,
+.metrics-card,
+.resume-box {
   background: var(--card);
-  padding: 28px;
   border: 1px solid var(--line);
   border-radius: 18px;
   box-shadow: var(--shadow);
+}
+
+.hero-card {
+  padding: 28px;
+}
+
+.hero-visual {
+  width: 100%;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: linear-gradient(135deg, rgba(10, 123, 108, 0.08), rgba(215, 95, 42, 0.08));
 }
 
 .hero-title {
@@ -117,7 +139,37 @@ a:hover {
   max-width: 760px;
 }
 
-.grid {
+.section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.about-split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.photo-card {
+  padding: 18px;
+}
+
+.profile-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: #f1ede6;
+}
+
+.grid,
+.media-grid,
+.project-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 18px;
@@ -125,11 +177,7 @@ a:hover {
 }
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
   padding: 20px;
-  box-shadow: var(--shadow);
 }
 
 .card h3 {
@@ -149,8 +197,26 @@ a:hover {
   border-color: #d7cec2;
 }
 
+.project-card {
+  padding: 0;
+  overflow: hidden;
+}
+
+.project-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-bottom: 1px solid var(--line);
+  background: linear-gradient(135deg, rgba(10, 123, 108, 0.08), rgba(215, 95, 42, 0.08));
+}
+
+.project-card-body {
+  padding: 18px 20px 20px;
+}
+
 .project-link .meta {
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .project-link .cta {
@@ -197,18 +263,12 @@ a:hover {
 }
 
 .resume-box {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
   padding: 20px;
 }
 
 .project-hero {
-  background: linear-gradient(135deg, rgba(10, 123, 108, 0.08), rgba(215, 95, 42, 0.08));
-  border: 1px solid var(--line);
-  border-radius: 18px;
   padding: 28px;
-  box-shadow: var(--shadow);
+  background: linear-gradient(135deg, rgba(10, 123, 108, 0.08), rgba(215, 95, 42, 0.08));
 }
 
 .project-hero h1 {
@@ -218,38 +278,36 @@ a:hover {
 
 .project-layout {
   display: grid;
-  grid-template-columns: minmax(0, 2fr) minmax(260px, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   margin-top: 24px;
 }
 
 .project-section {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
   padding: 22px;
-  box-shadow: var(--shadow);
 }
 
 .project-section h2,
-.project-section h3 {
+.project-section h3,
+.media-card h4 {
   margin-top: 0;
 }
 
-.quick-facts {
+.info-grid {
   display: grid;
-  gap: 12px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  margin: 18px 0 24px;
 }
 
-.fact {
-  background: var(--card);
+.info-pill {
+  padding: 14px 16px;
   border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 18px;
-  box-shadow: var(--shadow);
+  border-radius: 14px;
+  background: #fcfbf8;
 }
 
-.fact-label {
+.info-pill .fact-label {
   display: block;
   color: var(--muted);
   font-size: 13px;
@@ -266,27 +324,12 @@ a:hover {
   max-width: none;
 }
 
-.media-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-top: 16px;
-}
-
 .media-grid.featured {
   grid-template-columns: minmax(0, 1.3fr) minmax(260px, 0.7fr);
 }
 
 .media-card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
   padding: 18px;
-  box-shadow: var(--shadow);
-}
-
-.media-card h4 {
-  margin: 0 0 10px;
 }
 
 .media-frame {
@@ -320,14 +363,7 @@ a:hover {
   font-size: 14px;
 }
 
-.project-video {
-  width: 100%;
-  display: block;
-  border-radius: 12px;
-  border: 1px solid var(--line);
-  background: #000;
-}
-
+.project-video,
 .project-image {
   width: 100%;
   display: block;
@@ -336,13 +372,13 @@ a:hover {
   background: #fafafa;
 }
 
+.project-video {
+  background: #000;
+}
+
 .metrics-card {
   margin-top: 20px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
   padding: 20px;
-  box-shadow: var(--shadow);
 }
 
 .table-wrap {
@@ -386,11 +422,11 @@ a:hover {
     position: static;
   }
 
-  .project-layout {
+  .media-grid.featured {
     grid-template-columns: 1fr;
   }
 
-  .media-grid.featured {
-    grid-template-columns: 1fr;
+  .embed {
+    height: 620px;
   }
 }

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Minesweeper AI thumbnail</title>
+  <desc id="desc">Illustration of a Minesweeper board and a neural network graph.</desc>
+  <rect width="1200" height="675" fill="#f7f3ec" />
+  <rect x="132" y="132" width="428" height="428" rx="24" fill="#ffffff" stroke="#d7cec2" stroke-width="8" />
+  <g fill="#e9ecef">
+    <rect x="162" y="162" width="74" height="74" rx="12" />
+    <rect x="244" y="162" width="74" height="74" rx="12" />
+    <rect x="326" y="162" width="74" height="74" rx="12" />
+    <rect x="408" y="162" width="74" height="74" rx="12" />
+    <rect x="162" y="244" width="74" height="74" rx="12" />
+    <rect x="244" y="244" width="74" height="74" rx="12" fill="#dff0eb" />
+    <rect x="326" y="244" width="74" height="74" rx="12" />
+    <rect x="408" y="244" width="74" height="74" rx="12" />
+    <rect x="162" y="326" width="74" height="74" rx="12" />
+    <rect x="244" y="326" width="74" height="74" rx="12" />
+    <rect x="326" y="326" width="74" height="74" rx="12" fill="#fce9e1" />
+    <rect x="408" y="326" width="74" height="74" rx="12" />
+    <rect x="162" y="408" width="74" height="74" rx="12" />
+    <rect x="244" y="408" width="74" height="74" rx="12" />
+    <rect x="326" y="408" width="74" height="74" rx="12" />
+    <rect x="408" y="408" width="74" height="74" rx="12" />
+  </g>
+  <text x="274" y="292" font-family="Space Grotesk, sans-serif" font-size="44" fill="#0a7b6c">1</text>
+  <text x="356" y="374" font-family="Space Grotesk, sans-serif" font-size="44" fill="#d75f2a">2</text>
+  <g fill="none" stroke="#36524d" stroke-width="10">
+    <circle cx="792" cy="212" r="28" />
+    <circle cx="936" cy="176" r="28" />
+    <circle cx="1028" cy="278" r="28" />
+    <circle cx="830" cy="374" r="28" />
+    <circle cx="958" cy="430" r="28" />
+  </g>
+  <g stroke="#0a7b6c" stroke-width="8" stroke-linecap="round">
+    <path d="M820 212l88-28" />
+    <path d="M952 198l58 62" />
+    <path d="M996 292l-144 66" />
+    <path d="M852 384l84 34" />
+  </g>
+  <text x="676" y="540" font-family="Space Grotesk, sans-serif" font-size="34" fill="#36524d">RL policy learning under uncertainty</text>
+  <text x="130" y="102" font-family="Space Grotesk, sans-serif" font-size="48" fill="#1c1c1c">Minesweeper AI</text>
+</svg>
