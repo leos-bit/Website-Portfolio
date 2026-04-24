@@ -70,6 +70,23 @@
           tooling. The action space was designed around trajectory generation rather than direct throttle and steering,
           which kept the learning problem focused on planning instead of low-level control.
         </p>
+        <p>
+          The policy input was organized around three pieces of context: ego and route-tracking state, merge-gap
+          geometry, and neighboring traffic. That structure let the network reason about whether a candidate gap was
+          opening or closing while still preserving the route-following signals needed to stay on a stable local path.
+        </p>
+
+        <div class="media-section">
+          <h3>Model Input Structure</h3>
+          <div class="media-card">
+            <img class="project-image" src="assets/autonomous-model-input.svg" alt="Diagram of the PPO observation structure showing ego, route, merge-gap, and traffic features" />
+            <div class="media-caption">
+              The PPO observation combines a 12-dimensional ego and route-tracking state, a 10-dimensional merge-gap
+              description, and per-vehicle traffic features so the policy can time merges without giving up route
+              alignment or short-horizon safety context.
+            </div>
+          </div>
+        </div>
 
         <h3>Results</h3>
         <p>
@@ -148,12 +165,102 @@
             </div>
           </div>
         </div>
+
+        <div class="media-section">
+          <h3>Robustness Under Observation and Action Noise</h3>
+          <p>
+            I also evaluated how the merge planner behaved when moderate observation and action noise were injected at
+            test time. The clean PPO policy held up better than expected: its merge behavior stayed stable, the added
+            noise did not materially break its decision process, and in many runs it actually committed more decisively
+            to an available gap while preserving smoother overall behavior.
+          </p>
+          <p>
+            The noise-trained PPO policy behaved differently. Rather than learning a more robust version of the same
+            merge strategy, it appeared to learn a less stable one. That result makes sense in this setup because the
+            policy directly controls lateral trajectory anchors and target speed; once noise is present during training,
+            even small perturbations can create larger downstream changes in the generated local path and make the
+            already difficult merge-timing problem harder to solve cleanly.
+          </p>
+          <div class="media-grid">
+            <div class="media-card">
+              <img class="project-image" src="assets/ppo_noise_success_crash_rates.png" alt="Success and crash rates for PPO policies evaluated with injected noise" />
+              <div class="media-caption">
+                Success and crash rates under noise show that the clean PPO policy retained a strong merge strategy,
+                while the noise-trained variant gave up reliability instead of gaining robustness.
+              </div>
+            </div>
+            <div class="media-card">
+              <img class="project-image" src="assets/ppo_noise_p90_time_jerk_bars.png" alt="P90 completion time and jerk comparison for PPO policies under noise" />
+              <div class="media-caption">
+                Completion-time and jerk comparisons suggest that the clean policy remained decisive and comparatively
+                smooth even with perturbations, whereas the noise-trained policy paid a larger performance penalty.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="media-section">
+          <h3>Reward Ablation Study</h3>
+          <p>
+            To understand which reward terms were doing the real work, I removed comfort, lane, and traffic penalties
+            one at a time and compared the resulting success rates and jerk metrics against the full reward function.
+            The ablation runs showed that all three terms matter, but they influence behavior differently: traffic-aware
+            incentives protected success rate most strongly, while comfort and lane terms shaped how aggressively the
+            planner used the available merge space.
+          </p>
+          <div class="metrics-card">
+            <div class="table-wrap">
+              <table class="metrics-table">
+                <thead>
+                  <tr>
+                    <th>Reward Variant</th>
+                    <th>Success Rate</th>
+                    <th>P90 Max Jerk (m/s^3)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Full Reward Function</td>
+                    <td>83%</td>
+                    <td>590.604</td>
+                  </tr>
+                  <tr>
+                    <td>No Comfort Penalty</td>
+                    <td>66%</td>
+                    <td>577.030</td>
+                  </tr>
+                  <tr>
+                    <td>No Lane Penalty</td>
+                    <td>62%</td>
+                    <td>592.208</td>
+                  </tr>
+                  <tr>
+                    <td>No Traffic Penalty</td>
+                    <td>58%</td>
+                    <td>292.622</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p>
+            Example rollout for the full reward function:
+            <a href="https://www.youtube.com/watch?v=z7-IxLGJJVs&amp;list=PLNFFjxMc1ZrHqEnG5b47WwSxvCChSgZTt">watch evaluation video</a>.
+          </p>
+          <p>
+            The full reward produced the best overall merge reliability. Removing the traffic penalty caused the
+            sharpest collapse in success rate, which reinforces how important explicit interaction awareness was for
+            gap selection. Removing comfort or lane terms also hurt performance, but those variants mostly exposed how
+            much those penalties were stabilizing the local planner's path and merge timing rather than simply lowering
+            jerk on their own.
+          </p>
+        </div>
       </div>
     </section>
 
     <footer class="footer">
       <div><a href="projects.html">Back to projects &amp; experience</a></div>
-      <div>Last updated: April 23, 2026</div>
+      <div>Last updated: April 24, 2026</div>
     </footer>
   </main>
 </body>

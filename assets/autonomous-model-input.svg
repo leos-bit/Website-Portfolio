@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="880" viewBox="0 0 1200 880" role="img" aria-labelledby="title desc">
+  <title id="title">PPO model input structure</title>
+  <desc id="desc">Diagram showing the ego, route, track, merge-gap, and traffic features that make up the policy observation for the autonomous driving PPO planner.</desc>
+  <rect width="1200" height="880" fill="#f7f6f2"/>
+  <rect x="40" y="36" width="1120" height="808" rx="28" fill="#ffffff" stroke="#e7e2da" stroke-width="2"/>
+  <text x="80" y="104" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="38" font-weight="700">
+    PPO Observation Structure
+  </text>
+  <text x="80" y="144" fill="#4f4f4f" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="22">
+    Route state, merge context, and neighboring traffic are encoded before each policy update.
+  </text>
+
+  <rect x="80" y="188" width="480" height="266" rx="22" fill="#eef6f4" stroke="#0a7b6c" stroke-width="2"/>
+  <text x="112" y="234" fill="#0a7b6c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="28" font-weight="700">
+    Ego / Route / Track (12 dim)
+  </text>
+  <text x="112" y="274" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    normalized speed
+  </text>
+  <text x="112" y="306" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    normalized goal distance
+  </text>
+  <text x="112" y="338" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    route heading error (sin, cos)
+  </text>
+  <text x="112" y="370" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    lane offset, tracking heading error (sin, cos)
+  </text>
+  <text x="112" y="402" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    tracking distance, current steer
+  </text>
+  <text x="112" y="434" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    last target speed, mean lateral offset, last heading bias
+  </text>
+
+  <rect x="640" y="188" width="480" height="266" rx="22" fill="#fff1eb" stroke="#d75f2a" stroke-width="2"/>
+  <text x="672" y="234" fill="#d75f2a" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="28" font-weight="700">
+    Merge Gap (10 dim)
+  </text>
+  <text x="672" y="274" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    merge side
+  </text>
+  <text x="672" y="306" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    lead gap, lead relative speed, lead TTC urgency
+  </text>
+  <text x="672" y="338" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    rear gap, rear relative speed, rear TTC urgency
+  </text>
+  <text x="672" y="370" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    total gap size
+  </text>
+  <text x="672" y="402" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    merge minus current speed
+  </text>
+  <text x="672" y="434" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    merge minus target speed
+  </text>
+
+  <rect x="80" y="500" width="1040" height="180" rx="22" fill="#f6efe7" stroke="#b98c62" stroke-width="2"/>
+  <text x="112" y="546" fill="#8b5d2b" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="28" font-weight="700">
+    Traffic Features (up to 4 vehicles)
+  </text>
+  <text x="112" y="590" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    relative x, relative y
+  </text>
+  <text x="112" y="622" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    relative vx, relative vy, distance
+  </text>
+  <text x="112" y="654" fill="#1c1c1c" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="20">
+    vehicle length, width, safety radius
+  </text>
+
+  <path d="M320 454 L320 494" stroke="#0a7b6c" stroke-width="4" stroke-linecap="round"/>
+  <path d="M880 454 L880 494" stroke="#d75f2a" stroke-width="4" stroke-linecap="round"/>
+  <path d="M320 494 C320 524, 430 520, 520 520" stroke="#0a7b6c" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M880 494 C880 524, 770 520, 680 520" stroke="#d75f2a" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <rect x="420" y="718" width="360" height="86" rx="20" fill="#1c1c1c"/>
+  <text x="600" y="770" text-anchor="middle" fill="#ffffff" font-family="'Space Grotesk', 'Trebuchet MS', sans-serif" font-size="34" font-weight="700">
+    PPO Policy
+  </text>
+</svg>
