@@ -261,13 +261,41 @@ img {
 
 .resume-panel {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 20px;
   align-items: start;
 }
 
 .resume-box {
   padding: 20px;
+}
+
+.resume-main {
+  min-width: 0;
+}
+
+.resume-side {
+  position: sticky;
+  top: 92px;
+}
+
+.resume-side h3,
+.resume-main h3 {
+  margin-top: 0;
+}
+
+.resume-download {
+  display: inline-block;
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #eef6f4;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.resume-download:hover {
+  color: #065f54;
+  background: #e0f0ed;
 }
 
 .project-hero {
@@ -415,7 +443,7 @@ img {
 
 .embed {
   width: 100%;
-  height: 900px;
+  height: 980px;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: #fafafa;
@@ -430,7 +458,16 @@ img {
     grid-template-columns: 1fr;
   }
 
-  .embed {
-    height: 620px;
+  .resume-panel {
+    grid-template-columns: 1fr;
   }
+
+  .resume-side {
+    position: static;
+  }
+
+  .embed {
+    height: 760px;
+  }
+
 }
