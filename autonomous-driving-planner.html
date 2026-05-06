@@ -34,7 +34,7 @@
         <div class="info-grid">
           <div class="info-pill">
             <span class="fact-label">Focus</span>
-            Hierarchical planning and closed-loop evaluation
+            Closed-loop planning in highly interactive traffic
           </div>
           <div class="info-pill">
             <span class="fact-label">Stack</span>
@@ -42,33 +42,36 @@
           </div>
           <div class="info-pill">
             <span class="fact-label">Planner</span>
-            Global A* plus PPO local trajectory generation
+            Global A* plus PPO local trajectory generation with fixed PID tracking
           </div>
           <div class="info-pill">
             <span class="fact-label">Key Result</span>
-            86% success in 100 highway-merge episodes
+            83% merge success and 80% tuned left-turn success
           </div>
         </div>
 
         <h2>Overview</h2>
         <p>
-          This project focuses on the kinds of traffic interactions where simple reactive rules often break down:
-          contested highway merges, unprotected left turns, and abrupt cut-ins. I built the system so planner changes
-          could be measured in a controlled way without retuning the low-level controller every time.
+          This project grew into a closed-loop CARLA framework for studying three safety-critical interaction problems:
+          highway merges, unprotected left turns, and sudden cut-ins. The main design choice was to keep the same
+          low-level PID tracker across both classical and learned planners so planning improvements could be measured
+          directly rather than being mixed with controller retuning.
         </p>
 
         <h3>Implementation</h3>
         <p>
-          The stack keeps global A* routing and longitudinal and lateral PID tracking fixed, then replaces the local
-          planning layer with a PPO policy. At each simulator step, the learned policy predicts short-horizon trajectory
-          shaping parameters and target speed, letting the ego vehicle react to surrounding traffic while staying
-          aligned with the route-level objective.
+          The baseline stack used global A* routing, a local waypoint planner, and fixed longitudinal and lateral PID
+          control. On top of that benchmark, I replaced the rule-based local planner with PPO-based short-horizon
+          trajectory generation while preserving the same global route backbone and low-level controller interface.
+          At each simulator step, the learned policy predicted local trajectory-shaping parameters and target speed
+          instead of direct steering and throttle.
         </p>
         <p>
-          I built the training and evaluation pipeline in Python with reproducible scenario generation, observation
-          design for route and traffic interaction cues, reward shaping for safety and progress, and rollout analysis
-          tooling. The action space was designed around trajectory generation rather than direct throttle and steering,
-          which kept the learning problem focused on planning instead of low-level control.
+          The full framework included reproducible scenario generation, baseline behavior profiles, observation design
+          for route and interaction cues, scenario-specific reward shaping, and batch evaluation across success, crash,
+          completion-time, and jerk metrics. Highway merging used merge-gap and nearby-vehicle features, while the
+          unprotected left-turn setup added phase guidance and conflict-zone timing features to support yield-or-commit
+          decisions.
         </p>
         <p>
           The policy input was organized around three pieces of context: ego and route-tracking state, merge-gap
@@ -90,19 +93,87 @@
 
         <h3>Results</h3>
         <p>
-          In the tuned highway-merge benchmark, the PPO planner reached an 86% success rate over 100 episodes while
-          outperforming a scripted aggressive baseline on total successes. The project also exposed an honest tradeoff:
-          the learned planner improved completion reliability, but comfort and decisiveness still needed work when
-          measured with jerk-based metrics and long-tail completion times.
+          The final project showed that the framework was useful not just for one planner, but for measurable iteration
+          across multiple interactive scenarios. In highway merging, PPO improved from an earlier 76% success-rate
+          policy to an updated 83% success-rate policy while reducing P90 successful completion time from 24.5 s to
+          15.25 s. In unprotected left turns, reward tuning pushed the phase-guided PPO policy from 44% to 80%
+          success, bringing it close to baseline reliability while producing smoother successful trajectories.
         </p>
 
         <h3>What I Built</h3>
         <ul class="list">
-          <li>Hierarchical planner combining global A* guidance, PPO local planning, and fixed PID tracking.</li>
-          <li>Reproducible CARLA scenarios for merges, left turns, and sudden cut-ins.</li>
-          <li>Observation and reward design for route adherence, safety, progress, and comfort.</li>
-          <li>Evaluation tooling for success rate, crash rate, completion time, and jerk-based ride quality.</li>
+          <li>Shared CARLA benchmark framework for highway merges, unprotected left turns, and sudden cut-ins.</li>
+          <li>Hierarchical planner architecture combining global A* guidance, PPO local planning, and fixed PID tracking.</li>
+          <li>Observation and reward design for merge timing, left-turn commitment, route adherence, safety, and comfort.</li>
+          <li>Evaluation tooling for success rate, crash rate, completion time, jerk, and noise-robustness analysis.</li>
         </ul>
+
+        <div class="media-section">
+          <h3>Scenario Results</h3>
+          <div class="metrics-card">
+            <div class="table-wrap">
+              <table class="metrics-table">
+                <thead>
+                  <tr>
+                    <th>Scenario</th>
+                    <th>Method</th>
+                    <th>Success Rate</th>
+                    <th>Crash Rate</th>
+                    <th>P90 Time (s)</th>
+                    <th>P90 Jerk (m/s^3)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Highway Merge</td>
+                    <td>Baseline (Aggressive)</td>
+                    <td>83%</td>
+                    <td>17%</td>
+                    <td>11.6</td>
+                    <td>446.354</td>
+                  </tr>
+                  <tr>
+                    <td>Highway Merge</td>
+                    <td>PPO (Before)</td>
+                    <td>76%</td>
+                    <td>20%</td>
+                    <td>24.5</td>
+                    <td>482.044</td>
+                  </tr>
+                  <tr>
+                    <td>Highway Merge</td>
+                    <td>PPO (After)</td>
+                    <td>83%</td>
+                    <td>17%</td>
+                    <td>15.25</td>
+                    <td>590.965</td>
+                  </tr>
+                  <tr>
+                    <td>Left Turn</td>
+                    <td>Baseline (Aggressive)</td>
+                    <td>78%</td>
+                    <td>19%</td>
+                    <td>7.64</td>
+                    <td>81.30</td>
+                  </tr>
+                  <tr>
+                    <td>Left Turn</td>
+                    <td>Reward-Tuned PPO</td>
+                    <td>80%</td>
+                    <td>20%</td>
+                    <td>9.30</td>
+                    <td>61.04</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <p>
+            The sudden cut-in baseline highlighted one of the clearest limitations of the classical controller stack:
+            under identical TTC-triggered cut-in conditions, the PID-based baseline avoided collision at 70 km/h but
+            failed at 90 km/h, showing how quickly reactive behavior becomes brittle as closing speed increases.
+          </p>
+        </div>
 
         <div class="media-section">
           <h3>Project Media</h3>
@@ -169,17 +240,14 @@
         <div class="media-section">
           <h3>Robustness Under Observation and Action Noise</h3>
           <p>
-            I also evaluated how the merge planner behaved when moderate observation and action noise were injected at
-            test time. The clean PPO policy held up better than expected: its merge behavior stayed stable, the added
-            noise did not materially break its decision process, and in many runs it actually committed more decisively
-            to an available gap while preserving smoother overall behavior.
+            I also evaluated how the merge planner behaved under degraded observations. In the final project results,
+            the clean PPO policy scored 83% success in the clean environment and 86% success when evaluated in the
+            noisy environment, while the noisy-trained PPO policy dropped to 68% success under the same noisy test.
           </p>
           <p>
-            The noise-trained PPO policy behaved differently. Rather than learning a more robust version of the same
-            merge strategy, it appeared to learn a less stable one. That result makes sense in this setup because the
-            policy directly controls lateral trajectory anchors and target speed; once noise is present during training,
-            even small perturbations can create larger downstream changes in the generated local path and make the
-            already difficult merge-timing problem harder to solve cleanly.
+            That result suggests that naive noise injection did not automatically improve robustness. In this setup, the
+            clean policy remained competitive under perturbation, while the noisy-trained policy appeared to destabilize
+            merge timing and local trajectory generation instead of learning a stronger version of the same strategy.
           </p>
           <div class="media-grid">
             <div class="media-card">
@@ -260,7 +328,7 @@
 
     <footer class="footer">
       <div><a href="projects.html">Back to projects &amp; experience</a></div>
-      <div>Last updated: April 24, 2026</div>
+      <div>Last updated: May 6, 2026</div>
     </footer>
   </main>
 </body>

@@ -24,7 +24,8 @@
       <p class="meta">January 2026 - May 2026</p>
       <h1>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h1>
       <p class="hero-sub">
-        A calibrated vision and robot-integration pipeline for mixed-object sorting on a moving conveyor in real time.
+        A final mechatronics system that used cloud-assisted vision, homography calibration, and a delta robot with a
+        vacuum end effector to separate aluminum cans from plastic bottles on a moving conveyor.
       </p>
     </section>
 
@@ -33,56 +34,68 @@
         <div class="info-grid">
           <div class="info-pill">
             <span class="fact-label">Focus</span>
-            Computer vision, calibration, robot integration
+            End-to-end mechatronics integration
           </div>
           <div class="info-pill">
             <span class="fact-label">Stack</span>
-            Python, YOLO, OpenCV
+            Raspberry Pi, Roboflow, Python, homography calibration
           </div>
           <div class="info-pill">
             <span class="fact-label">Hardware</span>
-            Conveyor cell plus delta-arm sorter
+            Overhead webcam, delta robot, venturi vacuum end effector
           </div>
           <div class="info-pill">
-            <span class="fact-label">Output</span>
-            Real-time detections translated into robot actions
+            <span class="fact-label">Final Result</span>
+            99% classification and centroid accuracy, about 50% physical sorting accuracy
           </div>
         </div>
 
         <h2>Overview</h2>
         <p>
-          Mixed-item sorting on moving belts requires more than object detection. The system has to stay stable from
-          frame to frame, convert detections into usable physical coordinates, and deliver outputs the robot can act on
-          before the part has moved out of reach.
+          The final system focused on positive sorting of aluminum cans from plastic bottles on a moving conveyor. The
+          key challenge was not just recognizing the objects, but timing a real pick-and-place action accurately enough
+          for a fast delta robot to remove cans while bottles continued down the belt.
+        </p>
+        <p>
+          Project site:
+          <a href="https://sites.google.com/andrew.cmu.edu/cmumechatronics2026team3/home">CMU Mechatronics Team 3</a>.
         </p>
 
         <h3>Implementation</h3>
         <p>
-          I built the vision stack in Python using YOLO and OpenCV, then added silhouette-based centroid refinement and
-          homography calibration so detections could be projected into world coordinates. On top of that, I used
-          confidence-weighted tracking and label stabilization to reduce flicker and misclassification when objects were
-          partially occluded or visually similar.
+          The final architecture used a Raspberry Pi as the onboard controller for camera capture, homography-based
+          position estimation, inverse kinematics, motion scheduling, and coordination with the robot and vacuum
+          subsystems. A single overhead USB webcam captured the conveyor scene, and frames were sent to a Roboflow
+          hosted segmentation workflow for object classification and centroid extraction.
         </p>
         <p>
-          The perception pipeline fed a delta-arm robotic sorting workflow, so the project became an end-to-end physical
-          AI system rather than just a detection demo. I also set up rapid auto-labeling and retraining loops so the
-          model could adapt as the object set expanded from single containers to bundled products.
+          Returned detections were transformed into robot-plane coordinates with a calibrated homography, then passed
+          into the inverse kinematics solver for the three-servo delta arm. The end effector used a lightweight
+          three-suction-cup vacuum gripper driven by a venturi vacuum generator, solenoid switching circuit, and
+          auxiliary microcontroller. Because inference ran through the Roboflow API, the pickup logic also included
+          empirical timing compensation for conveyor motion during perception and communication latency.
         </p>
 
         <h3>Results</h3>
         <p>
-          The final system supported bottles, cans, and six-pack bundles while improving localization consistency and
-          reducing label churn across frames. More importantly, the outputs were robust enough to drive downstream
-          sorting actions in a real cell instead of staying trapped in image space.
+          The final system achieved approximately 99% practical classification and centroid accuracy under controlled
+          test conditions, and up to about 50% physical sorting accuracy in full closed-loop operation. That split was
+          the central lesson of the project: perception and coordinate mapping became highly reliable, but real sorting
+          consistency was limited by API latency, conveyor-speed variation, arm-link bending, and object motion after
+          detection.
+        </p>
+        <p>
+          In other words, the final product worked as a complete robotic sorting system, but its weakest point was
+          timing consistency rather than raw object recognition.
         </p>
 
         <h3>What I Built</h3>
         <ul class="list">
-          <li>Real-time YOLO and OpenCV detection pipeline for mixed objects on a conveyor.</li>
-          <li>Centroid refinement from object silhouettes for more stable pick localization.</li>
-          <li>Homography-based mapping from image coordinates to robot-usable world coordinates.</li>
-          <li>Confidence-weighted tracking, label stabilization, and retraining workflows for new classes.</li>
-          <li>Programming, assembly, testing, and integration of the downstream delta-arm sorting structure.</li>
+          <li>Integrated perception, calibration, inverse kinematics, and actuation into a single closed-loop sorting stack.</li>
+          <li>Homography-based mapping from image coordinates to robot-plane pick locations.</li>
+          <li>Timing compensation logic to account for cloud-inference and communication delay on a moving conveyor.</li>
+          <li>Delta-arm and vacuum-end-effector integration for positive sorting of aluminum cans.</li>
+          <li>System-level tuning and debugging across camera distortion, conveyor timing, linkage bending, and grasp reliability.</li>
         </ul>
 
         <div class="media-section">
@@ -96,11 +109,20 @@
               </div>
             </div>
             <div class="media-card">
-              <h4>System Highlights</h4>
+              <h4>Final Takeaways</h4>
               <div class="media-caption">
-                The strongest part of this project is the bridge between perception and action. The goal was not just to
-                classify objects but to produce detections that were precise enough for a physical robot to use in motion.
+                The strongest result was the complete perception-to-action integration: the system could classify,
+                localize, schedule, and execute real picks. The main remaining gap was consistency under latency and
+                changing conveyor conditions, not whether the individual subsystems worked in isolation.
               </div>
+            </div>
+          </div>
+
+          <div class="media-card">
+            <img class="project-image" src="assets/delta-arm-system.png" alt="Labeled photo of the final conveyor sorting system showing the camera, delta arm, actuators, compute hardware, and pneumatic vacuum components" />
+            <div class="media-caption">
+              Labeled overview of the final integrated system, including the overhead camera, delta arm, gantry frame,
+              compute hardware, pneumatic vacuum path, and diverter.
             </div>
           </div>
         </div>
@@ -109,7 +131,7 @@
 
     <footer class="footer">
       <div><a href="projects.html">Back to projects &amp; experience</a></div>
-      <div>Last updated: April 24, 2026</div>
+      <div>Last updated: May 6, 2026</div>
     </footer>
   </main>
 </body>
