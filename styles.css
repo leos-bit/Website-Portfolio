@@ -261,7 +261,7 @@ img {
 
 .resume-panel {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 20px;
   align-items: start;
 }
@@ -274,12 +274,6 @@ img {
   min-width: 0;
 }
 
-.resume-side {
-  position: sticky;
-  top: 92px;
-}
-
-.resume-side h3,
 .resume-main h3 {
   margin-top: 0;
 }
@@ -460,10 +454,6 @@ img {
 
   .resume-panel {
     grid-template-columns: 1fr;
-  }
-
-  .resume-side {
-    position: static;
   }
 
   .embed {
