@@ -31,6 +31,15 @@ a:hover {
   color: var(--accent);
 }
 
+.inline-link {
+  color: #1c66d6;
+  font-weight: 600;
+}
+
+.inline-link:hover {
+  color: #0f4ea9;
+}
+
 img {
   max-width: 100%;
 }
