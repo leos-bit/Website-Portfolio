@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Autonomous Drone Pathing with Reinforcement Learning | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects &amp; Experience</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">Spring 2026</p>
+      <h1>Autonomous Drone Pathing with Reinforcement Learning</h1>
+      <p class="hero-sub">
+        A MuJoCo quadrotor navigation project comparing PPO, SAC, and model-based RL in randomized 3D obstacle fields,
+        with final modifications for goal-hover stabilization and wind-disturbance robustness.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Reinforcement learning for autonomous quadrotor pathing
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            MuJoCo, JAX, PPO, SAC, PETS/MPC
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Platform</span>
+            Skydio X2-style quadrotor with lidar and goal-relative observations
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Best Result</span>
+            Goal-hover PPO reached 366.8 return and 45.3% success
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          This project studied autonomous drone pathing in a randomized 3D MuJoCo environment with capsule obstacles,
+          bounded workspace constraints, and goal-hover success criteria. Each episode randomized the drone start state,
+          target position, and obstacle layout, so the policy had to learn both obstacle-aware local motion and stable
+          final approach behavior.
+        </p>
+        <p>
+          Project site:
+          <a class="inline-link" href="https://leos-bit.github.io/Intro-to-Robot-Learning-/">Intro to Robot Learning website</a>.
+          Repository:
+          <a class="inline-link" href="https://github.com/leos-bit/Intro-to-Robot-Learning-">GitHub repo</a>.
+        </p>
+
+        <h3>Implementation</h3>
+        <p>
+          The learned policy did not command rotor thrusts directly. Instead, it produced normalized translational
+          velocity and yaw-rate commands, while a low-level proportional controller mapped those commands to quadrotor
+          actuation. Observations combined drone state, target-relative geometry, obstacle-relative state, obstacle
+          masks, active-obstacle counts, and multi-beam lidar distances.
+        </p>
+        <p>
+          I evaluated three planning approaches: PPO as the main on-policy baseline, SAC as the off-policy baseline,
+          and a constrained PETS/MPC-style model-based RL pipeline. The final project also introduced two targeted
+          modifications: goal-hover reward shaping to improve terminal stabilization, and wind-disturbance training to
+          test whether the learned policy could remain effective under external perturbations.
+        </p>
+
+        <h3>Results</h3>
+        <p>
+          PPO emerged as the strongest and most stable model-free baseline in the completed runs. The baseline PPO
+          policy reached a best return of 80.0 with 25.0% success, while SAC reached 20.7 return with 18.8% success.
+          The strongest overall result came from the goal-hover PPO modification, which improved mean evaluation return
+          to 366.8 and raised success to 45.3%, while also reducing final distance to 1.27 m.
+        </p>
+        <p>
+          Wind-disturbance training reached 267.6 return and 35.9% success under disturbed dynamics, showing meaningful
+          robustness even though nominal performance stayed below the best still-air goal-hover PPO policy. The main
+          remaining failure mode was final stabilization: the drone often moved toward the target successfully but still
+          overshot, drifted through the goal region, or collided during the last part of the approach.
+        </p>
+
+        <h3>What I Built</h3>
+        <ul class="list">
+          <li>Randomized MuJoCo quadrotor navigation task with bounded 3D workspace, capsule obstacles, and goal-hover success logic.</li>
+          <li>PPO, SAC, and model-based RL evaluation pipeline for comparing learning approaches on the same task.</li>
+          <li>Dense shaped reward with progress, obstacle avoidance, safety, smoothness, and terminal-hover components.</li>
+          <li>Goal-hover and wind-disturbance modifications to address terminal stabilization and robustness failures.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Project Media</h3>
+          <div class="media-grid featured">
+            <div class="media-card">
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/drone-rl-ppo-tuned.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Tuned PPO rollout from the final project website, showing goal-directed flight through a
+                cluttered 3D environment.
+              </div>
+            </div>
+            <div class="media-card">
+              <img class="project-image" src="assets/drone-rl-results.png" alt="Reward curves and final result summary for the drone reinforcement learning project" />
+              <div class="media-caption">
+                Final learning-curve summary comparing the random agent, PPO baseline, SAC baseline, model-based RL,
+                and the two final-project modifications.
+              </div>
+            </div>
+          </div>
+
+          <div class="media-grid">
+            <div class="media-card">
+              <h4>PPO Goal-Hover Modification</h4>
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/drone-rl-ppo-mod-1.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Final modification focused on stronger terminal stabilization and hover behavior near the goal.
+              </div>
+            </div>
+            <div class="media-card">
+              <h4>PPO Wind-Robustness Modification</h4>
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/drone-rl-ppo-mod-2.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Wind-disturbance training run showing how the learned policy responds under perturbed dynamics.
+              </div>
+            </div>
+            <div class="media-card">
+              <h4>SAC Tuned</h4>
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/drone-rl-sac-tuned.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Tuned SAC rollout illustrating the off-policy baseline's learned but less stable behavior.
+              </div>
+            </div>
+            <div class="media-card">
+              <h4>Model-Based RL</h4>
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/drone-rl-model-based.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Model-based PETS/MPC-style evaluation clip from the constrained planning configuration.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="metrics-card">
+          <h3>Best Checkpoint Metrics</h3>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Best Return</th>
+                  <th>Success</th>
+                  <th>Final Dist.</th>
+                  <th>Collisions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Random agent</td>
+                  <td>-120.0</td>
+                  <td>0.0%</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>PPO baseline</td>
+                  <td>80.0</td>
+                  <td>25.0%</td>
+                  <td>2.26 m</td>
+                  <td>18.23</td>
+                </tr>
+                <tr>
+                  <td>SAC baseline</td>
+                  <td>20.7</td>
+                  <td>18.8%</td>
+                  <td>2.73 m</td>
+                  <td>56.06</td>
+                </tr>
+                <tr>
+                  <td>Model-based PETS/MPC</td>
+                  <td>-0.1</td>
+                  <td>0.0%</td>
+                  <td>-</td>
+                  <td>-</td>
+                </tr>
+                <tr>
+                  <td>Mod 1: goal-hover PPO</td>
+                  <td>366.8</td>
+                  <td>45.3%</td>
+                  <td>1.27 m</td>
+                  <td>6.05</td>
+                </tr>
+                <tr>
+                  <td>Mod 2: wind PPO</td>
+                  <td>267.6</td>
+                  <td>35.9%</td>
+                  <td>1.59 m</td>
+                  <td>8.28</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: May 17, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
