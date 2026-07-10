@@ -132,8 +132,8 @@
                   <td>98.3 / 100</td>
                   <td>626</td>
                   <td>6</td>
-                  <td>~0.48 pages/s</td>
-                  <td>Higher readiness, but currently too slow</td>
+                  <td>~20 pages/s</td>
+                  <td>Higher readiness with a meaningful but workable throughput tradeoff</td>
                 </tr>
               </tbody>
             </table>
@@ -143,7 +143,7 @@
         <h3>Current Research Direction</h3>
         <p>
           The current tradeoff is clear: hybrid routing produces cleaner database-ready output on the benchmark PVD
-          manual, but the OCR overhead is still too expensive for routine use on native-text documents. The next phase
+          manual, while still running at roughly 20 pages per second through the OCR/VLM path. The next phase
           is to tighten page-level routing so sparse pages, boilerplate, and front matter stay on the native path while
           scanned or image-heavy pages can still benefit from OCR. That makes the project both a systems problem and an
           AI-quality problem, which is exactly the kind of research direction I’m interested in.
