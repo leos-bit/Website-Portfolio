@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">NEXA research module thumbnail</title>
+  <desc id="desc">Abstract diagram for the NEXA manufacturing AI research project showing experts, agents, and document pipelines.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#edf6f3" />
+      <stop offset="100%" stop-color="#fbefe9" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#bg)" rx="40" />
+  <rect x="72" y="84" width="1056" height="507" rx="28" fill="#ffffff" stroke="#e7e2da" stroke-width="3" />
+  <text x="110" y="155" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="44" font-weight="700">NEXA Research</text>
+  <text x="110" y="198" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="24">Small language models for manufacturing process design and document intelligence</text>
+
+  <rect x="110" y="252" width="220" height="120" rx="24" fill="#eef6f4" stroke="#cfe5df" />
+  <text x="220" y="304" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Technical Experts</text>
+  <text x="220" y="338" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Process docs</text>
+  <text x="220" y="362" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">RAG + tuning</text>
+
+  <rect x="405" y="252" width="220" height="120" rx="24" fill="#fff3ec" stroke="#f1d3c5" />
+  <text x="515" y="304" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Agent Runtime</text>
+  <text x="515" y="338" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Validation</text>
+  <text x="515" y="362" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Prompt orchestration</text>
+
+  <rect x="700" y="252" width="220" height="120" rx="24" fill="#eef6f4" stroke="#cfe5df" />
+  <text x="810" y="304" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">TurboOCR</text>
+  <text x="810" y="338" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Native or OCR</text>
+  <text x="810" y="362" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Chunk quality scoring</text>
+
+  <rect x="995" y="252" width="95" height="120" rx="24" fill="#fff8f2" stroke="#f1d3c5" />
+  <text x="1042" y="306" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="22" font-weight="700">JSON</text>
+  <text x="1042" y="340" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Ready</text>
+
+  <path d="M330 312 H395" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" />
+  <path d="M625 312 H690" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" />
+  <path d="M920 312 H985" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" />
+  <path d="M387 300 L405 312 L387 324" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M682 300 L700 312 L682 324" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M977 300 L995 312 L977 324" fill="none" stroke="#1c1c1c" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+
+  <rect x="130" y="438" width="940" height="94" rx="20" fill="#f8f5ef" stroke="#e7e2da" />
+  <text x="170" y="479" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="22" font-weight="700">Current branch focus</text>
+  <text x="170" y="513" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="19">Hybrid PDF routing, semantic chunking, manufacturing document extraction, and benchmark-ready dataset outputs.</text>
+</svg>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXA Research | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <div class="brand">Leo Shaw</div>
+    <div class="nav-links">
+      <a href="index.html">About</a>
+      <a href="projects.html">Projects &amp; Experience</a>
+      <a href="resume.html">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">Research | 2026</p>
+      <h1>NEXA: Small Language Models for Manufacturing Process Design</h1>
+      <p class="hero-sub">
+        A research effort at Carnegie Mellon focused on compact expert-agent systems for manufacturing process design,
+        document understanding, and retrieval-ready knowledge extraction from technical process documentation.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Small language models, retrieval, and constrained expert-agent workflows for manufacturing
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Python, OCR/VLM pipelines, TurboOCR, PyMuPDF, JSONL datasets, evaluation tooling
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Research Context</span>
+            Panat Lab, Carnegie Mellon University
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Current Branch Result</span>
+            Hybrid routing improved benchmark score from 94.1 to 98.3 on the PVD manual benchmark
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          NEXA stands for Network of Experts and Agents. The core idea is to use smaller, more efficient language
+          models as specialized technical experts and runtime agents instead of relying on one large general-purpose
+          model. In the slide deck, the system is framed as a unified path from user objectives to validated process
+          design decisions, with policy constraints, retrieval, fine-tuning, prompt optimization, and runtime feedback
+          all working together.
+        </p>
+        <p>
+          In practice, the TurboOCR branch translates that research framing into document intelligence infrastructure
+          for manufacturing knowledge. The branch is focused on extracting clean, structured text from process manuals,
+          sputtering references, and operator-facing documentation so that downstream expert models and RAG systems can
+          reason over trustworthy manufacturing content instead of brittle raw OCR output.
+        </p>
+        <p>
+          Repository:
+          <a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/tree/TurboOCR">TurboOCR branch on GitHub</a>.
+        </p>
+
+        <div class="media-section">
+          <h3>Research Architecture</h3>
+          <div class="media-card">
+            <img class="project-image" src="assets/nexa-architecture.svg" alt="Diagram of the NEXA expert-agent workflow for manufacturing documents and structured extraction" />
+            <div class="media-caption">
+              The workflow combines document routing, native and OCR extraction, chunk-quality scoring, and a layered
+              expert-agent runtime with validation and post-run review before knowledge is exposed to downstream tools.
+            </div>
+          </div>
+        </div>
+
+        <h3>What This Branch Implements</h3>
+        <p>
+          The repository is organized around four main working areas: an OCR/VLM document pipeline, an operator-note
+          ingestion pipeline, a troubleshooting and retrieval stack, and evaluation tools for building and checking
+          fine-tuning datasets. The active TurboOCR work adds an optional local Docker-based OCR service for A/B
+          testing against the lighter PyMuPDF and Surya-based paths.
+        </p>
+        <ul class="list">
+          <li><code>ocr_vlm_pipeline/</code> handles PDF ingestion, figure and equation extraction, chunking, and chunk-quality scoring.</li>
+          <li><code>turbo_ocr_vlm_pipeline/</code> mirrors that flow with TurboOCR as an OCR backend for scanned or image-heavy documents.</li>
+          <li><code>operator_note_pipeline/</code> ingests handwritten or semi-structured shop-floor notes and ties them to schema-aware outputs.</li>
+          <li><code>troubleshooting/</code> provides retrieval, copilot logic, API serving, and source-ingestion helpers for manufacturing support tasks.</li>
+          <li><code>eval_tools/</code> packages instruction-tuning datasets, synthetic records, and regression checks for iterative research work.</li>
+        </ul>
+
+        <h3>Why It Matters</h3>
+        <p>
+          The manufacturing setting here is a good example of where compact models and careful runtime design matter
+          more than raw parameter count. Technical documentation mixes dense native text, tables, figures, equations,
+          scanned pages, and low-value front matter. If those sources are ingested poorly, downstream process-design or
+          troubleshooting agents inherit bad context. This branch treats document quality as a first-class research
+          problem by routing pages, preserving provenance, and attaching review metadata to every chunk.
+        </p>
+
+        <div class="metrics-card">
+          <h3>TurboOCR Branch Benchmark Snapshot</h3>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Output Path</th>
+                  <th>Score</th>
+                  <th>Chunks</th>
+                  <th>Flags</th>
+                  <th>Speed</th>
+                  <th>Takeaway</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Native semantic chunking</td>
+                  <td>94.1 / 100</td>
+                  <td>154</td>
+                  <td>26</td>
+                  <td>~130.19 pages/s</td>
+                  <td>Fast baseline for text-native manuals</td>
+                </tr>
+                <tr>
+                  <td>Hybrid native + OCR routing</td>
+                  <td>98.3 / 100</td>
+                  <td>626</td>
+                  <td>6</td>
+                  <td>~0.48 pages/s</td>
+                  <td>Higher readiness, but currently too slow</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3>Current Research Direction</h3>
+        <p>
+          The current tradeoff is clear: hybrid routing produces cleaner database-ready output on the benchmark PVD
+          manual, but the OCR overhead is still too expensive for routine use on native-text documents. The next phase
+          is to tighten page-level routing so sparse pages, boilerplate, and front matter stay on the native path while
+          scanned or image-heavy pages can still benefit from OCR. That makes the project both a systems problem and an
+          AI-quality problem, which is exactly the kind of research direction I’m interested in.
+        </p>
+
+        <h3>What I Contributed</h3>
+        <ul class="list">
+          <li>Worked on the research framing around expert-agent manufacturing workflows, document trust, and model/runtime tradeoffs for small language models.</li>
+          <li>Supported the document pipeline direction for manufacturing references, especially around extraction quality, chunk structure, and downstream RAG usefulness.</li>
+          <li>Helped shape how technical process documentation can become structured, reviewable knowledge instead of one-off OCR output.</li>
+        </ul>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects.html">Back to projects &amp; experience</a></div>
+      <div>Last updated: July 9, 2026</div>
+    </footer>
+  </main>
+</body>
+</html>
