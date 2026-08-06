@@ -21,11 +21,12 @@
 
   <main class="page">
     <section class="project-hero">
-      <p class="meta">Research | 2026</p>
+      <p class="meta">Research | 2026 - Present</p>
       <h1>NEXA: Small Language Models for Manufacturing Process Design</h1>
       <p class="hero-sub">
-        A research effort at Carnegie Mellon focused on compact expert-agent systems for manufacturing process design,
-        document understanding, and retrieval-ready knowledge extraction from technical process documentation.
+        A Carnegie Mellon research effort building a grounded manufacturing AI stack: high-throughput document
+        ingestion, handwritten log reconstruction, evidence-backed reasoning datasets, and an OpenWebUI-facing RAG
+        assistant for technical process and troubleshooting questions.
       </p>
     </section>
 
@@ -34,19 +35,19 @@
         <div class="info-grid">
           <div class="info-pill">
             <span class="fact-label">Focus</span>
-            Small language models, retrieval, and constrained expert-agent workflows for manufacturing
+            Manufacturing document intelligence, grounded reasoning, and retrieval-backed expert-agent workflows
           </div>
           <div class="info-pill">
             <span class="fact-label">Stack</span>
-            Python, OCR/VLM pipelines, TurboOCR, PyMuPDF, JSONL datasets, evaluation tooling
+            Python, Nemotron OCR v2, PyMuPDF, Granite, SQLite/Postgres schemas, vLLM, FastAPI, OpenWebUI
           </div>
           <div class="info-pill">
             <span class="fact-label">Research Context</span>
             Panat Lab, Carnegie Mellon University
           </div>
           <div class="info-pill">
-            <span class="fact-label">Current Branch Result</span>
-            Hybrid routing improved benchmark score from 94.1 to 98.3 on the PVD manual benchmark
+            <span class="fact-label">Current System Result</span>
+            Warm Nemotron runs reach 28.57 pages/s pipeline throughput on the 208-page PVD manual
           </div>
         </div>
 
@@ -59,14 +60,15 @@
           all working together.
         </p>
         <p>
-          In practice, the TurboOCR branch translates that research framing into document intelligence infrastructure
-          for manufacturing knowledge. The branch is focused on extracting clean, structured text from process manuals,
-          sputtering references, and operator-facing documentation so that downstream expert models and RAG systems can
-          reason over trustworthy manufacturing content instead of brittle raw OCR output.
+          The project has now grown beyond the earlier TurboOCR comparison branch into a broader manufacturing AI
+          platform. The current work spans native-plus-OCR PDF ingestion, page-level metadata contracts, handwritten
+          equipment-log reconstruction, grounded Q/A/context generation, diagnostic reasoning over service incidents,
+          and a runtime RAG layer that can be served directly into OpenWebUI as an OpenAI-compatible model endpoint.
         </p>
         <p>
-          Repository:
-          <a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/tree/TurboOCR">TurboOCR branch on GitHub</a>.
+          Repositories:
+          <a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/tree/main">GitHub main branch</a>
+          and the local OpenWebUI-connected workspace in <code>/Users/leoshaw/Documents/VSCode/nexa.ai</code>.
         </p>
 
         <div class="media-section">
@@ -80,60 +82,118 @@
           </div>
         </div>
 
-        <h3>What This Branch Implements</h3>
+        <h3>Current System Architecture</h3>
         <p>
-          The repository is organized around four main working areas: an OCR/VLM document pipeline, an operator-note
-          ingestion pipeline, a troubleshooting and retrieval stack, and evaluation tools for building and checking
-          fine-tuning datasets. The active TurboOCR work adds an optional local Docker-based OCR service for A/B
-          testing against the lighter PyMuPDF and Surya-based paths.
+          The repository is now organized around several connected layers. The OCR and VLM pipelines extract structured
+          technical content from manuals and references, the handwritten pipeline reconstructs equipment logs into
+          tabular records, and the grounded reasoning pipeline turns accepted source material into cited Q/A/context
+          data for both training and runtime retrieval.
         </p>
         <ul class="list">
-          <li><code>ocr_vlm_pipeline/</code> handles PDF ingestion, figure and equation extraction, chunking, and chunk-quality scoring.</li>
-          <li><code>turbo_ocr_vlm_pipeline/</code> mirrors that flow with TurboOCR as an OCR backend for scanned or image-heavy documents.</li>
-          <li><code>operator_note_pipeline/</code> ingests handwritten or semi-structured shop-floor notes and ties them to schema-aware outputs.</li>
-          <li><code>troubleshooting/</code> provides retrieval, copilot logic, API serving, and source-ingestion helpers for manufacturing support tasks.</li>
-          <li><code>eval_tools/</code> packages instruction-tuning datasets, synthetic records, and regression checks for iterative research work.</li>
+          <li><code>nemotron_ocr_vlm_pipeline/</code> is now the main research-compliance OCR path, keeping PyMuPDF native fast-path extraction while routing harder pages through Nemotron OCR v2.</li>
+          <li><code>handwritten_log_pipeline/</code> reconstructs scanned PVD75 handwritten run logs into form-aware CSV and JSON outputs with bounded retries and field validation.</li>
+          <li><code>slm_reasoning_pipeline/</code> builds grounded Q/A/context tuples, diagnostic datasets, normalized Q/A/C stores, and runtime RAG answers with exact supporting quotes.</li>
+          <li><code>openwebui_api.py</code> exposes that runtime RAG stack as an OpenAI-compatible service so OpenWebUI can talk to the manufacturing assistant directly.</li>
+          <li><code>eval_tools/</code>, regression suites, and schema validators keep the data, retrieval behavior, and grounded-answer quality inspectable instead of opaque.</li>
         </ul>
 
-        <h3>Why It Matters</h3>
+        <h3>Document Ingestion And Knowledge Extraction</h3>
         <p>
-          The manufacturing setting here is a good example of where compact models and careful runtime design matter
-          more than raw parameter count. Technical documentation mixes dense native text, tables, figures, equations,
-          scanned pages, and low-value front matter. If those sources are ingested poorly, downstream process-design or
-          troubleshooting agents inherit bad context. This branch treats document quality as a first-class research
-          problem by routing pages, preserving provenance, and attaching review metadata to every chunk.
+          The manufacturing setting is full of mixed-format source material: clean native PDFs, scanned pages, figures,
+          tables, equations, front matter, and handwritten operator logs. The newer NEXA work treats ingestion as a
+          systems problem rather than just an OCR problem. Pages are routed between native extraction and OCR, readable
+          JSONL and metadata sidecars preserve provenance, semantic deduplication tracks repeated content, and bulk
+          ingestion keeps large document sets structured enough for downstream reasoning and retrieval.
         </p>
 
         <div class="metrics-card">
-          <h3>TurboOCR Branch Benchmark Snapshot</h3>
+          <h3>Current OCR Benchmark Snapshot</h3>
           <div class="table-wrap">
             <table class="metrics-table">
               <thead>
                 <tr>
-                  <th>Output Path</th>
-                  <th>Score</th>
-                  <th>Chunks</th>
-                  <th>Flags</th>
-                  <th>Speed</th>
-                  <th>Takeaway</th>
+                  <th>Metric</th>
+                  <th>Result</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Native semantic chunking</td>
-                  <td>94.1 / 100</td>
-                  <td>154</td>
-                  <td>26</td>
-                  <td>~130.19 pages/s</td>
-                  <td>Fast baseline for text-native manuals</td>
+                  <td>PDF pages</td>
+                  <td>208</td>
                 </tr>
                 <tr>
-                  <td>Hybrid native + OCR routing</td>
-                  <td>98.3 / 100</td>
-                  <td>626</td>
-                  <td>6</td>
-                  <td>~20 pages/s</td>
-                  <td>Higher readiness with a meaningful but workable throughput tradeoff</td>
+                  <td>Pipeline processing time</td>
+                  <td>7.28 s</td>
+                </tr>
+                <tr>
+                  <td>Pipeline throughput</td>
+                  <td>28.57 pages/s</td>
+                </tr>
+                <tr>
+                  <td>Full end-to-end throughput</td>
+                  <td>16.52 pages/s</td>
+                </tr>
+                <tr>
+                  <td>Pages routed through Nemotron</td>
+                  <td>23</td>
+                </tr>
+                <tr>
+                  <td>Nemotron OCR throughput</td>
+                  <td>6.36 OCR pages/s</td>
+                </tr>
+                <tr>
+                  <td>Exported chunks</td>
+                  <td>2,028</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <h3>Grounded Reasoning Pipeline</h3>
+        <p>
+          A major new piece of work is the grounded SLM reasoning pipeline. Instead of jumping directly from OCR text
+          to a chat model, the system first builds readable Q/A/context artifacts, audits them, and then loads accepted
+          rows into a normalized store. Runtime RAG uses keyword-indexed lookup plus cited Laguna synthesis, exact-quote
+          verification, and fail-closed abstention when evidence is weak or mismatched.
+        </p>
+        <ul class="list">
+          <li>Offline tuple generation turns accepted source chunks into deterministic Q/A/context rows with metadata sidecars for inspection.</li>
+          <li>Curated Q/A/C stores deduplicate repeated context text while keeping provenance, keyword lookup, and optional relation layers visible.</li>
+          <li>Diagnostic generation supports symptom-to-cause reasoning with ranked hypotheses, applicability conditions, evidence quotes, and discriminating next checks.</li>
+          <li>Runtime RAG audits exact source quotes and numeric claims before returning an answer, rather than trusting model output on its own.</li>
+        </ul>
+
+        <div class="metrics-card">
+          <h3>OpenWebUI And Runtime RAG</h3>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <thead>
+                <tr>
+                  <th>Capability</th>
+                  <th>Current Implementation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Serving boundary</td>
+                  <td>FastAPI service exposing an OpenAI-compatible <code>/v1</code> interface</td>
+                </tr>
+                <tr>
+                  <td>Client target</td>
+                  <td>OpenWebUI configured to treat NEXA as a manufacturing RAG model</td>
+                </tr>
+                <tr>
+                  <td>Answer path</td>
+                  <td>Keyword retrieval, Laguna synthesis through vLLM, grounding audit, exact quote rendering</td>
+                </tr>
+                <tr>
+                  <td>Safety boundary</td>
+                  <td>API key requirement for non-loopback binds, bounded concurrency, abstention on unsupported questions</td>
+                </tr>
+                <tr>
+                  <td>Conversation behavior</td>
+                  <td>Short follow-up questions reuse prior user context for retrieval only, without injecting assistant text back into search</td>
                 </tr>
               </tbody>
             </table>
@@ -142,25 +202,24 @@
 
         <h3>Current Research Direction</h3>
         <p>
-          The current tradeoff is clear: hybrid routing produces cleaner database-ready output on the benchmark PVD
-          manual, while still running at roughly 20 pages per second through the OCR/VLM path. The next phase
-          is to tighten page-level routing so sparse pages, boilerplate, and front matter stay on the native path while
-          scanned or image-heavy pages can still benefit from OCR. That makes the project both a systems problem and an
-          AI-quality problem, which is exactly the kind of research direction I’m interested in.
+          The project is now less about a single OCR backend and more about end-to-end grounded manufacturing AI. The
+          current focus is on keeping ingestion fast and structured enough for real datasets, improving handwritten-log
+          recovery, strengthening diagnostic retrieval and audit behavior, and making the OpenWebUI path reliable enough
+          for interactive technical support without giving up traceability or exact-source grounding.
         </p>
 
         <h3>What I Contributed</h3>
         <ul class="list">
-          <li>Worked on the research framing around expert-agent manufacturing workflows, document trust, and model/runtime tradeoffs for small language models.</li>
-          <li>Supported the document pipeline direction for manufacturing references, especially around extraction quality, chunk structure, and downstream RAG usefulness.</li>
-          <li>Helped shape how technical process documentation can become structured, reviewable knowledge instead of one-off OCR output.</li>
+          <li>Worked on the research framing around expert-agent manufacturing workflows, grounded reasoning, and model/runtime tradeoffs for small language models.</li>
+          <li>Supported the shift from raw document extraction into structured Q/A/C generation, runtime RAG, and inspection-friendly dataset and store design.</li>
+          <li>Helped shape how technical process documentation, incident reasoning, and handwritten equipment logs can become usable manufacturing knowledge rather than isolated OCR artifacts.</li>
         </ul>
       </div>
     </section>
 
     <footer class="footer">
       <div><a href="projects.html">Back to projects &amp; experience</a></div>
-      <div>Last updated: July 9, 2026</div>
+      <div>Last updated: August 6, 2026</div>
     </footer>
   </main>
 </body>
