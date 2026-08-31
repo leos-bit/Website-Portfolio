@@ -21,12 +21,11 @@
 
   <main class="page">
     <section class="project-hero">
-      <p class="meta">Research | 2026 - Present</p>
-      <h1>NEXA: Small Language Models for Manufacturing Process Design</h1>
+      <p class="meta">Panat Lab Research | 2026 - Present</p>
+      <h1>NEXA: Manufacturing Document Intelligence and Troubleshooting AI</h1>
       <p class="hero-sub">
-        A Carnegie Mellon research effort building a grounded manufacturing AI stack: high-throughput document
-        ingestion, handwritten log reconstruction, evidence-backed reasoning datasets, and an OpenWebUI-facing RAG
-        assistant for technical process and troubleshooting questions.
+        A Carnegie Mellon research platform that turns technical manuals, service records, and handwritten process
+        logs into traceable manufacturing data for retrieval, troubleshooting, and future small-language-model systems.
       </p>
     </section>
 
@@ -35,191 +34,187 @@
         <div class="info-grid">
           <div class="info-pill">
             <span class="fact-label">Focus</span>
-            Manufacturing document intelligence, grounded reasoning, and retrieval-backed expert-agent workflows
+            OCR/VLM ingestion, structured process data, and troubleshooting retrieval
           </div>
           <div class="info-pill">
             <span class="fact-label">Stack</span>
-            Python, Nemotron OCR v2, PyMuPDF, Granite, SQLite/Postgres schemas, vLLM, FastAPI, OpenWebUI
+            Python, PyMuPDF, Surya, Nemotron OCR v2, PyTorch, TrOCR, FastAPI
           </div>
           <div class="info-pill">
             <span class="fact-label">Research Context</span>
             Panat Lab, Carnegie Mellon University
           </div>
           <div class="info-pill">
-            <span class="fact-label">Current System Result</span>
-            Warm Nemotron runs reach 28.57 pages/s pipeline throughput on the 208-page PVD manual
+            <span class="fact-label">Repository Contributions</span>
+            24 commits on the current main branch across ingestion, retrieval, and handwritten OCR
           </div>
         </div>
 
         <h2>Overview</h2>
         <p>
-          NEXA stands for Network of Experts and Agents. The core idea is to use smaller, more efficient language
-          models as specialized technical experts and runtime agents instead of relying on one large general-purpose
-          model. In the slide deck, the system is framed as a unified path from user objectives to validated process
-          design decisions, with policy constraints, retrieval, fine-tuning, prompt optimization, and runtime feedback
-          all working together.
+          NEXA stands for Network of Experts and Agents. The research asks how compact, specialized AI systems can
+          support manufacturing process design and monitoring without losing the provenance, structure, and technical
+          constraints contained in the source material. My work has focused on the data and runtime infrastructure that
+          makes that possible: extracting reliable records from difficult documents, preserving evidence and metadata,
+          and making the resulting knowledge usable by troubleshooting tools.
         </p>
         <p>
-          The project has now grown beyond the earlier TurboOCR comparison branch into a broader manufacturing AI
-          platform. The current work spans native-plus-OCR PDF ingestion, page-level metadata contracts, handwritten
-          equipment-log reconstruction, grounded Q/A/context generation, diagnostic reasoning over service incidents,
-          and a runtime RAG layer that can be served directly into OpenWebUI as an OpenAI-compatible model endpoint.
+          The public repository now contains several connected systems rather than one monolithic model. Native PDFs
+          use a fast PyMuPDF route; scanned or sparse pages can be routed through Surya or NVIDIA Nemotron OCR v2;
+          operator notes and handwritten PVD forms have dedicated, form-aware pipelines; and the troubleshooting layer
+          combines structured source ingestion, retrieval, schemas, and a FastAPI service.
         </p>
         <p>
-          Repositories:
-          <a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/tree/main">GitHub main branch</a>
-          and the local OpenWebUI-connected workspace in <code>/Users/leoshaw/Documents/VSCode/nexa.ai</code>.
+          <a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai">View the NEXA repository on GitHub</a>
         </p>
 
         <div class="media-section">
-          <h3>Research Architecture</h3>
+          <h3>Published Repository Architecture</h3>
           <div class="media-card">
-            <img class="project-image" src="assets/nexa-architecture.svg" alt="Diagram of the NEXA expert-agent workflow for manufacturing documents and structured extraction" />
+            <img class="project-image" src="assets/nexa-architecture.svg" alt="Diagram of the published NEXA document intelligence and troubleshooting pipeline" />
             <div class="media-caption">
-              The workflow combines document routing, native and OCR extraction, chunk-quality scoring, and a layered
-              expert-agent runtime with validation and post-run review before knowledge is exposed to downstream tools.
+              The current public pipeline routes manuals and operator records through source-appropriate extraction,
+              produces traceable structured datasets, and exposes those records to retrieval, troubleshooting, and evaluation tools.
             </div>
           </div>
         </div>
 
-        <h3>Current System Architecture</h3>
+        <h3>Commit-Backed Development</h3>
         <p>
-          The repository is now organized around several connected layers. The OCR and VLM pipelines extract structured
-          technical content from manuals and references, the handwritten pipeline reconstructs equipment logs into
-          tabular records, and the grounded reasoning pipeline turns accepted source material into cited Q/A/context
-          data for both training and runtime retrieval.
-        </p>
-        <ul class="list">
-          <li><code>nemotron_ocr_vlm_pipeline/</code> is now the main research-compliance OCR path, keeping PyMuPDF native fast-path extraction while routing harder pages through Nemotron OCR v2.</li>
-          <li><code>handwritten_log_pipeline/</code> reconstructs scanned PVD75 handwritten run logs into form-aware CSV and JSON outputs with bounded retries and field validation.</li>
-          <li><code>slm_reasoning_pipeline/</code> builds grounded Q/A/context tuples, diagnostic datasets, normalized Q/A/C stores, and runtime RAG answers with exact supporting quotes.</li>
-          <li><code>openwebui_api.py</code> exposes that runtime RAG stack as an OpenAI-compatible service so OpenWebUI can talk to the manufacturing assistant directly.</li>
-          <li><code>eval_tools/</code>, regression suites, and schema validators keep the data, retrieval behavior, and grounded-answer quality inspectable instead of opaque.</li>
-        </ul>
-
-        <h3>Document Ingestion And Knowledge Extraction</h3>
-        <p>
-          The manufacturing setting is full of mixed-format source material: clean native PDFs, scanned pages, figures,
-          tables, equations, front matter, and handwritten operator logs. The newer NEXA work treats ingestion as a
-          systems problem rather than just an OCR problem. Pages are routed between native extraction and OCR, readable
-          JSONL and metadata sidecars preserve provenance, semantic deduplication tracks repeated content, and bulk
-          ingestion keeps large document sets structured enough for downstream reasoning and retrieval.
+          The page is grounded in the work merged to the repository's current <code>main</code> branch. The largest
+          contributions fall into four milestones, each represented by concrete code, tests, and documentation.
         </p>
 
         <div class="metrics-card">
-          <h3>Current OCR Benchmark Snapshot</h3>
           <div class="table-wrap">
             <table class="metrics-table">
               <thead>
                 <tr>
-                  <th>Metric</th>
-                  <th>Result</th>
+                  <th>Milestone</th>
+                  <th>What Landed</th>
+                  <th>Representative Commit</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>PDF pages</td>
-                  <td>208</td>
+                  <td>OCR/VLM data quality</td>
+                  <td>Database-safe paragraph cleanup, figure filtering, chunk review metadata, page coverage checks, and structured-row preservation</td>
+                  <td><a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/commit/03e80bf">03e80bf</a></td>
                 </tr>
                 <tr>
-                  <td>Pipeline processing time</td>
-                  <td>7.28 s</td>
+                  <td>Troubleshooting infrastructure</td>
+                  <td>Multi-source ingestion, retrieval, maintenance-event schemas, copilot logic, API serving, tests, and remote-ready tooling</td>
+                  <td><a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/commit/3ba3a92">3ba3a92</a></td>
                 </tr>
                 <tr>
-                  <td>Pipeline throughput</td>
-                  <td>28.57 pages/s</td>
+                  <td>Nemotron production ingestion</td>
+                  <td>Persistent GPU worker, adaptive batching, bulk processing, asynchronous figure enrichment, Parquet export, and performance tests</td>
+                  <td><a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/commit/7ce1f61">7ce1f61</a></td>
                 </tr>
                 <tr>
-                  <td>Full end-to-end throughput</td>
-                  <td>16.52 pages/s</td>
-                </tr>
-                <tr>
-                  <td>Pages routed through Nemotron</td>
-                  <td>23</td>
-                </tr>
-                <tr>
-                  <td>Nemotron OCR throughput</td>
-                  <td>6.36 OCR pages/s</td>
-                </tr>
-                <tr>
-                  <td>Exported chunks</td>
-                  <td>2,028</td>
+                  <td>Handwritten process logs</td>
+                  <td>Form reconstruction, field-aware OCR, TrOCR training data and evaluation, sequence checks, recipe priors, and benchmark tooling</td>
+                  <td><a class="inline-link" href="https://github.com/monish-piraimudi/nexa.ai/commit/1734a8d">1734a8d</a></td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <h3>Grounded Reasoning Pipeline</h3>
+        <h3>Technical Document Ingestion</h3>
         <p>
-          A major new piece of work is the grounded SLM reasoning pipeline. Instead of jumping directly from OCR text
-          to a chat model, the system first builds readable Q/A/context artifacts, audits them, and then loads accepted
-          rows into a normalized store. Runtime RAG uses keyword-indexed lookup plus cited Laguna synthesis, exact-quote
-          verification, and fail-closed abstention when evidence is weak or mismatched.
+          Manufacturing references mix clean digital text with scans, tables, equations, figures, safety notes, and
+          repeated front matter. I improved the OCR/VLM path so extraction quality is measured at the page and chunk
+          levels rather than treated as a single OCR score. The pipeline retains reading order and provenance, routes
+          native pages away from unnecessary GPU OCR, preserves short structured table rows, and produces readable
+          JSONL plus metadata and optional Parquet exports for downstream dataset assembly.
         </p>
         <ul class="list">
-          <li>Offline tuple generation turns accepted source chunks into deterministic Q/A/context rows with metadata sidecars for inspection.</li>
-          <li>Curated Q/A/C stores deduplicate repeated context text while keeping provenance, keyword lookup, and optional relation layers visible.</li>
-          <li>Diagnostic generation supports symptom-to-cause reasoning with ranked hypotheses, applicability conditions, evidence quotes, and discriminating next checks.</li>
-          <li>Runtime RAG audits exact source quotes and numeric claims before returning an answer, rather than trusting model output on its own.</li>
+          <li>Added database-safe cleanup and paragraph exports while preserving technical content and source location.</li>
+          <li>Integrated a persistent Nemotron worker and adaptive batching so multiple documents can reuse a warm OCR model.</li>
+          <li>Added bulk ingestion, resume behavior, per-document manifests, coverage metrics, semantic deduplication, and asynchronous VLM enrichment.</li>
+          <li>Improved caption routing, sparse-table retention, interlock-row preservation, and missing-page detection with regression tests.</li>
         </ul>
 
         <div class="metrics-card">
-          <h3>OpenWebUI And Runtime RAG</h3>
+          <h3>Published PVD Manual Benchmarks</h3>
           <div class="table-wrap">
             <table class="metrics-table">
               <thead>
                 <tr>
-                  <th>Capability</th>
-                  <th>Current Implementation</th>
+                  <th>Pipeline</th>
+                  <th>Quality / Coverage</th>
+                  <th>Throughput</th>
+                  <th>Output</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>Serving boundary</td>
-                  <td>FastAPI service exposing an OpenAI-compatible <code>/v1</code> interface</td>
+                  <td>Native PyMuPDF semantic chunking</td>
+                  <td>94.1 / 100 readiness score</td>
+                  <td>~130.19 pages/s</td>
+                  <td>154 chunks</td>
                 </tr>
                 <tr>
-                  <td>Client target</td>
-                  <td>OpenWebUI configured to treat NEXA as a manufacturing RAG model</td>
+                  <td>Hybrid native + OCR routing</td>
+                  <td>98.3 / 100 readiness score</td>
+                  <td>~0.48 pages/s</td>
+                  <td>626 chunks</td>
                 </tr>
                 <tr>
-                  <td>Answer path</td>
-                  <td>Keyword retrieval, Laguna synthesis through vLLM, grounding audit, exact quote rendering</td>
-                </tr>
-                <tr>
-                  <td>Safety boundary</td>
-                  <td>API key requirement for non-loopback binds, bounded concurrency, abstention on unsupported questions</td>
-                </tr>
-                <tr>
-                  <td>Conversation behavior</td>
-                  <td>Short follow-up questions reuse prior user context for retrieval only, without injecting assistant text back into search</td>
+                  <td>Warm Nemotron OCR v2 pipeline</td>
+                  <td>185 native pages + 23 OCR-routed pages</td>
+                  <td>28.57 pages/s processing; 16.52 pages/s end to end</td>
+                  <td>2,028 chunks</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
 
-        <h3>Current Research Direction</h3>
+        <h3>Manufacturing Troubleshooting Stack</h3>
         <p>
-          The project is now less about a single OCR backend and more about end-to-end grounded manufacturing AI. The
-          current focus is on keeping ingestion fast and structured enough for real datasets, improving handwritten-log
-          recovery, strengthening diagnostic retrieval and audit behavior, and making the OpenWebUI path reliable enough
-          for interactive technical support without giving up traceability or exact-source grounding.
+          I built the initial troubleshooting retrieval and API scaffold, then expanded it to ingest multiple source
+          types and support remote evaluation. This work introduced typed maintenance-event and knowledge schemas,
+          retrieval over manuals and service records, source-selection tooling, a troubleshooting copilot layer, and a
+          FastAPI boundary with tests and local pgvector validation support.
+        </p>
+        <ul class="list">
+          <li>Created retrieval, knowledge models, SQL schemas, representative maintenance events, and troubleshooting cases.</li>
+          <li>Added source ingestion for multiple technical record types and selection of preferred chunks.</li>
+          <li>Expanded API tests and remote-ready command-line tooling for repeatable case evaluation.</li>
+          <li>Kept source evidence and recommended review actions available to downstream troubleshooting logic.</li>
+        </ul>
+
+        <h3>Handwritten PVD Log Reconstruction</h3>
+        <p>
+          Scanned production forms are a different problem from ordinary PDF OCR, so I developed a dedicated pipeline
+          for reconstructing PVD75 logs. It separates form structure from handwriting, extracts bounded field regions,
+          records confidence and raw predictions, and exports fixed-form text, CSV, and metadata instead of flattening
+          each page into an untraceable transcript.
+        </p>
+        <p>
+          The later commits added page-grouped training manifests, TrOCR tuning, registered scanner test sets,
+          field-specific run-number and date recognizers, candidate retries, temporal sequence checks, recipe priors,
+          contact sheets, and reconstruction metrics. Experimental specialist checkpoints remain behind explicit
+          quality gates when held-out accuracy is insufficient, which keeps uncertain model output from silently
+          becoming manufacturing data.
         </p>
 
-        <h3>What I Contributed</h3>
+        <h3>My Contributions</h3>
         <ul class="list">
-          <li>Worked on the research framing around expert-agent manufacturing workflows, grounded reasoning, and model/runtime tradeoffs for small language models.</li>
-          <li>Supported the shift from raw document extraction into structured Q/A/C generation, runtime RAG, and inspection-friendly dataset and store design.</li>
-          <li>Helped shape how technical process documentation, incident reasoning, and handwritten equipment logs can become usable manufacturing knowledge rather than isolated OCR artifacts.</li>
+          <li>Authored 24 commits on the current main branch across the repository's OCR, troubleshooting, Nemotron, and handwritten-log work.</li>
+          <li>Moved technical PDF extraction from raw OCR output toward readable, database-ready records with provenance, coverage checks, and regression tests.</li>
+          <li>Built the initial troubleshooting retrieval/API stack and expanded it for multi-source manufacturing records and remote evaluation.</li>
+          <li>Developed the production Nemotron ingestion path, including persistent service mode, bulk processing, performance instrumentation, and structured exports.</li>
+          <li>Built and iterated on the handwritten PVD log pipeline, its training/evaluation tooling, and safeguards for uncertain field predictions.</li>
         </ul>
       </div>
     </section>
 
     <footer class="footer">
       <div><a href="projects.html">Back to projects &amp; experience</a></div>
-      <div>Last updated: August 6, 2026</div>
+      <div>Last updated: August 31, 2026</div>
     </footer>
   </main>
 </body>

@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
-  <title id="title">NEXA workflow architecture</title>
-  <desc id="desc">Diagram showing the NEXA workflow from source documents through routing, extraction, chunk QA, and expert-agent orchestration.</desc>
+  <title id="title">NEXA published repository architecture</title>
+  <desc id="desc">Diagram showing manufacturing manuals and operator records routed through extraction into structured datasets, troubleshooting retrieval, and evaluation.</desc>
   <defs>
     <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#edf6f3" />
@@ -9,57 +9,61 @@
   </defs>
   <rect width="1200" height="760" fill="#f7f6f2" />
   <rect x="48" y="48" width="1104" height="664" rx="28" fill="url(#panel)" stroke="#e7e2da" stroke-width="3" />
-  <text x="82" y="108" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="700">NEXA Expert-Agent Workflow</text>
-  <text x="82" y="146" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="22">Manufacturing documents and process knowledge routed into compact expert models, validators, and dataset outputs.</text>
+  <text x="82" y="108" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="40" font-weight="700">NEXA Manufacturing Data Pipeline</text>
+  <text x="82" y="146" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="22">Published repository flow from source records to traceable troubleshooting data.</text>
 
-  <rect x="90" y="210" width="210" height="112" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="195" y="258" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Source Inputs</text>
-  <text x="195" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">PVD manuals</text>
-  <text x="195" y="314" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Operator notes</text>
+  <rect x="82" y="210" width="216" height="132" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="190" y="254" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Source Records</text>
+  <text x="190" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Technical manuals</text>
+  <text x="190" y="316" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Service + operator logs</text>
 
-  <rect x="350" y="210" width="220" height="112" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="460" y="258" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Document Routing</text>
+  <rect x="342" y="210" width="236" height="132" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="460" y="254" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Route + Extract</text>
   <text x="460" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Native PyMuPDF</text>
-  <text x="460" y="314" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Hybrid OCR selection</text>
+  <text x="460" y="316" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Surya / Nemotron OCR</text>
 
-  <rect x="620" y="210" width="220" height="112" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="730" y="258" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Extraction</text>
-  <text x="730" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">TurboOCR / Surya OCR</text>
-  <text x="730" y="314" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Figures, equations, tables</text>
+  <rect x="622" y="210" width="236" height="132" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="740" y="254" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Reconstruct</text>
+  <text x="740" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Reading order + tables</text>
+  <text x="740" y="316" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Form-aware handwriting</text>
 
-  <rect x="890" y="210" width="220" height="112" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="1000" y="258" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Structured Output</text>
-  <text x="1000" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Chunk QA scores</text>
-  <text x="1000" y="314" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">JSONL for datasets</text>
+  <rect x="902" y="210" width="216" height="132" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="1010" y="254" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Structured Data</text>
+  <text x="1010" y="290" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">JSONL + Parquet</text>
+  <text x="1010" y="316" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Provenance + QA metadata</text>
 
-  <rect x="165" y="418" width="260" height="168" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="295" y="466" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Technical Experts</text>
-  <text x="295" y="500" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Process corpus access</text>
-  <text x="295" y="526" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Fine-tuned 10B+ SLMs</text>
-  <text x="295" y="552" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Reasoning over manufacturing</text>
+  <path d="M298 276 H332" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M578 276 H612" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M858 276 H892" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
+  <path d="M324 264 L342 276 L324 288" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M604 264 L622 276 L604 288" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M884 264 L902 276 L884 288" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
 
-  <rect x="470" y="418" width="260" height="168" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="600" y="466" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Application Agents</text>
-  <text x="600" y="500" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Plan, instruct, validate</text>
-  <text x="600" y="526" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Constrained runtime</text>
-  <text x="600" y="552" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Feedback and realignment</text>
+  <rect x="138" y="438" width="270" height="154" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="273" y="482" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Troubleshooting</text>
+  <text x="273" y="518" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Multi-source retrieval</text>
+  <text x="273" y="544" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Knowledge schemas + API</text>
+  <text x="273" y="570" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Evidence-backed cases</text>
 
-  <rect x="775" y="418" width="260" height="168" rx="24" fill="#ffffff" stroke="#d7cec2" />
-  <text x="905" y="466" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="25" font-weight="700">Data Integrity</text>
-  <text x="905" y="500" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Schema enforcement</text>
-  <text x="905" y="526" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Crash reports</text>
-  <text x="905" y="552" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Post-completion review</text>
+  <rect x="465" y="438" width="270" height="154" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="600" y="482" text-anchor="middle" fill="#d75f2a" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Dataset Assembly</text>
+  <text x="600" y="518" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Semantic chunks</text>
+  <text x="600" y="544" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Dedup + review actions</text>
+  <text x="600" y="570" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Training-ready exports</text>
 
-  <path d="M300 266 H340" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
-  <path d="M570 266 H610" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
-  <path d="M840 266 H880" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
-  <path d="M332 254 L350 266 L332 278" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M602 254 L620 266 L602 278" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M872 254 L890 266 L872 278" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <rect x="792" y="438" width="270" height="154" rx="24" fill="#ffffff" stroke="#d7cec2" />
+  <text x="927" y="482" text-anchor="middle" fill="#0a7b6c" font-family="'Space Grotesk', sans-serif" font-size="24" font-weight="700">Evaluation</text>
+  <text x="927" y="518" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Coverage + throughput</text>
+  <text x="927" y="544" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Regression scorecards</text>
+  <text x="927" y="570" text-anchor="middle" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Human review manifests</text>
 
-  <path d="M1000 332 V388 H600" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" />
-  <path d="M612 370 L600 388 L588 370" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M1010 350 V394 H273 V428" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M1010 394 H600 V428" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M1010 394 H927 V428" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M261 418 L273 438 L285 418" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M588 418 L600 438 L612 418" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M915 418 L927 438 L939 418" stroke="#1c1c1c" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" />
 
-  <text x="86" y="658" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="21" font-weight="700">TurboOCR branch benchmark</text>
-  <text x="86" y="692" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="19">Native semantic chunking: 94.1/100 at ~130.19 pages/s. Hybrid routing: 98.3/100 at ~0.48 pages/s, trading speed for cleaner retained chunks.</text>
+  <text x="84" y="666" fill="#1c1c1c" font-family="'Space Grotesk', sans-serif" font-size="21" font-weight="700">Current public system</text>
+  <text x="84" y="696" fill="#4f4f4f" font-family="'Space Grotesk', sans-serif" font-size="18">Source-aware extraction, traceable data contracts, troubleshooting retrieval, and quality-gated handwritten OCR.</text>
 </svg>
