@@ -329,6 +329,11 @@ img {
   padding: 18px 20px 20px;
 }
 
+.research-card .project-card-image {
+  aspect-ratio: auto;
+  height: auto;
+}
+
 .project-link .meta {
   margin-bottom: 12px;
 }
