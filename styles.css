@@ -31,6 +31,13 @@ a:hover {
   color: var(--accent);
 }
 
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 6px #064f46;
+}
+
 .inline-link {
   color: #1c66d6;
   font-weight: 600;
@@ -65,9 +72,15 @@ img {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
   font-weight: 700;
   letter-spacing: 0.4px;
   font-size: 1.2rem;
+}
+
+.brand:hover {
+  color: var(--accent);
 }
 
 .nav-links {
@@ -89,6 +102,18 @@ img {
   color: var(--accent);
   border-color: #d7cec2;
   background: #ffffff;
+}
+
+.nav-links a[aria-current] {
+  color: #ffffff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.nav-links a[aria-current]:hover {
+  color: #ffffff;
+  background: #08695d;
+  border-color: #08695d;
 }
 
 .hero {
@@ -308,6 +333,16 @@ img {
   font-weight: 600;
 }
 
+.highlight-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.highlight-card .cta {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
 .front-nav-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -347,11 +382,23 @@ img {
 }
 
 .footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  flex-wrap: wrap;
   margin-top: 64px;
   border-top: 1px solid var(--line);
   padding-top: 20px;
   color: var(--muted);
   font-size: 14px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-weight: 600;
 }
 
 @media (max-width: 780px) {
