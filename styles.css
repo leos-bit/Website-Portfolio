@@ -492,13 +492,40 @@ img {
   margin-top: 0;
 }
 
+.resume-preview-frame {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #ffffff;
+}
+
 .resume-preview {
   display: block;
   width: 100%;
   height: auto;
-  border: 1px solid var(--line);
   border-radius: 12px;
-  background: #ffffff;
+}
+
+.resume-profile-link {
+  position: absolute;
+  top: 6.2%;
+  height: 2%;
+  border-radius: 3px;
+}
+
+.resume-profile-link:hover,
+.resume-profile-link:focus-visible {
+  background: rgba(28, 102, 214, 0.12);
+}
+
+.resume-linkedin {
+  left: 60.2%;
+  width: 6.6%;
+}
+
+.resume-github {
+  left: 70.3%;
+  width: 5.2%;
 }
 
 .resume-download {

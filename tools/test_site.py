@@ -83,6 +83,24 @@ def parse_page(path):
 
 
 class PortfolioNavigationTests(unittest.TestCase):
+    def test_resume_preview_profile_links_open_correct_profiles_in_new_tabs(self):
+        page = parse_page(ROOT / "resume" / "index.html")
+        links = [
+            a for a in page.anchors
+            if "resume-profile-link" in a["attrs"].get("class", "").split()
+        ]
+        self.assertEqual(len(links), 2)
+        self.assertEqual(
+            {a["attrs"].get("href") for a in links},
+            {"https://www.linkedin.com/in/leo-shaw02/", "https://github.com/leos-bit"},
+        )
+        for anchor in links:
+            self.assertEqual(anchor["attrs"].get("target"), "_blank")
+            self.assertTrue(
+                {"noopener", "noreferrer"}.issubset(anchor["attrs"].get("rel", "").split())
+            )
+            self.assertTrue(anchor["attrs"].get("aria-label"))
+
     def test_homepage_highlights_link_to_their_detail_pages(self):
         page = parse_page(ROOT / "index.html")
         h2_text = [heading["text"] for heading in page.headings if heading["tag"] == "h2"]
