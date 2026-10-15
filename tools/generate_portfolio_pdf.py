@@ -202,7 +202,7 @@ def build_story():
     )
     story.append(
         Paragraph(
-            f"Live navigation: {link('Projects & Experience', SITE + '/projects.html')} | {link('Resume', SITE + '/resume.html')} | {link('About', SITE + '/index.html')}",
+            f"Live navigation: {link('Projects & Experience', SITE + '/projects/')} | {link('Resume', SITE + '/resume/')} | {link('About', SITE + '/')}",
             styles["BodySmall"],
         )
     )
@@ -213,31 +213,31 @@ def build_story():
             "NEXA: Small Language Models for Manufacturing Process Design",
             "Research | 2026 - Present",
             "A grounded manufacturing AI stack combining Nemotron OCR ingestion, handwritten log reconstruction, Q/A/context generation, diagnostic RAG, and OpenWebUI integration.",
-            SITE + "/nexa-research.html",
+            SITE + "/nexa-research/",
         ),
         (
             "Autonomous Driving Local Planner with Reinforcement Learning",
             "January 2026 - May 2026",
             "A CARLA planning framework for merges, left turns, and cut-ins that compares classical planning against PPO-based local trajectory generation under a fixed PID control stack.",
-            SITE + "/autonomous-driving-planner.html",
+            SITE + "/autonomous-driving-planner/",
         ),
         (
             "Real-Time Conveyor-Belt Object Detection and Robotic Sorting",
             "January 2026 - May 2026",
             "A final integrated sorting system using computer vision, homography calibration, and a vacuum-equipped delta robot to remove aluminum cans from a moving conveyor.",
-            SITE + "/conveyor-sorting.html",
+            SITE + "/conveyor-sorting/",
         ),
         (
             "Autonomous Drone Pathing with Reinforcement Learning",
             "Spring 2026",
             "A MuJoCo quadrotor navigation project comparing PPO, SAC, and model-based RL, including goal-hover shaping and wind-robustness experiments.",
-            SITE + "/drone-pathing-rl.html",
+            SITE + "/drone-pathing-rl/",
         ),
         (
             "Seeing Through Occlusion",
             "January 2026 - May 2026",
             "A video instance segmentation project on OVIS that models object motion through occlusion with multimodal LSTMs, temporal attention, and an occlusion-aware memory bank.",
-            SITE + "/seeing-through-occlusion.html",
+            SITE + "/seeing-through-occlusion/",
         ),
     ]
     for item in project_cards[:3]:
@@ -266,9 +266,9 @@ def build_story():
 
     story.append(Paragraph("Quick Links", styles["SectionHeader"]))
     quick_links = [
-        Paragraph(link("Full Projects & Experience index", SITE + "/projects.html"), styles["BodySmall"]),
+        Paragraph(link("Full Projects & Experience index", SITE + "/projects/"), styles["BodySmall"]),
         Paragraph(link("Current resume PDF", SITE + "/assets/Leo_Shaw_Resume.pdf"), styles["BodySmall"]),
-        Paragraph(link("NEXA research page", SITE + "/nexa-research.html"), styles["BodySmall"]),
+        Paragraph(link("NEXA research page", SITE + "/nexa-research/"), styles["BodySmall"]),
         Paragraph(link("GitHub profile", GITHUB), styles["BodySmall"]),
     ]
     for item in quick_links:

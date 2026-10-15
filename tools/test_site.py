@@ -5,7 +5,11 @@ import unittest
 
 
 ROOT = Path(__file__).resolve().parents[1]
-HTML_FILES = sorted(ROOT.glob("*.html"))
+HTML_FILES = [ROOT / "index.html"] + sorted(ROOT.glob("*/index.html"))
+
+
+def page_name(path):
+    return "index.html" if path.parent == ROOT else path.parent.name + ".html"
 
 
 class PortfolioHTMLParser(HTMLParser):
@@ -92,10 +96,10 @@ class PortfolioNavigationTests(unittest.TestCase):
         }
         self.assertEqual(
             set(highlights),
-            {"ulvac-field-service.html", "conveyor-sorting.html"},
+            {"ulvac-field-service/", "conveyor-sorting/"},
         )
-        self.assertIn("View experience", highlights["ulvac-field-service.html"])
-        self.assertIn("View project", highlights["conveyor-sorting.html"])
+        self.assertIn("View experience", highlights["ulvac-field-service/"])
+        self.assertIn("View project", highlights["conveyor-sorting/"])
 
     def test_every_page_uses_clean_home_links_and_marks_the_active_section(self):
         project_pages = {
@@ -134,16 +138,16 @@ class PortfolioNavigationTests(unittest.TestCase):
                 ]
                 self.assertEqual(len(current), 1)
 
-                if path.name == "index.html":
+                if page_name(path) == "index.html":
                     expected_current = "About"
                     expected_current_type = "page"
-                elif path.name == "resume.html":
+                elif page_name(path) == "resume.html":
                     expected_current = "Resume"
                     expected_current_type = "page"
-                elif path.name == "projects.html":
+                elif page_name(path) == "projects.html":
                     expected_current = "Projects & Experience"
                     expected_current_type = "page"
-                elif path.name in project_pages:
+                elif page_name(path) in project_pages:
                     expected_current = "Projects & Experience"
                     expected_current_type = "location"
                 else:
@@ -173,12 +177,12 @@ class PortfolioNavigationTests(unittest.TestCase):
                 self.assertTrue(expected_links.issubset(footer_links))
                 self.assertNotIn("Last updated:", page.footer_text)
 
-                if path.name not in {"index.html", "projects.html", "resume.html"}:
+                if page_name(path) not in {"index.html", "projects.html", "resume.html"}:
                     back_links = [
                         anchor
                         for anchor in page.anchors
                         if anchor["in_footer"]
-                        and anchor["attrs"].get("href") == "projects.html"
+                        and anchor["attrs"].get("href") == "projects/"
                         and anchor["text"] == "Back to projects & experience"
                     ]
                     self.assertEqual(len(back_links), 1)
@@ -194,6 +198,8 @@ class PortfolioNavigationTests(unittest.TestCase):
                     continue
                 local_path = unquote(urlsplit(value).path)
                 target = ROOT / ("index.html" if local_path in {"", "./"} else local_path)
+                if target.is_dir():
+                    target = target / "index.html"
                 if not target.exists():
                     missing.append((path.name, value))
 

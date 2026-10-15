@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Conveyor Sorting System | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="./" aria-label="Leo Shaw homepage">Leo Shaw</a>
+    <div class="nav-links">
+      <a href="./">About</a>
+      <a href="projects/" aria-current="location">Projects &amp; Experience</a>
+      <a href="resume/">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">January 2026 - May 2026</p>
+      <h1>Real-Time Conveyor-Belt Object Detection and Robotic Sorting</h1>
+      <p class="hero-sub">
+        A final mechatronics system that used cloud-assisted vision, homography calibration, and a delta robot with a
+        vacuum end effector to separate aluminum cans from plastic bottles on a moving conveyor.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            End-to-end mechatronics integration
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Stack</span>
+            Raspberry Pi, Roboflow, Python, homography calibration
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Hardware</span>
+            Overhead webcam, delta robot, venturi vacuum end effector
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Final Result</span>
+            99% classification and centroid accuracy, about 50% physical sorting accuracy
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          The final system focused on positive sorting of aluminum cans from plastic bottles on a moving conveyor. The
+          key challenge was not just recognizing the objects, but timing a real pick-and-place action accurately enough
+          for a fast delta robot to remove cans while bottles continued down the belt.
+        </p>
+        <p>
+          Project site:
+          <a class="inline-link" href="https://sites.google.com/andrew.cmu.edu/cmumechatronics2026team3/home">CMU Mechatronics Team 3</a>.
+        </p>
+
+        <h3>Implementation</h3>
+        <p>
+          The final architecture used a Raspberry Pi as the onboard controller for camera capture, homography-based
+          position estimation, inverse kinematics, motion scheduling, and coordination with the robot and vacuum
+          subsystems. A single overhead USB webcam captured the conveyor scene, and frames were sent to a Roboflow
+          hosted segmentation workflow for object classification and centroid extraction.
+        </p>
+        <p>
+          Returned detections were transformed into robot-plane coordinates with a calibrated homography, then passed
+          into the inverse kinematics solver for the three-servo delta arm. The end effector used a lightweight
+          three-suction-cup vacuum gripper driven by a venturi vacuum generator, solenoid switching circuit, and
+          auxiliary microcontroller. Because inference ran through the Roboflow API, the pickup logic also included
+          empirical timing compensation for conveyor motion during perception and communication latency.
+        </p>
+
+        <h3>Results</h3>
+        <p>
+          The final system achieved approximately 99% practical classification and centroid accuracy under controlled
+          test conditions, and up to about 50% physical sorting accuracy in full closed-loop operation. That split was
+          the central lesson of the project: perception and coordinate mapping became highly reliable, but real sorting
+          consistency was limited by API latency, conveyor-speed variation, arm-link bending, and object motion after
+          detection.
+        </p>
+        <p>
+          In other words, the final product worked as a complete robotic sorting system, but its weakest point was
+          timing consistency rather than raw object recognition.
+        </p>
+
+        <h3>What I Built</h3>
+        <ul class="list">
+          <li>Integrated perception, calibration, inverse kinematics, and actuation into a single closed-loop sorting stack.</li>
+          <li>Homography-based mapping from image coordinates to robot-plane pick locations.</li>
+          <li>Timing compensation logic to account for cloud-inference and communication delay on a moving conveyor.</li>
+          <li>Delta-arm and vacuum-end-effector integration for positive sorting of aluminum cans.</li>
+          <li>System-level tuning and debugging across camera distortion, conveyor timing, linkage bending, and grasp reliability.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Project Media</h3>
+          <div class="media-grid featured">
+            <div class="media-card">
+              <video class="project-video" controls preload="metadata">
+                <source src="assets/mechatronic-design-demo.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              <div class="media-caption">
+                Demo footage of the final conveyor-sorting system operating with the overhead camera, delta robot, and
+                vacuum end effector in the full closed-loop setup.
+              </div>
+            </div>
+            <div class="media-card">
+              <h4>Final Takeaways</h4>
+              <div class="media-caption">
+                The strongest result was the complete perception-to-action integration: the system could classify,
+                localize, schedule, and execute real picks. The main remaining gap was consistency under latency and
+                changing conveyor conditions, not whether the individual subsystems worked in isolation.
+              </div>
+            </div>
+          </div>
+
+          <div class="media-card">
+            <img class="project-image" src="assets/delta-arm-system.png" alt="Labeled photo of the final conveyor sorting system showing the camera, delta arm, actuators, compute hardware, and pneumatic vacuum components" />
+            <div class="media-caption">
+              Labeled overview of the final integrated system, including the overhead camera, delta arm, gantry frame,
+              compute hardware, pneumatic vacuum path, and diverter.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects/">Back to projects &amp; experience</a></div>
+      <div class="footer-links">
+        <a href="mailto:leos@andrew.cmu.edu">Email</a>
+        <a href="https://github.com/leos-bit">GitHub</a>
+        <a href="https://linkedin.com/in/leoshaw">LinkedIn</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>

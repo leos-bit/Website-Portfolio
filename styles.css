@@ -383,8 +383,10 @@ img {
 
 .footer {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  text-align: center;
   gap: 18px;
   flex-wrap: wrap;
   margin-top: 64px;
@@ -396,9 +398,25 @@ img {
 
 .footer-links {
   display: flex;
-  gap: 16px;
+  justify-content: center;
+  gap: 24px;
   flex-wrap: wrap;
+  font-size: 1.25rem;
   font-weight: 600;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 4px;
+  color: #1c66d6;
+}
+
+.footer-links a:hover {
+  color: #0f4ea9;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 @media (max-width: 780px) {

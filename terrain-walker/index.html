@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="../" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar-Powered Terrain Walker | Leo Shaw</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav class="nav">
+    <a class="brand" href="./" aria-label="Leo Shaw homepage">Leo Shaw</a>
+    <div class="nav-links">
+      <a href="./">About</a>
+      <a href="projects/" aria-current="location">Projects &amp; Experience</a>
+      <a href="resume/">Resume</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <section class="project-hero">
+      <p class="meta">August 2023 - May 2024</p>
+      <h1>Solar-Powered Terrain Walker</h1>
+      <p class="hero-sub">
+        A low-cost autonomous quadruped that used linkage-based leg design to reduce actuation complexity without giving up terrain capability.
+      </p>
+    </section>
+
+    <section class="project-layout">
+      <div class="project-section">
+        <div class="info-grid">
+          <div class="info-pill">
+            <span class="fact-label">Focus</span>
+            Mechanism design and embedded controls
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Tools</span>
+            SolidWorks, ANSYS, Arduino
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Design Gain</span>
+            34% lower cost than a comparable six-legged design
+          </div>
+          <div class="info-pill">
+            <span class="fact-label">Actuation</span>
+            Reduced from three motors per leg to one
+          </div>
+        </div>
+
+        <h2>Overview</h2>
+        <p>
+          Many legged robots become expensive and fragile because each leg needs several actuators and a correspondingly
+          complicated control system. This project explored a more deployable alternative: using clever linkage design to
+          simplify locomotion mechanically before asking software to compensate.
+        </p>
+
+        <h3>Implementation</h3>
+        <p>
+          I designed the robot around Chebyshev 4-bar linkages and pantographs so each leg could be driven with a
+          single actuator instead of three. I modeled the pivots and structural components in SolidWorks, validated key
+          parts with ANSYS stress analysis, and implemented motion and sensing subsystems in C on Arduino hardware.
+        </p>
+
+        <h3>Results</h3>
+        <p>
+          The final design lowered cost by about 34%, simplified controls, and preserved useful terrain performance
+          relative to more complex legged platforms. Consolidated actuation also improved energy efficiency and made the
+          robot easier to build, debug, and reason about.
+        </p>
+
+        <h3>What I Built</h3>
+        <ul class="list">
+          <li>Mechanism architecture based on Chebyshev 4-bar linkages and pantographs.</li>
+          <li>Actuator reduction strategy that cut each leg from three motors to one.</li>
+          <li>Structural design and validation in SolidWorks and ANSYS.</li>
+          <li>Embedded motion and sensing subsystems in C on Arduino.</li>
+        </ul>
+
+        <div class="media-section">
+          <h3>Project Snapshot</h3>
+          <div class="media-grid">
+            <div class="media-card">
+              <img class="project-image" src="assets/thumb-terrain.svg" alt="Illustration of the terrain walker linkage design" />
+              <div class="media-caption">
+                The main idea was to push complexity into the mechanical design so the robot could move with fewer
+                motors, simpler controls, and better energy efficiency.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div><a href="projects/">Back to projects &amp; experience</a></div>
+      <div class="footer-links">
+        <a href="mailto:leos@andrew.cmu.edu">Email</a>
+        <a href="https://github.com/leos-bit">GitHub</a>
+        <a href="https://linkedin.com/in/leoshaw">LinkedIn</a>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
