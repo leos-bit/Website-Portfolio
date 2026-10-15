@@ -313,6 +313,10 @@ img {
   overflow: hidden;
 }
 
+.project-card:hover {
+  transform: none;
+}
+
 .project-card-image {
   flex-shrink: 0;
   width: 100%;
