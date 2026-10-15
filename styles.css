@@ -306,11 +306,14 @@ img {
 }
 
 .project-card {
+  display: flex;
+  flex-direction: column;
   padding: 0;
   overflow: hidden;
 }
 
 .project-card-image {
+  flex-shrink: 0;
   width: 100%;
   aspect-ratio: 16 / 9;
   object-fit: cover;
@@ -320,6 +323,9 @@ img {
 }
 
 .project-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 18px 20px 20px;
 }
 
@@ -331,6 +337,12 @@ img {
   margin-top: 16px;
   color: var(--accent);
   font-weight: 600;
+}
+
+.project-card .cta {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: 16px;
 }
 
 .highlight-card {
