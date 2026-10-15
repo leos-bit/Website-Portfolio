@@ -25,7 +25,8 @@
       <p class="meta">August 2023 - May 2024</p>
       <h1>Solar-Powered Terrain Walker</h1>
       <p class="hero-sub">
-        A low-cost autonomous quadruped that used linkage-based leg design to reduce actuation complexity without giving up terrain capability.
+        SolVoyager: a Rutgers senior design quadruped combining single-motor leg mechanisms, a lightweight hybrid structure,
+        solar charging, and Arduino control to navigate obstacles while carrying a small payload.
       </p>
     </section>
 
@@ -41,46 +42,269 @@
             SolidWorks, ANSYS, Arduino
           </div>
           <div class="info-pill">
-            <span class="fact-label">Design Gain</span>
-            34% lower cost than a comparable six-legged design
+            <span class="fact-label">Prototype</span>
+            Four legs, five motors, and a reported height of 16 inches
           </div>
           <div class="info-pill">
             <span class="fact-label">Actuation</span>
-            Reduced from three motors per leg to one
+            One motor per leg plus one steering motor, versus 18 motors in the earlier six-legged concept
           </div>
         </div>
 
-        <h2>Overview</h2>
+        <h2 id="overview">Overview</h2>
         <p>
-          Many legged robots become expensive and fragile because each leg needs several actuators and a correspondingly
-          complicated control system. This project explored a more deployable alternative: using clever linkage design to
-          simplify locomotion mechanically before asking software to compensate.
+          SolVoyager was developed by Rutgers Mechanical and Aerospace Engineering team ME_B5 for the 2023-2024
+          senior design sequence. The challenge was to build an autonomous, solar-powered walking vehicle that could
+          carry an 8-ounce payload, negotiate obstacles and inclined terrain, and remain below 18 inches in height.
+          Wheels and tracks were prohibited. A race and engineering expo provided the final demonstration context,
+          while search and rescue motivated the emphasis on compact size, reliability, and operation away from mains power.
+        </p>
+        <p>
+          The team selected a four-legged architecture with a Chebyshev four-bar mechanism driving a pantograph in each
+          leg. Mechanical geometry creates the walking trajectory, allowing one motor per leg. A fifth motor steers the
+          front leg modules through a separate four-bar linkage. PETG framing, aluminum load-bearing links, ball-bearing
+          joints, and a solar-charged battery complete the system.
+        </p>
+        <div class="hero-actions">
+          <a class="hero-action secondary" href="assets/Solar_Powered_Terrain_Walker_Final_Report.pdf">Read the full design report</a>
+          <a class="hero-action secondary" href="assets/Solar%20Powered%20Poster.pdf">Open the project poster</a>
+        </div>
+        <nav class="case-study-toc" aria-label="Terrain walker case study sections">
+          <a href="terrain-walker/#contributions">My role</a>
+          <a href="terrain-walker/#concepts">Concept selection</a>
+          <a href="terrain-walker/#leg-design">Leg design</a>
+          <a href="terrain-walker/#steering">Chassis &amp; steering</a>
+          <a href="terrain-walker/#electronics">Electronics &amp; control</a>
+          <a href="terrain-walker/#manufacturing">Manufacturing</a>
+          <a href="terrain-walker/#testing">Testing &amp; results</a>
+          <a href="terrain-walker/#budget">Budget &amp; delivery</a>
+          <a href="terrain-walker/#media">Project media</a>
+        </nav>
+
+        <h2 id="contributions">My Contributions</h2>
+        <p>
+          I worked with Justin Bradley on the machine shop and manufacturing subteam, producing the metal leg links
+          and PETG components for the chassis and leg modules. Justin and I also carried out most of the coding and
+          programming, including the iterative PID-controller tuning needed to keep the walker stable. I contributed
+          to assembly and troubleshooting with the full team and documented machine-guarding practices for the milling work.
+        </p>
+        <p>
+          The broader system was a team effort: Steven Kaplan and Kirat Gill focused on electronics testing, while
+          Brendan Curran and Sean Sullivan developed and refined the leg, chassis, and steering designs. Prof. William
+          Bottega advised the project, with feasibility and manufacturing guidance from Dr. Basily. The technical
+          sections below describe the team's complete design and build.
         </p>
 
-        <h3>Implementation</h3>
-        <p>
-          I designed the robot around Chebyshev 4-bar linkages and pantographs so each leg could be driven with a
-          single actuator instead of three. I modeled the pivots and structural components in SolidWorks, validated key
-          parts with ANSYS stress analysis, and implemented motion and sensing subsystems in C on Arduino hardware.
-        </p>
-
-        <h3>Results</h3>
-        <p>
-          The final design lowered cost by about 34%, simplified controls, and preserved useful terrain performance
-          relative to more complex legged platforms. Consolidated actuation also improved energy efficiency and made the
-          robot easier to build, debug, and reason about.
-        </p>
-
-        <h3>What I Built</h3>
+        <h2 id="concepts">Requirements and Concept Selection</h2>
         <ul class="list">
-          <li>Mechanism architecture based on Chebyshev 4-bar linkages and pantographs.</li>
-          <li>Actuator reduction strategy that cut each leg from three motors to one.</li>
-          <li>Structural design and validation in SolidWorks and ANSYS.</li>
-          <li>Embedded motion and sensing subsystems in C on Arduino.</li>
+          <li>Walk without wheels or tracks, carry an 8-ounce payload, and change direction autonomously.</li>
+          <li>Stay below an 18-inch height limit; the poster reports a final height of 16 inches.</li>
+          <li>Balance stability, obstacle traversal, speed, power consumption, manufacturability, and a $700 departmental budget.</li>
+          <li>Keep the electronics and payload supported while limiting lateral sway and the risk of tipping during walking and turning.</li>
         </ul>
+        <div class="table-wrap">
+          <table class="metrics-table">
+            <caption>Body-plan tradeoffs documented in the report</caption>
+            <thead><tr><th scope="col">Concept</th><th scope="col">Advantages</th><th scope="col">Tradeoff / decision</th></tr></thead>
+            <tbody>
+              <tr><td>Six-legged insect; 18 motors</td><td>High dexterity, stability, and carrying capacity</td><td>More battery demand, weight, mechanical complexity, and control effort</td></tr>
+              <tr><td>Four-legged insect; 12 motors</td><td>Fewer actuators than the hexapod</td><td>Outward legs made stability and precise gait coordination more difficult; rejected early</td></tr>
+              <tr><td>Four-legged puppy; four leg motors</td><td>Vertical load support, compact geometry, and simpler actuation</td><td>Selected; required resistance to lateral leg forces and a separate steering mechanism</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          For steering, the team compared pivoting the front leg modules on a fixed chassis with splitting the chassis
+          around a central hinge. The fixed-body approach was selected to simplify weight distribution and balance.
+          A linkage driven by one steering servo replaced more complex two-motor, pulley, and rack-and-pinion concepts.
+        </p>
 
-        <div class="media-section">
-          <h3>Project Snapshot</h3>
+        <h2 id="leg-design">Leg Mechanism and Kinematic Analysis</h2>
+        <p>
+          A continuously rotating crank drives the Chebyshev four-bar. Its extended coupler traces a small, inverted
+          walking path, which the pantograph enlarges and flips into a foot trajectory with a nearly flat stance and
+          an elevated return. Each seven-link leg has one degree of freedom. The detailed report and poster describe
+          approximately 270 degrees of crank rotation in stance and a 90-degree quick return, supporting a gait intended
+          to keep three feet in their ground-contact portions at a time.
+        </p>
+        <p>
+          Position analysis tracked the crank angle through a full revolution, solved the intermediate joint positions,
+          and plotted the foot and coupler paths. The calculated transmission-angle ranges were approximately
+          83-153 degrees and 80-128 degrees. The first range exceeds the preferred band during part of the cycle;
+          the team checked its behavior in motion simulation rather than treating the geometry as ideal throughout.
+          MotionGen, graphical position calculations, MATLAB, and SolidWorks supported this analysis.
+        </p>
+        <details class="case-study-details">
+          <summary>Link dimensions and joint construction</summary>
+          <p>
+            The report's position-analysis dimensions, in inches, are a = 1.25; b1 = 1.875; b2 = 3.75;
+            c = d = f = 1.5625; h = 5.75; m = 0.625; z2 = 1.25; z3 = z6 = 2.75; z4 = 5.5;
+            and z5 = z7 = 2.5. Full equations, joint labels, and motion plots appear on pages 15-19 and in Appendix C.
+          </p>
+          <p>
+            Three fixed joints support each leg: the motor output, the upper four-bar pivot, and the lower pantograph
+            pivot. Nested inside/outside links distribute load across both sides of moving joints, reducing the bending
+            and bearing movement associated with simple side-by-side links. M3 threads, 4 mm shoulder screws, spacers,
+            and set screws retain the joints. Most moving joints use one bearing; the crank-to-coupler joint retains
+            three bearings because the crank must rotate through a full circle without interference. A 25T servo horn
+            connects the motor to the crank.
+          </p>
+        </details>
+
+        <h2 id="steering">Chassis, Steering, and Structural Analysis</h2>
+        <p>
+          The final chassis uses twelve printed PETG H-beams joined with mending plates, brackets, and fasteners.
+          Rear leg modules bolt directly to the frame; front modules mount on vertically aligned pivots. A servo and
+          sliding drive link move the steering four-bar, rotating both front modules while the body remains fixed.
+          The chassis is about 16 inches long and 8.25 inches wide; including the leg bases, the reported width is
+          approximately 12.15 inches.
+        </p>
+        <p>
+          Vehicle-steering analysis used a 16-inch wheelbase, a nominal 12-inch track, and a 20-inch inner-path design
+          parameter. MATLAB calculations gave an approximately 6-degree front offset for the selected geometry.
+          Because leg timing must remain coordinated for balance, turning also involves foot slip rather than simply
+          assigning different speeds to inner and outer wheels. The report treats this as a practical tuning challenge.
+        </p>
+        <p>
+          ANSYS static and dynamic analyses guided geometry and material selection. The team compared plastics and
+          wood before using PETG for the frame and four lower-stress links per leg, with 6061 aluminum for the crank,
+          extended coupler, and ground-contact link. Plastic versions of these highly loaded parts showed unacceptable
+          deformation, and geometric enlargement was constrained by the mechanism. Leg studies considered exaggerated
+          loading, including a leg supporting half the robot's weight, while an H-beam study used 40 lbf at each end.
+          These were design simulations, rather than measured load ratings for the finished robot.
+        </p>
+
+        <h2 id="electronics">Power, Sensors, and Embedded Control</h2>
+        <ul class="list">
+          <li><strong>Energy:</strong> a nominal 20 W, 12 V solar panel and a 7.4 V, 5200 mAh LiPo battery. The report describes a panel controller and buck-converter charging path.</li>
+          <li><strong>Actuation:</strong> five continuous-rotation servos rated around 30 kg-cm, or approximately 3 Nm stall torque at 7.4 V; four drive legs and one steers.</li>
+          <li><strong>Control:</strong> an Arduino Mega and servo driver coordinate walking and turning; the final assembly also uses a separate 9 V supply for the Arduino.</li>
+          <li><strong>Feedback:</strong> external encoders with printed 1:3 gearing provide approximately 6-degree motor-position resolution, compensating for servos purchased without built-in encoders.</li>
+          <li><strong>Autonomy:</strong> a TF-Luna ranging sensor provides obstacle-distance input, and a Bluetooth module remotely starts and stops the autonomous routine.</li>
+          <li><strong>Integration:</strong> color-coded wiring, a solderable distribution board, and mechanical separation keep wiring clear of the moving leg mechanisms.</li>
+        </ul>
+        <p>
+          The programming work centered on coordinating motor position and gait timing while tuning the PID controller
+          through repeated tests. An Appendix C torque estimate assumed a 15 lb robot, a quarter of its weight on each
+          leg, a 1.2 dynamic load coefficient, and a 0.1397 m lever arm at 45 degrees, giving approximately 1.98 Nm.
+          The nominal 3 Nm servo selection provided margin relative to that calculation; this was a sizing estimate,
+          not a measured torque requirement.
+        </p>
+
+        <h2 id="manufacturing">Manufacturing and Assembly</h2>
+        <h3>Machined aluminum links</h3>
+        <p>
+          We produced three aluminum parts per leg, twelve in total. Stock was milled to size, mounting and bearing
+          holes were drilled, screw holes were tapped, and bearing bores were finished with a 0.354-inch reamer.
+          Slots were opened through drilling and milling, and edges were rounded to reduce unnecessary mass.
+          Mislocated holes in an initial ground-contact link required rework, illustrating the importance of setup,
+          datum selection, and inspection before repeating a part across all four legs.
+        </p>
+        <h3>PETG printing and modular construction</h3>
+        <p>
+          The final build used PETG despite earlier ABS and wood concepts retained in parts of the report. The four
+          plastic links per leg and the structural H-beams were printed at 70% infill. Motor and encoder mounts and
+          the steering mechanism used 15% infill where loading was lower. Printed mounting holes reduced drilling
+          variation. Leg modules were assembled and checked separately before installation on the frame, with 1 and
+          2 mm spacers maintaining clearance between links and the base.
+        </p>
+        <h3>Bearing fits and assembly tolerances</h3>
+        <p>
+          The joints use 4 mm bore, 9 mm outside-diameter, 4 mm thick deep-groove bearings. Shoulder screws locate
+          the inner rings, while the rotating outer rings need retention in the links. The report records approximately
+          4.02 mm bearing bores and 3.98 mm screw shoulders, a 0.04 mm clearance. PETG compliance helped retain bearings
+          in the printed links; Loctite 609 retaining compound addressed fit variation in the machined aluminum bores.
+          Washers and spacers prevented rubbing, while set screws reduced shaft movement.
+        </p>
+
+        <h2 id="testing">Testing, Results, and Limitations</h2>
+        <p>
+          Validation began with a fully printed single-leg prototype on a stationary vertical rig. This exposed
+          collisions between links, joints, and bolts before all final parts were manufactured. The team added
+          spacers, adjusted clearances, and fit-checked parts as they became available. Straight edges and calipers
+          checked chassis warping, while obstructing fasteners and nearby components were modified during assembly.
+          Each motor, the Arduino interface, the solar panel, and the battery were tested independently before integration.
+        </p>
+        <div class="table-wrap">
+          <table class="metrics-table">
+            <caption>Reported outcomes and the evidence behind them</caption>
+            <thead><tr><th scope="col">Item</th><th scope="col">Result</th><th scope="col">Evidence / qualification</th></tr></thead>
+            <tbody>
+              <tr><td>Actuator count</td><td>Five total versus 18 in the earlier concept</td><td>Four leg servos and one steering servo; a design comparison, not an energy-efficiency measurement</td></tr>
+              <tr><td>Height and payload</td><td>16-inch height; 8-ounce payload objective</td><td>Height is reported on the poster; the report's conclusion states that obstacle navigation and small-payload goals were achieved</td></tr>
+              <tr><td>Solar test</td><td>18 V open-circuit panel voltage</td><td>March 14, 4:45-5:45 PM, Piscataway; mostly sunny with some clouds and the panel approximately normal to sunlight</td></tr>
+              <tr><td>Charging estimate from test</td><td>8.3 hours</td><td>Extrapolated from a one-hour voltage trace near half charge using assumed cell-voltage endpoints; not a measured full-charge cycle</td></tr>
+              <tr><td>Appendix energy calculations</td><td>18.35-minute runtime estimate; 2.51 / 13.94-hour charging estimates</td><td>Runtime assumes all five motors draw 3.4 A; charging values are the report's initial and efficiency-adjusted calculations, not validated operating endurance</td></tr>
+              <tr><td>Integrated prototype</td><td>Team reported successful walking, obstacle maneuvering, and small-payload carrying</td><td>No quantitative speed, incline, endurance, or race-placement results are supplied</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The report and poster identify practical next steps: motors with integrated encoders, stronger motor output,
+          fewer software delays in the gait and steering cycles, and protective housings against water and debris.
+          These improvements would reduce assembly effort and improve reliability outside controlled demonstrations.
+        </p>
+        <details class="case-study-details">
+          <summary>Standards and engineering practices documented by the team</summary>
+          <p>
+            The report discusses ANSI C18.2M battery specifications, IEEE 1679.1-2017 lithium-battery guidance,
+            NTN bearing-fit recommendations and ISO 286-1, OSHA 1926.963 testing practices, OSHA 1910.132 personal
+            protective equipment, and OSHA 1910.212 machine guarding. These were references for component checks,
+            fit selection, wiring separation, shop PPE, and guarding; the project does not claim independent certification.
+            My machine-guarding contribution checked the milling machine's guard, safety shield, and anchoring.
+          </p>
+        </details>
+
+        <h2 id="budget">Budget, Schedule, and Team Delivery</h2>
+        <p>
+          The recorded parts subtotal was $606.35 against $700 in departmental funding, leaving $93.65. Appendix B
+          explicitly excludes some components, including the solar panel and motor driver, so this subtotal is not a
+          complete system cost.
+        </p>
+        <details class="case-study-details">
+          <summary>Recorded parts list and spending</summary>
+          <div class="table-wrap">
+            <table class="metrics-table">
+              <caption>Appendix B line totals, including recorded tax and shipping</caption>
+              <thead><tr><th scope="col">Component</th><th scope="col">Quantity</th><th scope="col">Recorded total</th></tr></thead>
+              <tbody>
+                <tr><td>LM2596S buck converter</td><td>1</td><td>$7.45</td></tr>
+                <tr><td>Readytosky continuous-rotation servos</td><td>5</td><td>$133.25</td></tr>
+                <tr><td>TF-Luna range sensor</td><td>1</td><td>$24.99</td></tr>
+                <tr><td>ELEGOO Mega R3 starter kit</td><td>1</td><td>$70.36</td></tr>
+                <tr><td>684ZZ bearing packs</td><td>3</td><td>$38.49</td></tr>
+                <tr><td>7.4 V, 5200 mAh LiPo battery</td><td>1</td><td>$21.31</td></tr>
+                <tr><td>Mounting strips</td><td>1</td><td>$23.34</td></tr>
+                <tr><td>Pivot-hinge set</td><td>1</td><td>$12.78</td></tr>
+                <tr><td>Birch plywood sheets</td><td>1</td><td>$17.05</td></tr>
+                <tr><td>Wood screw assortment</td><td>1</td><td>$8.49</td></tr>
+                <tr><td>Shoulder screws, 92981A745</td><td>4</td><td>$12.80</td></tr>
+                <tr><td>Shoulder screws, 90269A209</td><td>4</td><td>$40.60</td></tr>
+                <tr><td>Shoulder screws, 92981A142</td><td>4</td><td>$12.68</td></tr>
+                <tr><td>Shoulder screws, 91273A368</td><td>20</td><td>$86.40</td></tr>
+                <tr><td>PETG filament</td><td>3</td><td>$71.37</td></tr>
+                <tr><td>6061 aluminum stock</td><td>1</td><td>$24.99</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+        <p>
+          Fall 2023 covered concept selection, feasibility reviews, subsystem analysis, material choices, and the
+          initial parts order. Spring 2024 focused on electronics verification, machining and printing, encoder
+          integration, assembly, programming, and tuning toward the late-April demonstration. The team met once or
+          twice a week and coordinated through GroupMe and Discord, with parallel electronics, design, and manufacturing
+          work feeding into full-team integration sessions. Appendix A preserves the semester Gantt charts.
+        </p>
+
+        <div class="media-section" id="media">
+          <h2>Project Media</h2>
+          <div class="media-card">
+            <h3>Senior Design Poster</h3>
+            <a href="assets/Solar%20Powered%20Poster.png" aria-label="Open the full-size solar-powered terrain walker poster">
+              <img class="project-image" src="assets/Solar%20Powered%20Poster.png" alt="Rutgers senior design poster covering SolVoyager's leg mechanism, electronics, chassis, steering, manufacturing, and prototype photos" loading="lazy" />
+            </a>
+            <p class="media-caption">The team's complete project poster. Select the image to read it at full size, or <a class="inline-link" href="assets/Solar%20Powered%20Poster.pdf">open the poster PDF</a>.</p>
+          </div>
           <div class="media-grid">
             <div class="media-card">
               <img class="project-image" src="assets/Solar%20Powered%20Terrain%20Walker.png" alt="Solar-powered terrain walker prototype showing its linkage legs, motors, and onboard electronics" />
@@ -90,7 +314,31 @@
               </div>
             </div>
           </div>
+          <div class="media-grid">
+            <figure class="media-card">
+              <img class="project-image" src="assets/solar-walker-leg-design.png" alt="Final report Figure 18 showing the leg assembly and its foot trajectory" loading="lazy" />
+              <figcaption class="media-caption">Figure 18, report page 25: final leg design and motion path.</figcaption>
+            </figure>
+            <figure class="media-card">
+              <img class="project-image" src="assets/solar-walker-kinematics.png" alt="Final report Figure C.4 plotting the motion paths of the mechanism joints" loading="lazy" />
+              <figcaption class="media-caption">Figure C.4, report page 57: graphical analysis of the motion path.</figcaption>
+            </figure>
+            <figure class="media-card">
+              <img class="project-image" src="assets/solar-walker-fea.png" alt="Final report Figure 19 showing structural simulation under exaggerated loading" loading="lazy" />
+              <figcaption class="media-caption">Figure 19, report page 27: static simulation with exaggerated forces.</figcaption>
+            </figure>
+          </div>
         </div>
+
+        <h2 id="sources">Full Report and References</h2>
+        <p>
+          This case study follows the <a class="inline-link" href="assets/Solar_Powered_Terrain_Walker_Final_Report.pdf">Spring 2024 final design report (65 pages)</a>
+          and the team poster. The full report includes all mechanism equations, CAD and simulation figures,
+          charging-test data, safety discussions, semester schedules, vendor part numbers, budget entries, and
+          Appendix C drawings and analyses. Its references include the previous ME_B5 report, quadruped and one-DOF
+          leg research, material-property sources, battery-charging calculations, bearing-fit tables, and the
+          textbooks <em>Applied Dynamics</em> and <em>Kinematics and Dynamics of Machinery</em>.
+        </p>
       </div>
     </section>
 
