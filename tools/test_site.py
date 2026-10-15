@@ -163,7 +163,7 @@ class PortfolioNavigationTests(unittest.TestCase):
         expected_links = {
             "mailto:leos@andrew.cmu.edu",
             "https://github.com/leos-bit",
-            "https://linkedin.com/in/leoshaw",
+            "https://www.linkedin.com/in/leo-shaw02/",
         }
 
         for path in HTML_FILES:

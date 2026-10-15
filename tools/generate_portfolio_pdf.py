@@ -25,7 +25,7 @@ OUTPUTS = [
 SITE = "https://leos-bit.github.io/Website-Portfolio"
 EMAIL = "leos@andrew.cmu.edu"
 GITHUB = "https://github.com/leos-bit"
-LINKEDIN = "https://linkedin.com/in/leoshaw"
+LINKEDIN = "https://www.linkedin.com/in/leo-shaw02/"
 
 
 def build_styles():
@@ -177,7 +177,7 @@ def build_story():
             Paragraph("<b>GitHub</b>", styles["BodySmall"]),
             Paragraph(link("leos-bit", GITHUB), styles["BodySmall"]),
             Paragraph("<b>LinkedIn</b>", styles["BodySmall"]),
-            Paragraph(link("linkedin.com/in/leoshaw", LINKEDIN), styles["BodySmall"]),
+            Paragraph(link("linkedin.com/in/leo-shaw02", LINKEDIN), styles["BodySmall"]),
         ],
     ]
     contact_table = Table(contact_rows, colWidths=[1.0 * inch, 2.3 * inch, 1.0 * inch, 2.3 * inch])
