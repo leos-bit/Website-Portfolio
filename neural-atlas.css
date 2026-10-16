@@ -1,5 +1,7 @@
 html { background: #0c1218; scroll-behavior: smooth; }
 body { margin: 0; }
+body #leo-neural-atlas .atlas-brand, body #leo-neural-atlas .atlas-navlinks a, body #leo-neural-atlas .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
+body #leo-neural-atlas .atlas-domains b { color: #849c9e; }
 /* Give the atlas its own edge-to-edge stage below the introduction. */
 body #leo-neural-atlas .atlas-hero { display: block; min-height: 0; }
 body #leo-neural-atlas .atlas-intro { padding: 54px 0 24px; text-align: center; }
@@ -93,7 +95,7 @@ body #leo-neural-atlas .atlas-bottom { justify-content: center; }
     #leo-neural-atlas .atlas-node[aria-pressed=true],#leo-neural-atlas .atlas-node:hover{color:var(--atlas-text);background:rgba(12,18,24,.84)}
     #leo-neural-atlas .atlas-node[aria-pressed=true]:before{background:var(--atlas-amber);box-shadow:0 0 0 5px rgba(198,171,127,.07),0 0 16px rgba(198,171,127,.6)}
     #leo-neural-atlas .atlas-node{transition:opacity .22s,color .22s,background .22s}
-    #leo-neural-atlas .atlas-network.is-expanded .atlas-node:not([aria-pressed=true]){opacity:.75}
+    #leo-neural-atlas .atlas-network.is-expanded .atlas-node:not([aria-pressed=true]){opacity:.85}
     #leo-neural-atlas .atlas-skills{position:absolute;inset:0;pointer-events:none;z-index:3}
     #leo-neural-atlas .atlas-skill{position:absolute;display:flex;align-items:center;gap:7px;padding:5px 7px;background:#0c1218;color:#c0d3ce;border-radius:3px;font-size:11px;line-height:1.4;white-space:nowrap;transform:translate(-50%,-50%);animation:atlas-skill-arrive .24s ease-out both}
     #leo-neural-atlas .atlas-skill:before{content:'';width:3px;height:3px;flex-shrink:0;background:#9ecdc4;border-radius:50%;box-shadow:0 0 7px rgba(158,205,196,.24)}

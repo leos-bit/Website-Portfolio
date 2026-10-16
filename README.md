@@ -15,6 +15,10 @@ Homepage files: `index.html`, `neural-atlas.css`, and `neural-atlas.js`.
 Open `http://localhost:8127/tools/atlas-interaction-test.html` to run the browser
 interaction regressions against the real homepage (touch toggle, outside tap,
 buffered pointer exit, keyboard focus, and Escape). All results should say PASS.
+Open `http://localhost:8127/tools/design-audit.html` for rendered text contrast,
+horizontal overflow, and section-anchor checks across all 11 pages at 1280, 768,
+390, and 320 pixels, including expanded atlas states. This is a regression check,
+not a substitute for visual review or a complete accessibility certification.
 Case studies retain their existing layouts in `styles.css` with a matching dark
 palette. Optimized homepage photos are `assets/atlas-*.jpg`.
 

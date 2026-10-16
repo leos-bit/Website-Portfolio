@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Portfolio design audit</title>
+<h1>Portfolio design audit</h1><pre id="results">Running…</pre>
+<iframe title="Page under test" style="height:900px;border:1px solid #999"></iframe>
+<script>
+const routes=['','projects/','resume/','nexa-research/','conveyor-sorting/','autonomous-driving-planner/','drone-pathing-rl/','seeing-through-occlusion/','terrain-walker/','ulvac-field-service/','paltorc-ebike/'];
+const frame=document.querySelector('iframe'), output=document.querySelector('#results');
+const rgb=s=>(s.match(/[\d.]+/g)||[]).map(Number);
+const blend=(a,b)=>a.slice(0,3).map((v,i)=>v*(a[3]??1)+b[i]*(1-(a[3]??1)));
+const lum=c=>c.slice(0,3).map(x=>{x/=255;return x<=.04045?x/12.92:((x+.055)/1.055)**2.4;}).reduce((s,v,i)=>s+v*[.2126,.7152,.0722][i],0);
+function contrast(doc,win){
+  const failures=[];
+  for(const el of doc.body.querySelectorAll('*')){
+    if(![...el.childNodes].some(n=>n.nodeType===3&&n.textContent.trim())||!el.getClientRects().length)continue;
+    const style=win.getComputedStyle(el);if(style.visibility==='hidden')continue;
+    let chain=[],bg=[12,18,24];for(let p=el;p;p=p.parentElement)chain.unshift(p);
+    for(const p of chain)bg=blend(rgb(win.getComputedStyle(p).backgroundColor),bg);
+    const opacity=chain.reduce((v,p)=>v*Number(win.getComputedStyle(p).opacity),1);
+    const fg=blend([...blend(rgb(style.color),bg),opacity],bg);
+    const ratio=(Math.max(lum(fg),lum(bg))+.05)/(Math.min(lum(fg),lum(bg))+.05);
+    const large=parseFloat(style.fontSize)>=24||(parseFloat(style.fontSize)>=18.66&&Number(style.fontWeight)>=700);
+    if(ratio<(large?3:4.5))failures.push(`${el.textContent.trim().slice(0,45)} (${ratio.toFixed(2)}:1)`);
+  }
+  return failures;
+}
+(async()=>{
+  const lines=[];
+  for(const width of [1280,768,390,320])for(const route of routes){
+    frame.style.width=width+'px';
+    await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+route+'?design-audit=2';});
+    const win=frame.contentWindow,doc=win.document;
+    const low=contrast(doc,win),overflow=doc.body.scrollWidth>doc.documentElement.clientWidth;
+    if(route===''){
+      for(const node of doc.querySelectorAll('.atlas-node')){
+        doc.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Tab'}));node.focus();
+        await Promise.all(doc.getAnimations().map(animation=>animation.finished.catch(()=>{})));
+        low.push(...contrast(doc,win).filter(s=>!low.includes(s)));
+      }
+      doc.querySelector('.atlas-network').dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Escape'}));
+    }
+    const missing=[...doc.querySelectorAll('a[href*="#"]')].filter(a=>a.pathname===win.location.pathname&&a.hash&&!doc.getElementById(decodeURIComponent(a.hash.slice(1))));
+    lines.push(`${low.length||overflow||missing.length?'FAIL':'PASS'} ${width}px /${route} ${low.length?'contrast: '+low.join('; '):''}${overflow?' PAGE OVERFLOW':''}${missing.length?' MISSING ANCHOR':''}`);
+    output.textContent=lines.join('\n');
+  }
+  document.title=lines.some(l=>l.startsWith('FAIL'))?'FAIL — Design audit':'PASS — Design audit';
+})();
+</script></html>

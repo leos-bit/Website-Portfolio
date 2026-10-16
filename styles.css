@@ -204,8 +204,14 @@ img {
 }
 
 .hero-action.secondary {
-  background: #ffffff;
-  border-color: #d7cec2;
+  background: var(--card);
+  border-color: #58766e;
+  color: var(--accent);
+}
+
+.hero-action.secondary:hover {
+  background: #17252c;
+  border-color: var(--accent);
   color: var(--ink);
 }
 

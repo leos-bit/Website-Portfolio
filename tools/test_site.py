@@ -87,6 +87,17 @@ def parse_page(path):
 
 
 class PortfolioNavigationTests(unittest.TestCase):
+    def test_every_page_has_one_primary_heading_and_no_skipped_heading_levels(self):
+        for path in HTML_FILES:
+            with self.subTest(page=page_name(path)):
+                headings = parse_page(path).headings
+                self.assertEqual(sum(h["tag"] == "h1" for h in headings), 1)
+                previous = 0
+                for heading in headings:
+                    level = int(heading["tag"][1])
+                    self.assertLessEqual(level, previous + 1)
+                    previous = level
+
     def test_neural_atlas_has_six_accessible_project_controls(self):
         html = (ROOT / "index.html").read_text()
         self.assertEqual(html.count('data-project='), 6)
