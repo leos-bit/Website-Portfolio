@@ -83,6 +83,17 @@ def parse_page(path):
 
 
 class PortfolioNavigationTests(unittest.TestCase):
+    def test_neural_atlas_has_six_accessible_project_controls(self):
+        html = (ROOT / "index.html").read_text()
+        self.assertEqual(html.count('data-project='), 6)
+        self.assertIn('class="atlas-skills"', html)
+        self.assertIn('aria-live="polite"', html)
+        page = parse_page(ROOT / "index.html")
+        destinations = {a["attrs"].get("href") for a in page.anchors}
+        for target in ("nexa-research/", "conveyor-sorting/", "autonomous-driving-planner/",
+                       "drone-pathing-rl/", "seeing-through-occlusion/", "terrain-walker/"):
+            self.assertIn(target, destinations)
+
     def test_resume_preview_profile_links_open_correct_profiles_in_new_tabs(self):
         page = parse_page(ROOT / "resume" / "index.html")
         links = [

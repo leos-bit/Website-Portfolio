@@ -1,52 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leo Shaw | Engineering Portfolio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261015-card-bottom" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Leo Shaw — AI, robotics, and mechanical engineering. Explore a connected body of work in perception, learning, planning, and physical systems.">
+<title>Leo Shaw | Neural Atlas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="neural-atlas.css">
+<script src="neural-atlas.js" defer></script>
 </head>
-<body>
-  <nav class="nav">
-    <a class="brand" href="./" aria-label="Leo Shaw homepage">Leo Shaw</a>
-    <div class="nav-links">
-      <a href="./" aria-current="page">About</a>
-      <a href="projects/">Projects &amp; Experience</a>
-      <a href="resume/">Resume</a>
-    </div>
-  </nav>
-
-  <main class="page">
-    <section class="hero">
-      <div class="hero-card">
-        <p class="meta">Graduate Student @ Carnegie Mellon University</p>
-        <h1 class="hero-title">Artificial Intelligence and Mechanical Engineering for real-world autonomy.</h1>
-        <p class="hero-sub">
-          I build systems that sense, decide, and act in physical environments, from semiconductor equipment and
-          robotic sorting cells to reinforcement learning planners and occlusion-aware vision models.
-        </p>
-        <div class="hero-actions">
-          <a class="hero-action primary" href="projects/">Explore Projects &amp; Experience</a>
-          <span class="hero-action-divider" aria-hidden="true"></span>
-          <a class="hero-action secondary" href="resume/">Open Resume</a>
-          <span class="hero-action-divider" aria-hidden="true"></span>
-          <a class="hero-action secondary" href="assets/Leo_Shaw_Portfolio.pdf" download>Download Portfolio PDF</a>
-        </div>
-        <p class="hero-nav-note">Start with project case studies, jump to the current resume, or download a portfolio PDF with clickable links.</p>
-        <div class="tag-row">
-          <span class="tag">Physical AI</span>
-          <span class="tag">Robotics</span>
-          <span class="tag">Computer Vision</span>
-          <span class="tag">Manufacturing Systems</span>
-        </div>
+<body><div id="leo-neural-atlas">
+<a class="skip-link" href="#atlas-top">Skip to content</a>
+<div class="atlas-wrap">
+    <nav class="atlas-nav" aria-label="Main navigation"><a class="brand atlas-brand" href="./" aria-label="Leo Shaw homepage">Leo Shaw<span class="atlas-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></a><div class="atlas-navlinks"><a href="./" aria-current="page">About</a><a href="projects/">Projects &amp; Experience</a><a class="atlas-resume" href="resume/">Resume</a></div></nav>
+    <main><section class="atlas-hero" id="atlas-top">
+      <div class="atlas-intro">
+        <p class="atlas-eyebrow">AI · Robotics · Mechanical Engineering</p>
+        <h1>Intelligence for the <em>physical world.</em></h1>
+        <p class="atlas-lede">I’m Leo, an engineer connecting perception, learning, and control to real machines.</p>
+        <div class="atlas-actions"><a class="atlas-main-action" href="#atlas-selected">Explore my work <span aria-hidden="true">↘</span></a><a class="atlas-secondary-action" href="https://github.com/leos-bit">GitHub ↗</a></div>
+        <p class="atlas-affiliation">M.S. Artificial Intelligence Engineering · Carnegie Mellon</p>
       </div>
-      <img src="assets/hero.svg" alt="Abstract physical AI illustration" class="hero-visual" />
+      <div class="atlas-network" aria-label="Explore the connections between Leo's projects">
+        <button class="atlas-motion" type="button">Pause motion</button>
+        <canvas aria-hidden="true"></canvas>
+        <button class="atlas-node" style="left:47%;top:20%" data-project="nexa" aria-pressed="false">NeXa research</button>
+        <button class="atlas-node" style="left:77%;top:36%" data-project="drone" aria-pressed="false">Drone pathing</button>
+        <button class="atlas-node" style="left:32%;top:43%" data-project="conveyor" aria-pressed="true">Robotic sorting</button>
+        <button class="atlas-node" style="left:69%;top:57%" data-project="driving" aria-pressed="false">Autonomous driving</button>
+        <button class="atlas-node" style="left:23%;top:63%" data-project="vision" aria-pressed="false">Occlusion recovery</button>
+        <button class="atlas-node" style="left:52%;top:73%" data-project="walker" aria-pressed="false">Terrain walker</button>
+        <div class="atlas-selection" aria-live="polite"><strong>Robotic sorting</strong><span class="atlas-selection-detail">Perception → calibration → physical action</span><a class="atlas-selection-link" href="conveyor-sorting/">Explore ↗</a></div>
+        <div class="atlas-skills" aria-label="Skills used in the focused project" role="list" hidden></div>
+        <div class="atlas-node-note"><span><i class="atlas-note-dot"></i>A connected body of work</span><span>Hover, focus, or tap for skills</span></div>
+      </div>
     </section>
-
-    <section class="section about-split">
+    <div class="atlas-bridge"><span class="atlas-bridge-title">From signals to systems</span><div class="atlas-domains"><span><b>01</b> Perception</span><span><b>02</b> Learning</span><span><b>03</b> Planning</span><span><b>04</b> Physical action</span></div></div>
+    <section class="atlas-work" id="atlas-selected">
+      <div class="atlas-sectionhead"><div><p class="atlas-section-kicker">Selected work</p><h2>Built. Tested. Refined.</h2></div><a href="projects/">All projects & research ↗</a></div>
+      <div class="atlas-grid">
+        <a class="atlas-project" href="conveyor-sorting/"><div class="atlas-photo"><img src="assets/atlas-conveyor.jpg" alt="The real conveyor sorting system and delta robot"></div><div class="atlas-project-meta"><span>Robotics & perception</span><span>2026</span></div><div><h3>Seeing. Sorting. Acting.</h3><p>A vision-guided delta robot that connects object detection to real-time conveyor sorting.</p></div><div class="atlas-case"><span>View conveyor sorting</span><span aria-hidden="true">↗</span></div></a>
+        <a class="atlas-project" href="autonomous-driving-planner/"><div class="atlas-photo"><img src="assets/atlas-driving.jpg" alt="Autonomous vehicle trajectory planning in CARLA" style="object-position:center 62%"></div><div class="atlas-project-meta"><span>Planning & control</span><span>2026</span></div><div><h3>Decisions in motion.</h3><p>Learning local driving trajectories for merges, turns, and the uncertainty in between.</p></div><div class="atlas-case"><span>View autonomous driving</span><span aria-hidden="true">↗</span></div></a>
+        <a class="atlas-project" href="drone-pathing-rl/"><div class="atlas-photo"><img src="assets/atlas-drone.jpg" alt="Drone navigating a simulated field of obstacles"></div><div class="atlas-project-meta"><span>Robot learning</span><span>2026</span></div><div><h3>Finding a way through.</h3><p>Reinforcement learning for quadrotor navigation, obstacle avoidance, and stable arrival.</p></div><div class="atlas-case"><span>View drone pathing</span><span aria-hidden="true">↗</span></div></a>
+      </div>
+      <div class="atlas-caption"><p><a href="nexa-research/">NeXa research ↗</a> · Also exploring: <a href="seeing-through-occlusion/">occlusion recovery ↗</a> &amp; <a href="terrain-walker/">legged mechanisms ↗</a></p><span>Engineering across the boundaries.</span></div>
+    </section>
+    <section class="atlas-about-section" id="atlas-about">
       <div>
         <h2>About Me</h2>
         <p>
@@ -61,6 +62,7 @@
         <div class="callout">
           Target roles: robotics, semiconductor manufacturing and design, embodied AI, and applied ML systems.
         </div>
+        <p><a class="atlas-secondary-action" href="assets/Leo_Shaw_Portfolio.pdf" download>Download portfolio PDF ↗</a></p>
       </div>
 
       <div class="photo-card">
@@ -69,9 +71,7 @@
           Leo Shaw
         </p>
       </div>
-    </section>
-
-    <section class="section">
+    </section><section class="atlas-highlights">
       <h2>Portfolio Highlights</h2>
       <div class="grid">
         <a class="card project-link highlight-card" href="ulvac-field-service/">
@@ -95,15 +95,13 @@
           <p class="cta">View project</p>
         </a>
       </div>
-    </section>
-
-    <footer class="footer">
+    </section></main><footer class="atlas-bottom">
       <div class="footer-links">
         <a href="mailto:leos@andrew.cmu.edu">Email</a>
         <a href="https://github.com/leos-bit">GitHub</a>
         <a href="https://www.linkedin.com/in/leo-shaw02/">LinkedIn</a>
       </div>
     </footer>
-  </main>
-</body>
+  </div>
+</div></body>
 </html>

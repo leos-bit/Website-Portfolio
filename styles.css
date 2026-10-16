@@ -1,11 +1,11 @@
 :root {
-  --bg: #f7f6f2;
-  --ink: #1c1c1c;
-  --muted: #4f4f4f;
-  --accent: #0a7b6c;
-  --accent-2: #d75f2a;
-  --card: #ffffff;
-  --line: #e7e2da;
+  --bg: #0c1218;
+  --ink: #e8ece9;
+  --muted: #99aaaf;
+  --accent: #9ecdc4;
+  --accent-2: #c6ab7f;
+  --card: #111b23;
+  --line: #25333c;
   --shadow: 0 8px 24px rgba(12, 12, 12, 0.08);
 }
 
@@ -65,7 +65,7 @@ img {
   padding: 24px 28px;
   position: sticky;
   top: 0;
-  background: rgba(247, 246, 242, 0.9);
+  background: rgba(12, 18, 24, 0.94);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--line);
   z-index: 10;
@@ -95,13 +95,13 @@ img {
   padding: 10px 16px;
   border-radius: 999px;
   border: 1px solid transparent;
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(158, 205, 196, 0.04);
 }
 
 .nav-links a:hover {
   color: var(--accent);
-  border-color: #d7cec2;
-  background: #ffffff;
+  border-color: #58766e;
+  background: #17252c;
 }
 
 .nav-links a[aria-current] {
@@ -726,6 +726,22 @@ img {
 .metrics-table tbody tr:last-child td {
   border-bottom: none;
 }
+
+/* Neural Atlas companion pages: preserve case-study layouts and media. */
+.nav-links a[aria-current], .nav-links a:hover {
+  color: #0c1218;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.tag, .resume-download, .info-pill, .case-study-toc,
+.metrics-table th { background: #17252c; color: var(--accent); }
+.resume-download:hover { background: #9ecdc4; color: #0c1218; }
+.project-link:hover { border-color: #58766e; }
+.inline-link, .footer-links a, .case-study-toc a { color: #87b5ff; }
+.inline-link:hover, .footer-links a:hover { color: #b3d1ff; }
+.project-hero, .hero-card, .callout { background: linear-gradient(135deg, #14232a, #111b23); border-color: var(--line); }
+.media-frame { background: #17252c; border-color: #40534f; }
+.hero-action.primary, .button { color: #0c1218; }
 
 .embed {
   width: 100%;
