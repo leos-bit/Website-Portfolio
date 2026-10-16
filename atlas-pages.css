@@ -14,7 +14,7 @@ h3 { font-size: 19px; letter-spacing: -.35px; }
 .nav-links { align-items: center; gap: 28px; font-size: 13px; font-weight: 400; }
 .nav-links a, .nav-links a:hover, .nav-links a[aria-current], .nav-links a[aria-current]:hover { padding: 0; color: var(--muted); border: 0; border-radius: 0; background: transparent; }
 .nav-links a:hover, .nav-links a[aria-current] { color: var(--ink); }
-.nav-links a[href="resume/"] { padding: 7px 13px; border: 1px solid #40534f; border-radius: 4px; color: var(--accent); }
+.nav-links a[href^="resume/"] { padding: 7px 13px; border: 1px solid #40534f; border-radius: 4px; color: var(--accent); }
 a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--accent-2); outline-offset: 5px; box-shadow: none; }
 .atlas-page-heading, .project-hero { padding: 60px 0 40px; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; background: none; box-shadow: none; }
 .atlas-page-heading h1, .project-hero h1 { font-weight: 400; font-size: clamp(34px,4.5vw,56px); margin: 14px 0 20px; max-width: 1050px; }

@@ -12,6 +12,9 @@ Run `python3 -m http.server 8127` from the repository, then visit
 `http://localhost:8127/`. Run checks with `python3 tools/test_site.py`.
 
 Homepage files: `index.html`, `neural-atlas.css`, and `neural-atlas.js`.
+Open `http://localhost:8127/tools/atlas-interaction-test.html` to run the browser
+interaction regressions against the real homepage (touch toggle, outside tap,
+buffered pointer exit, keyboard focus, and Escape). All results should say PASS.
 Case studies retain their existing layouts in `styles.css` with a matching dark
 palette. Optimized homepage photos are `assets/atlas-*.jpg`.
 

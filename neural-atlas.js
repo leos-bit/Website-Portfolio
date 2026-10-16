@@ -23,7 +23,8 @@
         vision:{title:'Occlusion recovery',detail:'Visual history → motion models → scene understanding',url:'seeing-through-occlusion/',x:.23,y:.63},
         walker:{title:'Terrain walker',detail:'Mechanism design → fabrication → stable locomotion',url:'terrain-walker/',x:.52,y:.73}
       };
-      let selected='conveyor',width=0,height=0,frame=0,visible=true,phase=0,px=0,py=0;
+      let selected=null,width=0,height=0,frame=0,visible=true,phase=0,px=0,py=0;
+      let selectionMode='pointer',lastInput='keyboard',lastPointerType=null,leaveTimer=0;
       const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const motionButton=box.querySelector('.atlas-motion');
       if(reduced){motionButton.hidden=true;state.motion=false;}
@@ -74,10 +75,28 @@
         skillMap[selected].forEach(skill=>{const label=document.createElement('span');label.className='atlas-skill';label.setAttribute('role','listitem');label.textContent=skill;skillsLayer.appendChild(label);});
         layoutSkills();
       }
-      function hideSkills(){expanded=false;box.classList.remove('is-expanded');skillsLayer.hidden=true;skillsLayer.replaceChildren();skillPoints=[];draw();}
+      function hideSkills(){
+        clearTimeout(leaveTimer);leaveTimer=0;expanded=false;selected=null;
+        box.classList.remove('is-expanded');skillsLayer.hidden=true;skillsLayer.replaceChildren();skillPoints=[];
+        box.querySelectorAll('.atlas-node').forEach(b=>b.setAttribute('aria-pressed','false'));
+        root.querySelector('.atlas-selection strong').textContent='Explore the atlas';
+        root.querySelector('.atlas-selection-detail').textContent='Hover, focus, or tap a project to discover its skills.';
+        root.querySelector('.atlas-selection-link').hidden=true;
+        draw();
+      }
+      function scheduleDeselect(){
+        if(selectionMode==='keyboard'||leaveTimer||!expanded)return;
+        leaveTimer=setTimeout(hideSkills,180);
+      }
+      function insideCluster(x,y){
+        const targets=[box.querySelector('.atlas-node[aria-pressed=true]'),...skillsLayer.children,root.querySelector('.atlas-selection-link')];
+        const rects=targets.filter(Boolean).map(el=>el.getBoundingClientRect());
+        const buffer=32;
+        return x>=Math.min(...rects.map(r=>r.left))-buffer&&x<=Math.max(...rects.map(r=>r.right))+buffer&&y>=Math.min(...rects.map(r=>r.top))-buffer&&y<=Math.max(...rects.map(r=>r.bottom))+buffer;
+      }
       function draw(){
         if(!ctx)return;
-        ctx.clearRect(0,0,width,height);const t=phase;const active=projects[selected];
+        ctx.clearRect(0,0,width,height);const t=phase;const active=projects[selected]||{x:-10,y:-10};
         const points=particles.map(n=>({x:n.x*width+Math.sin(t+n.p)*2.2+px*n.z*7,y:n.y*height+Math.cos(t*.7+n.p)*2+py*n.z*6,z:n.z}));
         edges.forEach(([i,j,d])=>{if(i>=state.density||j>=state.density)return;const a=points[i],b=points[j];const near=Math.hypot(particles[i].x-active.x,particles[i].y-active.y)<.19;ctx.strokeStyle=near?'rgba(159,200,185,.28)':'rgba(109,151,158,.14)';ctx.lineWidth=near?.7:.5;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke();});
         points.slice(0,state.density).forEach((n,i)=>{const near=Math.hypot(particles[i].x-active.x,particles[i].y-active.y)<.12;ctx.fillStyle=near?'rgba(202,182,146,.8)':`rgba(145,188,185,${.2+n.z*.6})`;ctx.beginPath();ctx.arc(n.x,n.y,.65+n.z*.8,0,Math.PI*2);ctx.fill();});
@@ -86,15 +105,36 @@
       }
       function animate(){if(!ctx||!visible||document.hidden||reduced||!state.motion){frame=0;return;}phase+=.0018;draw();frame=requestAnimationFrame(animate);}
       function start(){if(!frame&&visible&&!reduced&&state.motion)frame=requestAnimationFrame(animate);}
-      function select(key){if(!projects[key])return;selected=key;root.querySelectorAll('.atlas-node').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.project===key));b.setAttribute('aria-label',projects[b.dataset.project].title+': '+skillMap[b.dataset.project].join(', '));});const p=projects[key];root.querySelector('.atlas-selection strong').textContent=p.title;root.querySelector('.atlas-selection-detail').textContent=p.detail;root.querySelector('.atlas-selection-link').href=p.url;revealSkills();draw();}
-      root.querySelectorAll('.atlas-node').forEach(b=>{b.addEventListener('click',()=>select(b.dataset.project));b.addEventListener('pointerenter',()=>select(b.dataset.project));b.addEventListener('focus',()=>select(b.dataset.project));});
-      box.addEventListener('pointermove',e=>{const r=box.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;if(reduced||!state.motion)draw();});
-      box.addEventListener('pointerleave',()=>{px=0;py=0;if(!box.querySelector('.atlas-node:focus-visible'))hideSkills();else draw();});
-      box.addEventListener('focusout',e=>{if(!box.contains(e.relatedTarget)&&!box.matches(':hover'))hideSkills();});
+      function select(key,mode='pointer'){if(!projects[key])return;clearTimeout(leaveTimer);leaveTimer=0;selectionMode=mode;selected=key;root.querySelectorAll('.atlas-node').forEach(b=>{b.setAttribute('aria-pressed',String(b.dataset.project===key));b.setAttribute('aria-label',projects[b.dataset.project].title+': '+skillMap[b.dataset.project].join(', '));});const p=projects[key];root.querySelector('.atlas-selection strong').textContent=p.title;root.querySelector('.atlas-selection-detail').textContent=p.detail;const link=root.querySelector('.atlas-selection-link');link.href=p.url;link.hidden=false;revealSkills();draw();}
+      document.addEventListener('keydown',()=>{lastInput='keyboard';},true);
+      document.addEventListener('pointerdown',e=>{
+        lastInput='pointer';lastPointerType=e.pointerType;
+        if(!e.target.closest('.atlas-node,.atlas-selection,.atlas-motion'))hideSkills();
+      },true);
+      root.querySelectorAll('.atlas-node').forEach(b=>{
+        b.addEventListener('click',e=>{
+          if(e.detail===0){select(b.dataset.project,'keyboard');return;}
+          if(lastPointerType==='touch'&&expanded&&selected===b.dataset.project)hideSkills();
+          else select(b.dataset.project);
+          lastPointerType=null;
+        });
+        b.addEventListener('pointerenter',e=>{if(e.pointerType!=='touch')select(b.dataset.project);});
+        b.addEventListener('focus',()=>{if(lastInput==='keyboard')select(b.dataset.project,'keyboard');});
+      });
+      box.addEventListener('pointermove',e=>{
+        if(e.pointerType==='touch')return;
+        const r=box.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;
+        if(expanded&&selectionMode!=='keyboard'){
+          if(insideCluster(e.clientX,e.clientY)){clearTimeout(leaveTimer);leaveTimer=0;}else scheduleDeselect();
+        }
+        if(reduced||!state.motion)draw();
+      });
+      box.addEventListener('pointerleave',e=>{if(e.pointerType==='touch')return;px=0;py=0;scheduleDeselect();draw();});
+      box.addEventListener('focusout',e=>{if(!box.contains(e.relatedTarget)&&selectionMode==='keyboard')hideSkills();});
       box.addEventListener('keydown',e=>{if(e.key==='Escape')hideSkills();});
       new ResizeObserver(resize).observe(box);
       new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;if(visible)start();}).observe(box);
       document.addEventListener('visibilitychange',()=>{if(!document.hidden)start();});
-      resize();start();
+      hideSkills();resize();start();
     })();
   

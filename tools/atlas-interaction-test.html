@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><meta charset="utf-8"><title>Atlas interaction tests</title>
+<h1>Atlas interaction tests</h1><pre id="results">Running…</pre>
+<iframe src="../" title="Actual portfolio under test" style="width:100%;height:760px"></iframe>
+<script>
+document.querySelector('iframe').addEventListener('load', async function () {
+  const win=this.contentWindow, doc=win.document;
+  const box=doc.querySelector('.atlas-network'), a=doc.querySelector('[data-project="nexa"]'), b=doc.querySelector('[data-project="drone"]');
+  const results=[];
+  const active=()=>box.querySelectorAll('.atlas-node[aria-pressed="true"]').length;
+  const dispatch=(target,type,options={})=>target.dispatchEvent(new win.PointerEvent(type,{bubbles:true,pointerType:'mouse',...options}));
+  const touch=target=>{dispatch(target,'pointerdown',{pointerType:'touch'});dispatch(target,'pointerup',{pointerType:'touch'});target.dispatchEvent(new win.MouseEvent('click',{bubbles:true,detail:1}));};
+  const escape=()=>box.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Escape'}));
+  const pause=ms=>new Promise(resolve=>setTimeout(resolve,ms));
+  function check(name,condition){results.push((condition?'PASS ':'FAIL ')+name);}
+  check('Starts with no project selected',active()===0);
+  touch(a);check('First touch selects and reveals four skills',a.getAttribute('aria-pressed')==='true'&&box.querySelectorAll('.atlas-skill').length===4);
+  touch(a);check('Second touch clears selection and preview',active()===0&&box.querySelector('.atlas-skills').hidden&&box.querySelector('.atlas-selection-link').hidden);
+  touch(a);touch(b);check('Touching another node switches selection',b.getAttribute('aria-pressed')==='true'&&active()===1);
+  touch(doc.querySelector('.atlas-eyebrow'));check('Touching outside clears selection',active()===0);
+  escape();dispatch(a,'pointerenter');check('Mouse hover reveals skills',a.getAttribute('aria-pressed')==='true');
+  const p=a.getBoundingClientRect();
+  dispatch(box,'pointermove',{clientX:p.left+p.width/2,clientY:p.top+p.height/2});
+  await pause(220);check('Moving inside the cluster preserves selection',active()===1);
+  const rect=box.getBoundingClientRect();
+  dispatch(box,'pointermove',{clientX:rect.right-5,clientY:rect.top+5});
+  await pause(220);check('Moving beyond cluster buffer deselects',active()===0);
+  dispatch(a,'pointerenter');dispatch(box,'pointerleave');await pause(220);check('Leaving atlas deselects',active()===0);
+  doc.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Tab'}));a.focus();
+  check('Keyboard focus selects project',a.getAttribute('aria-pressed')==='true');
+  dispatch(box,'pointermove',{clientX:rect.right-5,clientY:rect.top+5});await pause(220);
+  check('Pointer movement does not clear keyboard selection',active()===1);
+  escape();check('Escape clears keyboard selection',active()===0);
+  a.blur();a.focus();box.querySelector('.atlas-selection-link').focus();
+  check('Keyboard can reach selected case-study link',active()===1);
+  doc.querySelector('.atlas-main-action').focus();check('Focus leaving atlas clears selection',active()===0);
+  document.querySelector('#results').textContent=results.join('\n');
+  document.title=results.some(s=>s.startsWith('FAIL'))?'FAIL — Atlas tests':'PASS — Atlas tests';
+});
+</script></html>
