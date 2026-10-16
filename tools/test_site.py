@@ -29,6 +29,10 @@ class PortfolioHTMLParser(HTMLParser):
 
         if attributes.get("src"):
             self.sources.append(attributes["src"])
+        if tag == "link" and attributes.get("rel") == "stylesheet":
+            href = attributes.get("href", "")
+            if href and not href.startswith(("http://", "https://")):
+                self.sources.append(href)
 
         if tag == "nav":
             self._nav_depth += 1
