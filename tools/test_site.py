@@ -127,11 +127,11 @@ class PortfolioNavigationTests(unittest.TestCase):
             )
             self.assertTrue(anchor["attrs"].get("aria-label"))
 
-    def test_homepage_highlights_link_to_their_detail_pages(self):
+    def test_homepage_research_and_experience_link_to_their_detail_pages(self):
         page = parse_page(ROOT / "index.html")
         h2_text = [heading["text"] for heading in page.headings if heading["tag"] == "h2"]
-        self.assertIn("Portfolio Highlights", h2_text)
-        self.assertNotIn("Impact Highlights", h2_text)
+        self.assertIn("Research & Experience", h2_text)
+        self.assertNotIn("Portfolio Highlights", h2_text)
 
         highlights = {
             anchor["attrs"].get("href"): anchor["text"]
@@ -140,10 +140,22 @@ class PortfolioNavigationTests(unittest.TestCase):
         }
         self.assertEqual(
             set(highlights),
-            {"ulvac-field-service/", "conveyor-sorting/"},
+            {"ulvac-field-service/", "nexa-research/"},
         )
         self.assertIn("View experience", highlights["ulvac-field-service/"])
-        self.assertIn("View project", highlights["conveyor-sorting/"])
+        self.assertIn("View research", highlights["nexa-research/"])
+
+    def test_homepage_gives_recruiters_direct_actions_and_project_results(self):
+        page = parse_page(ROOT / "index.html")
+        primary = [a for a in page.anchors if "atlas-main-action" in a["attrs"].get("class", "").split()]
+        self.assertEqual(len(primary), 1)
+        self.assertEqual(urlsplit(primary[0]["attrs"]["href"]).path, "resume/")
+        self.assertTrue(any(a["text"] == "Contact me" and a["attrs"].get("href") == "mailto:leos@andrew.cmu.edu" for a in page.anchors))
+        featured = [a for a in page.anchors if "atlas-project" in a["attrs"].get("class", "").split()]
+        self.assertEqual(len(featured), 3)
+        for card, title, result in zip(featured, ("Robotic Sorting", "Autonomous Driving", "Drone Navigation"), ("99%", "83%", "45.3%")):
+            self.assertIn(title, card["text"])
+            self.assertIn(result, card["text"])
 
     def test_every_page_uses_clean_home_links_and_marks_the_active_section(self):
         project_pages = {

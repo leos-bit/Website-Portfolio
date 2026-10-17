@@ -3,26 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Leo Shaw — AI, robotics, and mechanical engineering. Explore a connected body of work in perception, learning, planning, and physical systems.">
-<title>Leo Shaw | Neural Atlas</title>
+<meta name="description" content="Leo Shaw — AI and robotics engineer with graduate AI work at Carnegie Mellon, a mechanical engineering background, and hands-on semiconductor field experience. Explore selected projects, research, and résumé.">
+<title>Leo Shaw | AI &amp; Robotics Engineer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="neural-atlas.css?v=20261016-motion-cards">
-<script src="neural-atlas.js?v=20261016-motion-cards" defer></script>
+<link rel="stylesheet" href="recruiter-home.css?v=20261017-3">
+<script src="neural-atlas.js?v=20261017-recruiter-2" defer></script>
 </head>
-<body><div id="leo-neural-atlas">
+<body><div id="leo-neural-atlas" class="recruiter-home">
 <a class="skip-link" href="#atlas-top">Skip to content</a>
 <div class="atlas-wrap">
     <nav class="atlas-nav" aria-label="Main navigation"><a class="brand atlas-brand" href="./" aria-label="Leo Shaw homepage">Leo Shaw<span class="atlas-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></span></a><div class="atlas-navlinks"><a href="./" aria-current="page">About</a><a href="projects/?v=atlas-20261016">Projects &amp; Experience</a><a class="atlas-resume" href="resume/?v=atlas-20261016">Resume</a></div></nav>
     <main><section class="atlas-hero" id="atlas-top">
       <div class="atlas-intro">
-        <p class="atlas-eyebrow">AI · Robotics · Mechanical Engineering</p>
-        <h1>Intelligence for the <em>physical world.</em></h1>
-        <p class="atlas-lede">I’m Leo, an engineer connecting perception, learning, and control to real machines.</p>
-        <div class="atlas-actions"><a class="atlas-main-action" href="#atlas-selected">Explore my work <span aria-hidden="true">↘</span></a><a class="atlas-secondary-action" href="https://github.com/leos-bit">GitHub ↗</a></div>
-        <p class="atlas-affiliation">M.S. Artificial Intelligence Engineering · Carnegie Mellon</p>
+        <div class="atlas-intro-copy">
+          <p class="atlas-eyebrow">Perception · Learning · Real hardware</p>
+          <h1>Leo Shaw</h1>
+          <p class="atlas-role">AI &amp; Robotics Engineer</p>
+          <p class="atlas-affiliation">M.S. Artificial Intelligence Engineering · Carnegie Mellon<br><span>B.S. Mechanical Engineering · Rutgers</span></p>
+          <p class="atlas-lede">I build systems that connect perception, learning, and control to real hardware. My background combines graduate AI work at CMU with hands-on semiconductor field engineering.</p>
+          <p class="atlas-skill-summary">Python · PyTorch · Computer vision · Reinforcement learning · Hardware integration</p>
+          <p class="atlas-target">Seeking roles in robotics, embodied AI, and applied ML systems.</p>
+          <div class="atlas-actions"><a class="atlas-main-action" href="resume/?v=atlas-20261016">View résumé <span aria-hidden="true">→</span></a><a class="atlas-secondary-action" href="mailto:leos@andrew.cmu.edu">Contact me</a><a class="atlas-work-link" href="#atlas-selected">Selected projects ↓</a></div>
+        </div>
+        <img class="atlas-portrait" src="assets/headshot.jpeg" alt="Leo Shaw" width="140" height="140">
       </div>
+      <div class="atlas-map-heading"><h2>Neural Atlas</h2><p>Hover for skills; click to open. On mobile, tap first.</p></div>
       <div class="atlas-network" aria-label="Explore the connections between Leo's projects">
         <button class="atlas-motion" type="button">Pause motion</button>
         <canvas aria-hidden="true"></canvas>
@@ -34,68 +42,38 @@
         <button class="atlas-node" style="left:52%;top:73%" data-project="walker" aria-pressed="false">Terrain walker</button>
         <div class="atlas-selection" aria-live="polite"><strong>Explore the atlas</strong><span class="atlas-selection-detail">Hover, focus, or tap a project to discover its skills.</span><a class="atlas-selection-link" href="conveyor-sorting/" hidden>View project →</a></div>
         <div class="atlas-skills" aria-label="Skills used in the focused project" role="list" hidden></div>
-        <div class="atlas-node-note"><span><i class="atlas-note-dot"></i>A connected body of work</span><span>Hover, focus, or tap for skills</span></div>
       </div>
     </section>
-    <div class="atlas-bridge"><span class="atlas-bridge-title">From signals to systems</span><div class="atlas-domains"><span><b>01</b> Perception</span><span><b>02</b> Learning</span><span><b>03</b> Planning</span><span><b>04</b> Physical action</span></div></div>
     <section class="atlas-work" id="atlas-selected">
-      <div class="atlas-sectionhead"><div><p class="atlas-section-kicker">Selected work</p><h2>Built. Tested. Refined.</h2></div><a href="projects/">All projects & research ↗</a></div>
+      <div class="atlas-sectionhead"><h2>Selected projects</h2><a href="projects/">All projects &amp; experience →</a></div>
       <div class="atlas-grid">
-        <a class="atlas-project" href="conveyor-sorting/"><div class="atlas-photo"><img src="assets/atlas-conveyor.jpg" alt="The real conveyor sorting system and delta robot"></div><div class="atlas-project-meta"><span>Robotics & perception</span><span>2026</span></div><div><h3>Seeing. Sorting. Acting.</h3><p>A vision-guided delta robot that connects object detection to real-time conveyor sorting.</p></div><div class="atlas-case"><span>View conveyor sorting</span><span aria-hidden="true">↗</span></div></a>
-        <a class="atlas-project" href="autonomous-driving-planner/"><div class="atlas-photo"><img src="assets/atlas-driving.jpg" alt="Autonomous vehicle trajectory planning in CARLA" style="object-position:center 62%"></div><div class="atlas-project-meta"><span>Planning & control</span><span>2026</span></div><div><h3>Decisions in motion.</h3><p>Learning local driving trajectories for merges, turns, and the uncertainty in between.</p></div><div class="atlas-case"><span>View autonomous driving</span><span aria-hidden="true">↗</span></div></a>
-        <a class="atlas-project" href="drone-pathing-rl/"><div class="atlas-photo"><img src="assets/atlas-drone.jpg" alt="Drone navigating a simulated field of obstacles"></div><div class="atlas-project-meta"><span>Robot learning</span><span>2026</span></div><div><h3>Finding a way through.</h3><p>Reinforcement learning for quadrotor navigation, obstacle avoidance, and stable arrival.</p></div><div class="atlas-case"><span>View drone pathing</span><span aria-hidden="true">↗</span></div></a>
+        <a class="atlas-project" href="conveyor-sorting/"><div class="atlas-photo"><img src="assets/atlas-conveyor.jpg" alt="Conveyor sorting system and delta robot" loading="lazy"></div><div class="atlas-project-meta"><span>Computer vision · Hardware</span><span>2026</span></div><div><h3>Robotic Sorting</h3><p>Integrated vision, camera calibration, and delta-arm control to sort objects on a moving conveyor.</p><p class="atlas-result"><strong>99% perception accuracy</strong><span>Controlled tests · ~50% physical sorting</span></p></div><div class="atlas-case"><span>View project</span><span aria-hidden="true">→</span></div></a>
+        <a class="atlas-project" href="autonomous-driving-planner/"><div class="atlas-photo"><img src="assets/atlas-driving.jpg" alt="Vehicle trajectory planning in CARLA" style="object-position:center 62%" loading="lazy"></div><div class="atlas-project-meta"><span>Reinforcement learning · CARLA</span><span>2026</span></div><div><h3>Autonomous Driving</h3><p>Built a closed-loop simulation stack combining A* routing, PPO local planning, and PID control.</p><p class="atlas-result"><strong>83% merge success</strong><span>80% left-turn success · simulation</span></p></div><div class="atlas-case"><span>View project</span><span aria-hidden="true">→</span></div></a>
+        <a class="atlas-project" href="drone-pathing-rl/"><div class="atlas-photo"><img src="assets/atlas-drone.jpg" alt="Drone navigating simulated obstacles" loading="lazy"></div><div class="atlas-project-meta"><span>Robot learning · MuJoCo</span><span>2026</span></div><div><h3>Drone Navigation</h3><p>Developed and evaluated RL policies for quadrotor obstacle avoidance and stable arrival.</p><p class="atlas-result"><strong>45.3% goal-hover success</strong><span>Evaluated in simulation</span></p></div><div class="atlas-case"><span>View project</span><span aria-hidden="true">→</span></div></a>
       </div>
-      <div class="atlas-caption"><p><a href="nexa-research/">NeXa research ↗</a> · Also exploring: <a href="seeing-through-occlusion/">occlusion recovery ↗</a> &amp; <a href="terrain-walker/">legged mechanisms ↗</a></p><span>Engineering across the boundaries.</span></div>
+      <div class="atlas-caption"><p>More projects: <a href="seeing-through-occlusion/">Seeing Through Occlusion →</a> · <a href="terrain-walker/">Solar-Powered Terrain Walker →</a></p></div>
     </section>
-    <section class="atlas-about-section" id="atlas-about">
-      <div>
-        <h2>About Me</h2>
-        <p>
-          I like building intelligent systems that have to work outside the lab. My background spans semiconductor
-          manufacturing, robot integration, autonomous planning, and deep learning for perception under difficult
-          operating conditions.
-        </p>
-        <p>
-          The throughline in my work is reliability under constraints: hardware that has to stay online, models that
-          have to react in real time, and engineering decisions that need to survive contact with the real world.
-        </p>
-        <div class="callout">
-          Target roles: robotics, semiconductor manufacturing and design, embodied AI, and applied ML systems.
-        </div>
-        <p><a class="atlas-secondary-action" href="assets/Leo_Shaw_Portfolio.pdf" download>Download portfolio PDF ↗</a></p>
-      </div>
-
-      <div class="photo-card">
-        <img src="assets/headshot.jpeg" alt="Headshot of Leo Shaw" class="profile-photo" />
-        <p class="media-caption">
-          Leo Shaw
-        </p>
-      </div>
-    </section><section class="atlas-highlights">
-      <h2>Portfolio Highlights</h2>
+    <section class="atlas-background" id="atlas-about">
+      <div class="atlas-sectionhead"><h2>Research &amp; Experience</h2></div>
       <div class="grid">
-        <a class="card project-link highlight-card" href="ulvac-field-service/">
-          <h3>Ulvac Technologies - Field Service Engineer I</h3>
-          <p class="meta">Santa Clara, CA | Oct 2024 - Aug 2025</p>
-          <ul class="list">
-            <li>Upgraded an etch chuck assembly to support 8-inch wafers, improving uniformity and reducing downtime by 15%.</li>
-            <li>Maintained semiconductor tools across six high-volume fabs, increasing uptime by 18%.</li>
-            <li>Executed 30+ retrofit projects spanning vacuum, RF, PLC, HMI, and motion-handling subsystems.</li>
-          </ul>
-          <p class="cta">View experience</p>
+        <a class="highlight-card" href="nexa-research/">
+          <p class="meta">Graduate AI research · CMU · 2026–present</p>
+          <h3>NEXA · Manufacturing AI</h3>
+          <p>Built document-ingestion and retrieval workflows using OCR/VLM pipelines, Python, and structured data for manufacturing troubleshooting.</p>
+          <p class="atlas-proof">AI infrastructure built around messy, real-world technical data.</p>
+          <p class="cta">View research <span aria-hidden="true">→</span></p>
         </a>
-        <a class="card project-link highlight-card" href="conveyor-sorting/">
-          <h3>Conveyor-Belt Object Detection and Robotic Sorting</h3>
-          <p class="meta">CMU | Spring 2026</p>
-          <ul class="list">
-            <li>Built a real-time YOLO and OpenCV pipeline for mixed-object detection on a moving conveyor.</li>
-            <li>Mapped detections into world coordinates with homography calibration for downstream robot actions.</li>
-            <li>Integrated a delta-arm sorting cell with stabilized labels and retraining workflows for new object classes.</li>
-          </ul>
-          <p class="cta">View project</p>
+        <a class="highlight-card" href="ulvac-field-service/">
+          <p class="meta">Field Service Engineer · 2024–2025</p>
+          <h3>Ulvac Technologies</h3>
+          <p>Delivered 30+ equipment retrofit projects across six high-volume fabs, debugging controls, vacuum, RF, and motion subsystems.</p>
+          <p class="atlas-proof">Production-critical hardware and customer-facing troubleshooting.</p>
+          <p class="cta">View experience <span aria-hidden="true">→</span></p>
         </a>
       </div>
-    </section></main><footer class="atlas-bottom">
+    </section>
+    </main><footer class="atlas-bottom">
+      <p class="atlas-footer-note"><a href="assets/Leo_Shaw_Portfolio.pdf" download>Download portfolio PDF →</a></p>
       <div class="footer-links">
         <a href="mailto:leos@andrew.cmu.edu">Email</a>
         <a href="https://github.com/leos-bit">GitHub</a>

@@ -13,7 +13,10 @@ preferences, can be paused, and stops off-screen or when the tab is hidden.
 Run `python3 -m http.server 8127` from the repository, then visit
 `http://localhost:8127/`. Run checks with `python3 tools/test_site.py`.
 
-Homepage files: `index.html`, `neural-atlas.css`, and `neural-atlas.js`.
+Homepage files: `index.html`, `neural-atlas.css`, `recruiter-home.css`, and
+`neural-atlas.js`. The recruiter layout leads with identity, education, target
+roles, and résumé/contact actions. The compact atlas is optional; three project
+summaries and two research/experience cards provide a non-interactive overview.
 Open `http://localhost:8127/tools/atlas-interaction-test.html` to run the browser
 interaction regressions against the real homepage (touch toggle, outside tap,
 buffered pointer exit, keyboard focus, and Escape). All results should say PASS.

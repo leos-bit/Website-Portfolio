@@ -1,0 +1,66 @@
+/* A short recruiter read; the atlas remains an optional path to more depth. */
+#leo-neural-atlas.recruiter-home .atlas-intro { display: grid; grid-template-columns: minmax(0,1fr) 140px; align-items: center; gap: 48px; text-align: left; padding: 36px 0 28px; }
+#leo-neural-atlas.recruiter-home .atlas-eyebrow { justify-content: flex-start; margin-bottom: 10px; }
+#leo-neural-atlas.recruiter-home h1 { font-size: clamp(36px,4.6vw,54px); letter-spacing: -1.8px; margin: 0 0 2px; }
+#leo-neural-atlas.recruiter-home .atlas-role { font: 400 clamp(23px,2.5vw,30px)/1.35 'Manrope',sans-serif; color: var(--atlas-teal); margin: 0 0 12px; }
+#leo-neural-atlas.recruiter-home .atlas-affiliation { font-size: 16px; margin: 0 0 12px; }
+#leo-neural-atlas.recruiter-home .atlas-affiliation span { font-size: 14px; }
+#leo-neural-atlas.recruiter-home .atlas-lede { font-size: 15px; max-width: 740px; margin: 0 0 8px; line-height: 1.7; }
+#leo-neural-atlas.recruiter-home .atlas-target { margin: 0 0 18px; color: var(--atlas-muted); font-size: 13px; }
+#leo-neural-atlas.recruiter-home .atlas-skill-summary { color: var(--atlas-teal); font-size: 13px; margin: 0 0 8px; max-width: 740px; }
+#leo-neural-atlas.recruiter-home .atlas-actions { justify-content: flex-start; flex-wrap: wrap; gap: 20px; font-size: 13px; }
+#leo-neural-atlas.recruiter-home .atlas-main-action, #leo-neural-atlas.recruiter-home .atlas-secondary-action, #leo-neural-atlas.recruiter-home .atlas-work-link { min-height: 44px; display: inline-flex; align-items: center; }
+#leo-neural-atlas.recruiter-home .atlas-work-link { color: var(--atlas-muted); }
+#leo-neural-atlas.recruiter-home .atlas-portrait { width: 140px; height: 140px; object-fit: cover; border-radius: 50%; border: 1px solid #40534f; filter: saturate(.7); }
+#leo-neural-atlas.recruiter-home .atlas-map-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 20px; padding-top: 20px; border-top: 1px solid var(--atlas-line); }
+#leo-neural-atlas.recruiter-home .atlas-map-heading h2 { font-size: 18px; letter-spacing: -.3px; }
+#leo-neural-atlas.recruiter-home .atlas-map-heading p { color: var(--atlas-muted); font-size: 12px; margin: 0; }
+#leo-neural-atlas.recruiter-home .atlas-network { height: 420px; }
+#leo-neural-atlas.recruiter-home .atlas-network:not(.is-expanded) .atlas-selection { visibility: hidden; }
+#leo-neural-atlas.recruiter-home .atlas-selection { bottom: 20px; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="nexa"] { top: 16% !important; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="drone"] { top: 28% !important; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="conveyor"] { top: 35% !important; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="driving"] { top: 46% !important; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="vision"] { top: 53% !important; }
+#leo-neural-atlas.recruiter-home .atlas-node[data-project="walker"] { top: 61% !important; }
+#leo-neural-atlas.recruiter-home .atlas-work { padding: 30px 0 12px; border-top: 1px solid var(--atlas-line); }
+#leo-neural-atlas.recruiter-home .atlas-sectionhead { margin-bottom: 20px; }
+#leo-neural-atlas.recruiter-home .atlas-sectionhead h2 { font-size: 27px; }
+#leo-neural-atlas.recruiter-home .atlas-sectionhead > a { white-space: normal; text-align: right; }
+#leo-neural-atlas.recruiter-home .atlas-photo { height: 150px; }
+#leo-neural-atlas.recruiter-home .atlas-project h3 { font-size: 20px; }
+#leo-neural-atlas.recruiter-home .atlas-project p { font-size: 14px; line-height: 1.65; }
+#leo-neural-atlas.recruiter-home .atlas-project-meta { font-size: 10px; letter-spacing: .4px; }
+#leo-neural-atlas.recruiter-home .atlas-project .atlas-result { padding-top: 12px; border-top: 1px solid var(--atlas-line); margin-bottom: 0; }
+#leo-neural-atlas.recruiter-home .atlas-result strong { display: block; color: var(--atlas-teal); font-weight: 500; font-size: 15px; }
+#leo-neural-atlas.recruiter-home .atlas-result span { display: block; font-size: 12px; }
+#leo-neural-atlas.recruiter-home .atlas-case { font-size: 13px; }
+#leo-neural-atlas.recruiter-home .atlas-caption { padding: 22px 0; font-size: 13px; line-height: 1.8; }
+#leo-neural-atlas.recruiter-home .atlas-caption a { color: var(--atlas-teal); }
+#leo-neural-atlas.recruiter-home .atlas-background { padding: 24px 0 36px; border-top: 1px solid var(--atlas-line); }
+#leo-neural-atlas.recruiter-home .grid { margin-top: 0; }
+#leo-neural-atlas.recruiter-home .highlight-card { padding: 22px; }
+#leo-neural-atlas.recruiter-home .highlight-card h3 { font-size: 20px; margin-bottom: 10px; }
+#leo-neural-atlas.recruiter-home .highlight-card > p { margin: 0 0 12px; color: var(--atlas-muted); font-size: 14px; }
+#leo-neural-atlas.recruiter-home .highlight-card .meta { font-size: 11px; color: var(--atlas-teal); }
+#leo-neural-atlas.recruiter-home .highlight-card .atlas-proof { font-size: 13px; }
+#leo-neural-atlas.recruiter-home .highlight-card .cta { display: flex; justify-content: space-between; margin: auto 0 0; padding-top: 10px; color: var(--atlas-teal); }
+#leo-neural-atlas.recruiter-home .atlas-bottom { flex-direction: column; gap: 10px; padding: 24px 0; }
+#leo-neural-atlas.recruiter-home .atlas-footer-note { font-size: 12px; }
+@media(max-width:760px) {
+  #leo-neural-atlas.recruiter-home .atlas-intro { grid-template-columns: minmax(0,1fr) 100px; gap: 24px; }
+  #leo-neural-atlas.recruiter-home .atlas-portrait { width: 100px; height: 100px; }
+  #leo-neural-atlas.recruiter-home .atlas-network { height: 500px; }
+  #leo-neural-atlas.recruiter-home .atlas-project-meta { flex-direction: column; }
+}
+@media(max-width:600px) {
+  #leo-neural-atlas.recruiter-home .atlas-intro { display: block; padding-top: 26px; }
+  #leo-neural-atlas.recruiter-home .atlas-portrait { display: none; }
+  #leo-neural-atlas.recruiter-home .atlas-map-heading { align-items: flex-start; flex-direction: column; gap: 6px; }
+  #leo-neural-atlas.recruiter-home .atlas-grid { grid-template-columns: 1fr; }
+  #leo-neural-atlas.recruiter-home .atlas-photo { height: 140px; }
+  #leo-neural-atlas.recruiter-home .atlas-project-meta { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  #leo-neural-atlas.recruiter-home .atlas-node[data-project="vision"] { top: 48% !important; }
+  #leo-neural-atlas.recruiter-home .atlas-node[data-project="walker"] { top: 60% !important; }
+}

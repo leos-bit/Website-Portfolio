@@ -38,16 +38,16 @@
       const particles=[];
       for(let i=0;i<190;i++){
         const a=random()*Math.PI*2,r=Math.sqrt(random()),bend=Math.sin(a*3+.6)*.045;
-        particles.push({x:.53+Math.cos(a)*(r*.39+bend),y:.43+Math.sin(a)*r*.31,z:random(),p:random()*6.28});
+        particles.push({x:.53+Math.cos(a)*(r*.39+bend),y:.36+Math.sin(a)*r*.25,z:random(),p:random()*6.28});
       }
       const edges=[];
       particles.forEach((n,i)=>particles.slice(i+1).forEach((m,j)=>{const d=Math.hypot(n.x-m.x,n.y-m.y);if(d<.145&&random()<.65)edges.push([i,i+j+1,d]);}));
-      function resize(){width=box.clientWidth;height=box.clientHeight;if(!width||!height)return;const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;if(ctx)ctx.setTransform(dpr,0,0,dpr,0,0);if(expanded)layoutSkills();draw();}
+      function resize(){width=box.clientWidth;height=box.clientHeight;if(!width||!height)return;box.querySelectorAll('.atlas-node').forEach(button=>{const p=projects[button.dataset.project];p.x=button.offsetLeft/width;p.y=button.offsetTop/height;});const dpr=Math.min(window.devicePixelRatio||1,2);canvas.width=width*dpr;canvas.height=height*dpr;if(ctx)ctx.setTransform(dpr,0,0,dpr,0,0);if(expanded)layoutSkills();draw();}
       function layoutSkills(){
         const button=box.querySelector('.atlas-node[aria-pressed=true]');
         const br=button.getBoundingClientRect(),rr=box.getBoundingClientRect();
         const cx=br.left-rr.left+br.width/2,cy=br.top-rr.top+br.height/2;
-        const radiusX=Math.min(112,width*.27),radiusY=Math.min(78,height*.18);
+        const radiusX=Math.min(170,width*.27),radiusY=Math.min(78,height*.18);
         const skillsBottom=Math.min(height-110,root.querySelector('.atlas-selection').offsetTop-16);
         const offsets=[[-1,-.72],[.9,-.9],[1,.82],[-.9,.9]];
         const placed=[];skillPoints=[];
