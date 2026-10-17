@@ -125,13 +125,14 @@
       });
       box.addEventListener('pointermove',e=>{
         if(e.pointerType==='touch')return;
-        const r=box.getBoundingClientRect();px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;
+        const r=box.getBoundingClientRect();
+        if(state.motion&&!reduced){px=(e.clientX-r.left)/r.width-.5;py=(e.clientY-r.top)/r.height-.5;}
         if(expanded&&selectionMode!=='keyboard'){
           if(insideCluster(e.clientX,e.clientY)){clearTimeout(leaveTimer);leaveTimer=0;}else scheduleDeselect();
         }
         if(reduced||!state.motion)draw();
       });
-      box.addEventListener('pointerleave',e=>{if(e.pointerType==='touch')return;px=0;py=0;scheduleDeselect();draw();});
+      box.addEventListener('pointerleave',e=>{if(e.pointerType==='touch')return;if(state.motion&&!reduced){px=0;py=0;}scheduleDeselect();draw();});
       box.addEventListener('focusout',e=>{if(!box.contains(e.relatedTarget)&&selectionMode==='keyboard')hideSkills();});
       box.addEventListener('keydown',e=>{if(e.key==='Escape')hideSkills();});
       new ResizeObserver(resize).observe(box);

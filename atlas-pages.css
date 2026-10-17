@@ -27,15 +27,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .section-heading p { max-width: 760px; }
 .project-grid { gap: 24px; }
 .card, .project-section, .media-card, .metrics-card, .resume-box { border-radius: 4px; box-shadow: none; }
-.project-card { background: transparent; border: 0; border-bottom: 1px solid var(--line); border-radius: 0; }
-.project-card-image { border: 0; border-radius: 3px; filter: saturate(.75); }
-.project-card-body { padding: 20px 0 70px; }
+.project-card { background: var(--card); border: 1px solid #40534f; border-radius: 12px; }
+.project-card-image { border: 0; border-radius: 11px 11px 0 0; filter: saturate(.75); }
+.project-card-body { padding: 20px 20px 76px; }
 .project-card-body h3 { font-size: 18px; font-weight: 500; }
 .project-card-body p { font-size: 13px; }
-.project-card .cta { left: 0; right: 0; bottom: 20px; font-size: 12px; font-weight: 400; display: flex; justify-content: space-between; }
+.project-card .cta { left: 20px; right: 20px; bottom: 20px; max-width: none; font-size: 12px; font-weight: 400; display: flex; justify-content: space-between; }
 .project-card .cta:after { content: '↗'; }
 .project-link:hover { transform: none; box-shadow: none; border-color: #58766e; }
-.research-card { background: var(--card); border: 1px solid var(--line); border-radius: 4px; }
+.research-card { background: var(--card); border: 1px solid #40534f; border-radius: 12px; }
 .research-card .project-card-body { padding: 24px 24px 70px; }
 .research-card .cta { left: 24px; right: 24px; }
 .meta { font-size: 11px; color: var(--accent); letter-spacing: .35px; font-weight: 400; }

@@ -1,5 +1,9 @@
 html { background: #0c1218; scroll-behavior: smooth; }
 body { margin: 0; }
+body #leo-neural-atlas .atlas-project { padding: 16px; border: 1px solid #40534f; border-radius: 12px; background: var(--atlas-panel); transition: border-color .2s; }
+body #leo-neural-atlas .atlas-project:hover { border-color: var(--atlas-teal); }
+body #leo-neural-atlas .highlight-card { border-color: #40534f; border-radius: 12px; }
+body #leo-neural-atlas .atlas-case { border-bottom: 0; padding-bottom: 0; }
 body #leo-neural-atlas .atlas-brand, body #leo-neural-atlas .atlas-navlinks a, body #leo-neural-atlas .footer-links a { min-height: 44px; display: inline-flex; align-items: center; }
 body #leo-neural-atlas .atlas-domains b { color: #849c9e; }
 /* Give the atlas its own edge-to-edge stage below the introduction. */

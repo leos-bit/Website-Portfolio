@@ -30,6 +30,12 @@ function contrast(doc,win){
     await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+route+'?design-audit='+Date.now();});
     const win=frame.contentWindow,doc=win.document;
     const low=contrast(doc,win),overflow=doc.body.scrollWidth>doc.documentElement.clientWidth;
+    for(const card of doc.querySelectorAll('.project-card,.atlas-project,.highlight-card')){
+      const style=win.getComputedStyle(card);
+      if(['Top','Right','Bottom','Left'].some(side=>parseFloat(style['border'+side+'Width'])<1))low.push('Missing full card border');
+      const cta=card.matches('.project-card')?card.querySelector('.cta'):null;
+      if(cta&&card.getBoundingClientRect().right-cta.getBoundingClientRect().right>26)low.push('Project arrow is not aligned to the card right edge');
+    }
     if(route===''){
       for(const node of doc.querySelectorAll('.atlas-node')){
         doc.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Tab'}));node.focus();
