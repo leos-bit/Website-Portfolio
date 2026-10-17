@@ -27,7 +27,7 @@ function contrast(doc,win){
   const lines=[];
   for(const width of [1280,768,390,320])for(const route of routes){
     frame.style.width=width+'px';
-    await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+route+'?design-audit=2';});
+    await new Promise(resolve=>{frame.onload=resolve;frame.src='../'+route+'?design-audit='+Date.now();});
     const win=frame.contentWindow,doc=win.document;
     const low=contrast(doc,win),overflow=doc.body.scrollWidth>doc.documentElement.clientWidth;
     if(route===''){
@@ -35,6 +35,10 @@ function contrast(doc,win){
         doc.dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Tab'}));node.focus();
         await Promise.all(doc.getAnimations().map(animation=>animation.finished.catch(()=>{})));
         low.push(...contrast(doc,win).filter(s=>!low.includes(s)));
+        const labels=[...doc.querySelectorAll('.atlas-skill')].map(el=>el.getBoundingClientRect());
+        const preview=doc.querySelector('.atlas-selection').getBoundingClientRect();
+        if(labels.some(a=>a.bottom>preview.top))low.push('Skill label overlaps project preview');
+        if(labels.some((a,i)=>labels.slice(i+1).some(b=>a.left<b.right&&a.right>b.left&&a.top<b.bottom&&a.bottom>b.top)))low.push('Skill labels overlap');
       }
       doc.querySelector('.atlas-network').dispatchEvent(new win.KeyboardEvent('keydown',{bubbles:true,key:'Escape'}));
     }

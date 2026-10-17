@@ -48,13 +48,14 @@
         const br=button.getBoundingClientRect(),rr=box.getBoundingClientRect();
         const cx=br.left-rr.left+br.width/2,cy=br.top-rr.top+br.height/2;
         const radiusX=Math.min(112,width*.27),radiusY=Math.min(78,height*.18);
+        const skillsBottom=Math.min(height-110,root.querySelector('.atlas-selection').offsetTop-16);
         const offsets=[[-1,-.72],[.9,-.9],[1,.82],[-.9,.9]];
         const placed=[];skillPoints=[];
         Array.from(skillsLayer.children).forEach((label,i)=>{
           const w=label.offsetWidth,h=label.offsetHeight;
           let x=Math.max(w/2+5,Math.min(width-w/2-5,cx+offsets[i][0]*radiusX));
-          let y=Math.max(h/2+12,Math.min(height-110-h/2,cy+offsets[i][1]*radiusY));
-          if(width<360){
+          let y=Math.max(h/2+12,Math.min(skillsBottom-h/2,cy+offsets[i][1]*radiusY));
+          if(width<600){
             x=Math.max(w/2+5,Math.min(width-w/2-5,width*(i%2===0?.25:.75)));
             const direction=cy<height*.4?1:-1;
             const distance=i<2?45:90;
@@ -65,7 +66,7 @@
             const hitsProject=Math.abs(cx-x)<(br.width+w)/2+8&&Math.abs(cy-y)<(br.height+h)/2+8;
             if(!hit&&!hitsProject)break;
             y+=i<2?-h-9:h+9;
-            y=Math.max(h/2+8,Math.min(height-108-h/2,y));
+            y=Math.max(h/2+8,Math.min(skillsBottom-h/2,y));
           }
           label.style.left=x+'px';label.style.top=y+'px';placed.push({x,y,w,h});skillPoints.push({x,y,cx,cy});
         });
@@ -113,7 +114,8 @@
       },true);
       root.querySelectorAll('.atlas-node').forEach(b=>{
         b.addEventListener('click',e=>{
-          if(e.detail===0){select(b.dataset.project,'keyboard');return;}
+          const isTouch=e.pointerType==='touch'||lastPointerType==='touch';
+          if(e.detail===0||!isTouch){window.location.assign(projects[b.dataset.project].url);return;}
           if(lastPointerType==='touch'&&expanded&&selected===b.dataset.project)hideSkills();
           else select(b.dataset.project);
           lastPointerType=null;

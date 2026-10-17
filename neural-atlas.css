@@ -19,6 +19,9 @@ body #leo-neural-atlas .atlas-node { font-size: 14px; min-height: 44px; padding:
 body #leo-neural-atlas .atlas-skill { font-size: 13px; padding: 6px 9px; }
 body #leo-neural-atlas .atlas-selection { left: max(24px, calc((100vw - 1264px) / 2)); right: 24px; font-size: 12px; }
 body #leo-neural-atlas .atlas-selection strong { font-size: 16px; }
+body #leo-neural-atlas .atlas-selection a.atlas-selection-link { min-height: 44px; padding: 8px 14px; border-radius: 3px; background: var(--atlas-teal); color: #0c1218; font-size: 12px; font-weight: 500; align-items: center; margin: 8px 0 0; }
+body #leo-neural-atlas .atlas-selection-link:not([hidden]) { display: inline-flex; }
+body #leo-neural-atlas .atlas-selection-detail { display: block; }
 body #leo-neural-atlas .atlas-node-note { left: max(24px, calc((100vw - 1264px) / 2)); right: 24px; font-size: 11px; }
 body #leo-neural-atlas .atlas-motion { right: 24px; font-size: 11px; }
 @media(max-width:760px) {
@@ -28,13 +31,16 @@ body #leo-neural-atlas .atlas-motion { right: 24px; font-size: 11px; }
   body #leo-neural-atlas .atlas-skill { font-size: 11px; }
 }
 @media(max-width:500px) {
-  body #leo-neural-atlas .atlas-network { height: 460px; }
+  body #leo-neural-atlas .atlas-network { height: 540px; }
   body #leo-neural-atlas .atlas-node { font-size: 10px; padding: 7px; }
   body #leo-neural-atlas .atlas-node-note { font-size: 9px; left: 16px; right: 16px; gap: 12px; }
   body #leo-neural-atlas .atlas-selection { left: 20px; right: 20px; font-size: 11px; }
 }
 #leo-neural-atlas .atlas-motion { position: absolute; right: 8px; top: 4px; z-index: 4; background: transparent; border: 1px solid #25333c; border-radius: 3px; padding: 5px 9px; font-size: 10px; color: #99aaaf; }
-@media(max-width:500px) { body #leo-neural-atlas .atlas-node[data-project="walker"] { top: 68% !important; } }
+@media(max-width:500px) {
+  body #leo-neural-atlas .atlas-node[data-project="walker"] { top: 66% !important; }
+  body #leo-neural-atlas .atlas-node[data-project="vision"] { top: 56% !important; }
+}
 body #leo-neural-atlas { border-radius: 0; min-height: 100vh; }
 body #leo-neural-atlas .atlas-nav { padding-right: 0; }
 body #leo-neural-atlas .atlas-navlinks { font-size: 13px; }

@@ -2,7 +2,9 @@
 
 Static, build-free portfolio for GitHub Pages. The homepage uses an organic
 canvas network with six project controls: hover, keyboard focus, or tap to reveal
-skill nodes, then use **Explore** to open the case study. Ordinary project links
+skill nodes. Mouse clicks and keyboard activation open the project directly;
+touch users reveal skills first and use **View project** to open the case study.
+Ordinary project links
 remain available independently of the canvas. Animation respects reduced-motion
 preferences, can be paused, and stops off-screen or when the tab is hidden.
 
